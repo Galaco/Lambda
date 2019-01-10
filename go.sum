@@ -1,0 +1,6 @@
+github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2 h1:78Hza2KHn2PX1jdydQnffaU2A/xM0g3Nx1xmMdep9Gk=
+github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2/go.mod h1:482civXOzJJCPzJ4ZOX/pwvXBWSnzD4OKMdH4ClKGbk=
+github.com/inkyblackness/imgui-go v1.3.0 h1:0P8vurDL0ZnRjeo2PYkYcQhS/5NWbEPj1w54wqGCHG4=
+github.com/inkyblackness/imgui-go v1.3.0/go.mod h1:/qnwYnJnAAUR1JW1/+wIMhC6HnHZON4iGuL+aqTvKxI=
+github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5 h1:m2ubjBfoVgaHlyMAeZZYetN8HKDv+BQBgmbMN3XIMjY=
+github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5/go.mod h1:qui9jo5J26j9fXv2x3bySGThxYkQZt4SgsPIZRtZAbQ=
