@@ -54,11 +54,12 @@ func main() {
 
 	event.Singleton().Initialize()
 
+	windowShouldClose := false
 	event.Singleton().Listen(actions.TypeWindowClosed, func(action event.IAction) {
-		window.Destroy()
+		windowShouldClose = true
 	})
 
-	for !window.ShouldClose() {
+	for !window.ShouldClose() && !windowShouldClose {
 		glfw.PollEvents()
 		impl.NewFrame()
 
