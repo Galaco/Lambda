@@ -1,11 +1,11 @@
-package actions
+package events
 
 const TypeWindowResized = "WindowResized"
 const TypeWindowClosed = "WindowClosed"
 
 type windowResized struct {
 	actionType string
-	x,y int
+	x, y       int
 }
 
 func (act *windowResized) Type() string {
@@ -19,10 +19,9 @@ func NewWindowResized(x int, y int) *windowResized {
 	}
 }
 
-
 type windowClosed struct {
 	actionType string
-	x,y int
+	x, y       int
 }
 
 func (act *windowClosed) Type() string {

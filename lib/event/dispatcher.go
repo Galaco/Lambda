@@ -5,11 +5,11 @@ import "sync"
 var singleton *dispatcher
 
 type dispatcher struct {
-	running bool
+	running   bool
 	receivers map[string][]Receivable
 
 	messages []IAction
-	mutex sync.Mutex
+	mutex    sync.Mutex
 }
 
 func (dispatch *dispatcher) Initialize() {
@@ -18,9 +18,9 @@ func (dispatch *dispatcher) Initialize() {
 	go func() {
 		for dispatch.running == true {
 			dispatch.mutex.Lock()
-			for _,message := range dispatch.messages {
+			for _, message := range dispatch.messages {
 				if dispatch.receivers[message.Type()] != nil {
-					for _,receiver := range dispatch.receivers[message.Type()] {
+					for _, receiver := range dispatch.receivers[message.Type()] {
 						receiver(message)
 					}
 				}

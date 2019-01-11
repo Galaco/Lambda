@@ -1,6 +1,12 @@
+github.com/galaco/vmf v0.0.0-20180309175744-7a9ccb6e8abb h1:15XPqvxG/llf53op1m6Dy4CDiZ+DUvnqc1IEqHdxxN4=
+github.com/galaco/vmf v0.0.0-20180309175744-7a9ccb6e8abb/go.mod h1:+hpnZQBHJ5xrERgGMr6f/KO0ZkxEkrvjqr3RI9aNHes=
 github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2 h1:78Hza2KHn2PX1jdydQnffaU2A/xM0g3Nx1xmMdep9Gk=
 github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2/go.mod h1:482civXOzJJCPzJ4ZOX/pwvXBWSnzD4OKMdH4ClKGbk=
+github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a h1:2n5w2v3knlspzjJWyQPC0j88Mwvq0SZV0Jdws34GJwc=
+github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a/go.mod h1:dvrdneKbyWbK2skTda0nM4B9zSlS2GZSnjX7itr/skQ=
 github.com/inkyblackness/imgui-go v1.3.0 h1:0P8vurDL0ZnRjeo2PYkYcQhS/5NWbEPj1w54wqGCHG4=
 github.com/inkyblackness/imgui-go v1.3.0/go.mod h1:/qnwYnJnAAUR1JW1/+wIMhC6HnHZON4iGuL+aqTvKxI=
 github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5 h1:m2ubjBfoVgaHlyMAeZZYetN8HKDv+BQBgmbMN3XIMjY=
 github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5/go.mod h1:qui9jo5J26j9fXv2x3bySGThxYkQZt4SgsPIZRtZAbQ=
+golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b h1:VHyIDlv3XkfCa5/a81uzaoDkHH4rr81Z62g+xlnO8uM=
+golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b/go.mod h1:ux5Hcp/YLpHSI86hEcLt0YII63i6oz57MZXIpbrjZUs=

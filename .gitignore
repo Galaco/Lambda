@@ -2,3 +2,5 @@
 \.idea/
 
 imgui\.ini
+
+*.vmf

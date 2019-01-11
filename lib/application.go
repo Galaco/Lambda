@@ -1,6 +1,5 @@
 package lib
 
-
 type application struct {
 	modules []IWidget
 }

@@ -1,7 +1,8 @@
 package menu
 
 import (
-	"github.com/galaco/Lambda/actions"
+	"github.com/galaco/Lambda/core/importers"
+	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/inkyblackness/imgui-go"
 )
@@ -20,6 +21,8 @@ func (mod *widget) Render() {
 				/* Do stuff */
 			}
 			if imgui.MenuItemV("Open..", "Ctrl+O", false, true) {
+				importer := importers.VmfImporter{}
+				importer.LoadVmf("./ze_angel_beats.vmf")
 				/* Do stuff */
 			}
 			if imgui.MenuItemV("Save", "Ctrl+S", false, true) {
@@ -29,7 +32,7 @@ func (mod *widget) Render() {
 				/* Do stuff */
 			}
 			if imgui.MenuItem("Exit") {
-				event.Singleton().Dispatch(actions.NewWindowClosed())
+				event.Singleton().Dispatch(events.NewWindowClosed())
 				/* Do stuff */
 			}
 			imgui.EndMenu()

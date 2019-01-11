@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/galaco/Lambda/actions"
+	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/galaco/Lambda/widgets/menu"
@@ -55,7 +55,7 @@ func main() {
 	event.Singleton().Initialize()
 
 	windowShouldClose := false
-	event.Singleton().Listen(actions.TypeWindowClosed, func(action event.IAction) {
+	event.Singleton().Listen(events.TypeWindowClosed, func(action event.IAction) {
 		windowShouldClose = true
 	})
 
@@ -64,7 +64,6 @@ func main() {
 		impl.NewFrame()
 
 		app.Render()
-
 
 		displayWidth, displayHeight := window.GetFramebufferSize()
 		gl.Viewport(0, 0, int32(displayWidth), int32(displayHeight))
