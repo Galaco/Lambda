@@ -1,33 +1,37 @@
 package scenegraph
 
 import (
-	"fmt"
 	"github.com/inkyblackness/imgui-go"
 )
 
-type widget struct {
+type Widget struct {
+	nodes []Item
 }
 
-func (mod *widget) Initialize() {
+func (mod *Widget) Initialize() {
 
 }
 
-func (mod *widget) Render() {
+func (mod *Widget) Render() {
 	imgui.SetNextWindowPos(imgui.Vec2{X: 0, Y: 48})
 	if imgui.BeginV("Objects", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
 		imgui.BeginChild("Scrolling")
-		for i := 0; i < 200; i++ {
-			imgui.Text(fmt.Sprintf("%d: Some text", i))
+		for _,row := range mod.nodes {
+			row.Render()
 		}
 		imgui.EndChild()
 		imgui.End()
 	}
 }
 
-func (mod *widget) Update() {
+func (mod *Widget) Update() {
 
 }
 
-func NewWidget() *widget {
-	return &widget{}
+func (mod *Widget) AddNode(id int, title string) {
+	mod.nodes = append(mod.nodes, NewItem(id, title))
+}
+
+func NewWidget() *Widget {
+	return &Widget{}
 }

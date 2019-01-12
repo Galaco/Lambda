@@ -16,6 +16,34 @@ type Vmf struct {
 	cordon       Cordon
 }
 
+func (vmf *Vmf) VersionInfo() *VersionInfo {
+	return &vmf.versionInfo
+}
+
+func (vmf *Vmf) Visgroups() *VisGroups {
+	return &vmf.visGroups
+}
+
+func (vmf *Vmf) ViewSettings() *ViewSettings {
+	return &vmf.viewSettings
+}
+
+func (vmf *Vmf) Worldspawn() *world.World {
+	return &vmf.world
+}
+
+func (vmf *Vmf) Entities() *entity.List {
+	return &vmf.entities
+}
+
+func (vmf *Vmf) Cameras() *Cameras {
+	return &vmf.cameras
+}
+
+func (vmf *Vmf) Cordons() *Cordon {
+	return &vmf.cordon
+}
+
 type VersionInfo struct {
 	editorVersion int
 	editorBuild   int

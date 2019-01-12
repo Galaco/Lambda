@@ -5,8 +5,7 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
 	"github.com/galaco/Lambda/lib/event"
-	"github.com/galaco/Lambda/widgets/menu"
-	"github.com/galaco/Lambda/widgets/scenegraph"
+	"github.com/galaco/Lambda/views/menu"
 	"github.com/go-gl/gl/v4.1-core/gl"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
@@ -54,7 +53,6 @@ func main() {
 	app := lib.NewApplication()
 	app.AddController(controllers.NewSceneController())
 	app.AddWidget(menu.NewWidget())
-	app.AddWidget(scenegraph.NewWidget())
 
 
 	windowShouldClose := false

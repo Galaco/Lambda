@@ -7,14 +7,14 @@ import (
 	//	"github.com/sqweek/dialog"
 )
 
-type widget struct {
+type Widget struct {
 }
 
-func (mod *widget) Initialize() {
+func (mod *Widget) Initialize() {
 
 }
 
-func (mod *widget) Render() {
+func (mod *Widget) Render() {
 	if imgui.BeginMainMenuBar() {
 		if imgui.BeginMenu("File") {
 			if imgui.MenuItemV("New..", "Ctrl+N", false, true) {
@@ -43,12 +43,12 @@ func (mod *widget) Render() {
 	}
 }
 
-func (mod *widget) Update() {
+func (mod *Widget) Update() {
 
 }
 
-func NewWidget() *widget {
-	return &widget{}
+func NewWidget() *Widget {
+	return &Widget{}
 }
 
 

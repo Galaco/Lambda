@@ -20,6 +20,9 @@ func (app *application) AddWidget(mod IWidget) {
 
 // Render draws the widgets registered with the application.
 func (app *application) Render() {
+	for _, controller := range app.controllers {
+		controller.Render()
+	}
 	for _, mod := range app.widgets {
 		mod.Render()
 	}
