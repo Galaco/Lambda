@@ -5,6 +5,7 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/inkyblackness/imgui-go"
+//	"github.com/sqweek/dialog"
 )
 
 type widget struct {
@@ -21,9 +22,13 @@ func (mod *widget) Render() {
 				/* Do stuff */
 			}
 			if imgui.MenuItemV("Open..", "Ctrl+O", false, true) {
-				importer := importers.VmfImporter{}
-				importer.LoadVmf("./ze_angel_beats.vmf")
 				/* Do stuff */
+				// This needs to dispatch an event that will actually call load elsewhere
+				filename := openFile()
+				if filename != "" {
+					importer := importers.VmfImporter{}
+					importer.LoadVmf(filename)
+				}
 			}
 			if imgui.MenuItemV("Save", "Ctrl+S", false, true) {
 				/* Do stuff */
@@ -47,4 +52,15 @@ func (mod *widget) Update() {
 
 func NewWidget() *widget {
 	return &widget{}
+}
+
+
+func openFile() string {
+	//filename, err := dialog.File().Filter("Vmf map file", "vmf").Load()
+	//if err != nil {
+	//	dialog.Message("%s", "Failed to open file").Error()
+	//	return ""
+	//}
+	filename := "./ze_angel_beats.vmf"
+	return filename
 }

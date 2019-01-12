@@ -1,14 +1,9 @@
 package world
 
+import "github.com/galaco/source-tools-common/entity"
+
 type World struct {
-	id                 int
-	mapVersion         int
-	classname          string
-	detailMaterial     string
-	detailVbsp         string
-	maxPropScreenWidth int
-	skyName            string
-	targetname         string
+	keyvalues *entity.Entity
 	solids             []Solid
 }
 
@@ -18,4 +13,11 @@ func (world *World) AddSolid(solid *Solid) error {
 	world.solids = append(world.solids, *solid)
 
 	return nil
+}
+
+func NewWorld(entityKvs *entity.Entity, solids []Solid) *World {
+	return &World{
+		keyvalues: entityKvs,
+		solids: solids,
+	}
 }
