@@ -4,7 +4,6 @@ const TypeWindowResized = "WindowResized"
 const TypeWindowClosed = "WindowClosed"
 
 type windowResized struct {
-	actionType string
 	x, y       int
 }
 
@@ -20,7 +19,6 @@ func NewWindowResized(x int, y int) *windowResized {
 }
 
 type windowClosed struct {
-	actionType string
 	x, y       int
 }
 

@@ -1,11 +1,10 @@
 package menu
 
 import (
-	"github.com/galaco/Lambda/core/importers"
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/inkyblackness/imgui-go"
-//	"github.com/sqweek/dialog"
+	//	"github.com/sqweek/dialog"
 )
 
 type widget struct {
@@ -24,10 +23,8 @@ func (mod *widget) Render() {
 			if imgui.MenuItemV("Open..", "Ctrl+O", false, true) {
 				/* Do stuff */
 				// This needs to dispatch an event that will actually call load elsewhere
-				filename := openFile()
-				if filename != "" {
-					importer := importers.VmfImporter{}
-					importer.LoadVmf(filename)
+				if filename := openFile(); filename != "" {
+					event.Singleton().Dispatch(events.NewOpenScene(filename))
 				}
 			}
 			if imgui.MenuItemV("Save", "Ctrl+S", false, true) {
@@ -61,6 +58,6 @@ func openFile() string {
 	//	dialog.Message("%s", "Failed to open file").Error()
 	//	return ""
 	//}
-	filename := "./ze_angel_beats.vmf"
+	filename := "./ze_bioshock_v6_4.vmf"
 	return filename
 }

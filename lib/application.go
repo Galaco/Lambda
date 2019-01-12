@@ -1,26 +1,39 @@
 package lib
 
 type application struct {
-	modules []IWidget
+	controllers []IController
+	widgets []IWidget
 }
 
-func (app *application) RegisterModule(mod IWidget) {
+// AddController adds a new controller to the
+// current application.
+func (app *application) AddController(controller IController) {
+	controller.RegisterEventListeners()
+	app.controllers = append(app.controllers, controller)
+}
+
+// AddWidget adds a widget to the application.
+func (app *application) AddWidget(mod IWidget) {
 	mod.Initialize()
-	app.modules = append(app.modules, mod)
+	app.widgets = append(app.widgets, mod)
 }
 
+// Render draws the widgets registered with the application.
 func (app *application) Render() {
-	for _, mod := range app.modules {
+	for _, mod := range app.widgets {
 		mod.Render()
 	}
 }
 
+// Update ensures that views and controllers can update
+// themselves automatically.
 func (app *application) Update() {
-	for _, mod := range app.modules {
+	for _, mod := range app.widgets {
 		mod.Update()
 	}
 }
 
+// NewApplication returns a new application.
 func NewApplication() *application {
 	return &application{}
 }

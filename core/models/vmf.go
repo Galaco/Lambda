@@ -1,7 +1,8 @@
-package model
+package models
 
 import (
-	"github.com/galaco/Lambda/core/model/world"
+	"github.com/galaco/Lambda/core/models/world"
+	"github.com/galaco/source-tools-common/entity"
 	"github.com/go-gl/mathgl/mgl64"
 )
 
@@ -10,6 +11,7 @@ type Vmf struct {
 	visGroups    VisGroups
 	viewSettings ViewSettings
 	world        world.World
+	entities	entity.List
 	cameras      Cameras
 	cordon       Cordon
 }
@@ -57,4 +59,13 @@ type Cordon struct {
 	mins   mgl64.Vec3
 	maxs   mgl64.Vec3
 	active bool
+}
+
+func NewVmf(version *VersionInfo, visgroups *VisGroups, worldSpawn *world.World, entities *entity.List) *Vmf {
+	return &Vmf{
+		versionInfo: *version,
+		visGroups: *visgroups,
+		world: *worldSpawn,
+		entities: *entities,
+	}
 }

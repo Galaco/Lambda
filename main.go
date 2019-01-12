@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/galaco/Lambda/controllers"
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
 	"github.com/galaco/Lambda/lib/event"
@@ -48,14 +49,16 @@ func main() {
 
 	var clearColor imgui.Vec4
 
-	app := lib.NewApplication()
-	app.RegisterModule(menu.NewWidget())
-	app.RegisterModule(scenegraph.NewWidget())
-
 	event.Singleton().Initialize()
 
+	app := lib.NewApplication()
+	app.AddController(controllers.NewSceneController())
+	app.AddWidget(menu.NewWidget())
+	app.AddWidget(scenegraph.NewWidget())
+
+
 	windowShouldClose := false
-	event.Singleton().Listen(events.TypeWindowClosed, func(action event.IAction) {
+	event.Singleton().Subscribe(events.TypeWindowClosed, func(action event.IEvent) {
 		windowShouldClose = true
 	})
 

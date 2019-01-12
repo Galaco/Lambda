@@ -3,20 +3,23 @@ package importers
 import (
 	"errors"
 	"github.com/galaco/source-tools-common/entity"
-	"github.com/galaco/Lambda/core/model"
-	"github.com/galaco/Lambda/core/model/world"
+	"github.com/galaco/Lambda/core/models"
+	"github.com/galaco/Lambda/core/models/world"
 	"github.com/galaco/vmf"
 	"os"
 	"strconv"
 )
 
+// Imports a Vmf file and returns a Vmf Model
 type VmfImporter struct {
 }
 
-func (importer *VmfImporter) LoadVmf(filepath string) error {
+// Public loader function to open and import a vmf file
+// Will error out if the file is malformed or cannot be opened
+func (importer *VmfImporter) LoadVmf(filepath string) (*models.Vmf,error) {
 	file, err := os.Open(filepath)
 	if err != nil {
-		return err
+		return nil,err
 	}
 	defer file.Close()
 
@@ -24,27 +27,31 @@ func (importer *VmfImporter) LoadVmf(filepath string) error {
 	importable, err := reader.Read()
 
 	if err != nil {
-		return err
+		return nil,err
 	}
 
+	// Create models for different vmf properties
 	versionInfo, err := importer.loadVersionInfo(&importable.VersionInfo)
 	if err != nil || versionInfo == nil {
-		return err
+		return nil,err
 	}
 	visGroups,err := importer.loadVisGroups(&importable.VisGroup)
 	if err != nil || visGroups == nil {
-		return err
+		return nil,err
 	}
 	worldspawn,err := importer.loadWorld(&importable.World)
 	if err != nil || worldspawn == nil {
-		return err
+		return nil,err
 	}
 
+	entities := importer.loadEntities(&importable.Entities)
 
-	return nil
+	return models.NewVmf(versionInfo, visGroups, worldspawn, entities), nil
 }
 
-func (importer *VmfImporter) loadVersionInfo(root *vmf.Node) (*model.VersionInfo, error) {
+// loadVersionInfo creates a VersionInfo model
+// from the versioninfo vmf block
+func (importer *VmfImporter) loadVersionInfo(root *vmf.Node) (*models.VersionInfo, error) {
 	if root == nil {
 		return nil, errors.New("missing versioninfo")
 	}
@@ -69,11 +76,13 @@ func (importer *VmfImporter) loadVersionInfo(root *vmf.Node) (*model.VersionInfo
 		prefab = true
 	}
 
-	return model.NewVersionInfo(int(editorVersion), int(editorBuild), int(mapVersion), int(formatVersion), prefab), nil
+	return models.NewVersionInfo(int(editorVersion), int(editorBuild), int(mapVersion), int(formatVersion), prefab), nil
 }
 
-func (importer *VmfImporter) loadVisGroups(root *vmf.Node) (*model.VisGroups, error){
-	return &model.VisGroups{}, nil
+// loadVisgroups loads all visgroup information from the
+// visgroups block of a vmf
+func (importer *VmfImporter) loadVisGroups(root *vmf.Node) (*models.VisGroups, error){
+	return &models.VisGroups{}, nil
 }
 
 func (importer *VmfImporter) loadWorld(root *vmf.Node) (*world.World, error){
@@ -101,6 +110,7 @@ func (importer *VmfImporter) loadSolid(node *vmf.Node) (*world.Solid, error) {
 		return world.NewSolid(-1, nil, nil),err
 	}
 	sideNodes := node.GetChildrenByKey("side")
+	// Create sides for solid
 	sides := make([]world.Side, len(sideNodes))
 	for idx, sideNode := range sideNodes {
 		var id int64
@@ -138,4 +148,12 @@ func (importer *VmfImporter) loadSolid(node *vmf.Node) (*world.Solid, error) {
 	}
 
 	return world.NewSolid(int(id), sides, nil), nil
+}
+
+// loadEntities creates models from the entity data block
+// from a vmf
+func (importer *VmfImporter) loadEntities(node *vmf.Node) (*entity.List) {
+	entities := entity.FromVmfNodeTree(*node)
+
+	return &entities
 }
