@@ -3,18 +3,14 @@ package controllers
 import (
 	"fmt"
 	"github.com/galaco/Lambda/core/importers"
-	"github.com/galaco/Lambda/core/models/world"
+	"github.com/galaco/Lambda/core/persistance/scene"
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/galaco/Lambda/views/scenegraph"
-	"github.com/galaco/source-tools-common/entity"
 )
 
 type sceneController struct {
 	nodeListView *scenegraph.Widget
-
-	world *world.World
-	entities *entity.List
 }
 
 func (controller *sceneController) RegisterEventListeners() {
@@ -39,15 +35,15 @@ func (controller *sceneController) listenerOpenScene(action event.IEvent) {
 }
 
 func (controller *sceneController) listenerNewScene(dispatched event.IEvent) {
-	scene := dispatched.(*events.NewScene).Model()
-	controller.world = scene.Worldspawn()
-	controller.entities = scene.Entities()
+	sceneModel := dispatched.(*events.NewScene).Model()
+	scene.Singleton().SetWorld(sceneModel.Worldspawn())
+	scene.Singleton().SetEntities(sceneModel.Entities())
 
-	for i := 0; i < controller.entities.Length(); i++ {
-		ent := controller.entities.Get(i)
+	for i := 0; i < scene.Singleton().Entities().Length(); i++ {
+		ent := scene.Singleton().Entities().Get(i)
 		controller.nodeListView.AddNode(
 			ent.IntForKey("id"),
-			fmt.Sprintf("%s: %s", ent.ValueForKey("classname"), ent.ValueForKey("targetname")))
+			fmt.Sprintf("%d %s: %s", ent.IntForKey("id"), ent.ValueForKey("classname"), ent.ValueForKey("targetname")))
 	}
 }
 

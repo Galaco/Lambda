@@ -5,7 +5,6 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
 	"github.com/galaco/Lambda/lib/event"
-	"github.com/galaco/Lambda/views/menu"
 	"github.com/go-gl/gl/v4.1-core/gl"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
@@ -51,8 +50,11 @@ func main() {
 	event.Singleton().Initialize()
 
 	app := lib.NewApplication()
+	app.AddController(controllers.NewMenuController())
 	app.AddController(controllers.NewSceneController())
-	app.AddWidget(menu.NewWidget())
+	app.AddController(controllers.NewKeyValuesController())
+	//app.AddWidget(menu.NewWidget())
+	//app.AddWidget(keyvalues.NewWidget())
 
 
 	windowShouldClose := false
