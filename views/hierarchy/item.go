@@ -1,4 +1,4 @@
-package scenegraph
+package hierarchy
 
 import (
 	"fmt"

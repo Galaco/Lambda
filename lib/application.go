@@ -2,6 +2,8 @@ package lib
 
 type application struct {
 	controllers []IController
+	views 		[]IView
+	models 		[]IModel
 }
 
 // AddController adds a new controller to the
@@ -11,11 +13,20 @@ func (app *application) AddController(controller IController) {
 	app.controllers = append(app.controllers, controller)
 }
 
+func (app *application) AddView(view IView) {
+	view.Initialize()
+	app.views = append(app.views, view)
+}
+
+func (app *application) AddModel(model IModel) {
+	app.models = append(app.models, model)
+}
+
 
 // Render draws the widgets registered with the application.
 func (app *application) Render() {
-	for _, controller := range app.controllers {
-		controller.Render()
+	for _, view := range app.views {
+		view.Render()
 	}
 }
 

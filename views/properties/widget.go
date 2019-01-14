@@ -1,17 +1,19 @@
-package keyvalues
+package properties
 
 import (
+	"github.com/galaco/Lambda/events"
+	"github.com/galaco/Lambda/lib/event"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/inkyblackness/imgui-go"
 )
 
 type Widget struct {
 	selectedEntity *entity.Entity
-	keyValueViews []keyvalue
+	keyValueViews []keyValue
 }
 
 func (mod *Widget) Initialize() {
-
+	event.Singleton().Subscribe(events.TypeEntitySelected, mod.selectedEntityChanged)
 }
 
 func (mod *Widget) Render() {
@@ -30,9 +32,10 @@ func (mod *Widget) Update() {
 
 }
 
-func (mod *Widget) SetActiveEntity(selected *entity.Entity) {
-	mod.selectedEntity = selected
-	mod.keyValueViews = make([]keyvalue, 0)
+func (mod *Widget) selectedEntityChanged(received event.IEvent) {
+	evt := received.(*events.EntitySelected)
+	mod.selectedEntity = evt.Target()
+	mod.keyValueViews = make([]keyValue, 0)
 
 	kv := mod.selectedEntity.EPairs
 	for kv != nil {

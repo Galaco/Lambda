@@ -5,5 +5,4 @@ package lib
 type IController interface {
 	// RegisterEventListeners registers a controllers event handlers.
 	RegisterEventListeners()
-	Render()
 }

@@ -1,10 +1,17 @@
 package main
 
 import (
+	"github.com/galaco/Lambda-Core/core/filesystem"
+	"github.com/galaco/Lambda-Core/core/logger"
+	"github.com/galaco/Lambda-Core/core/resource"
+	"github.com/galaco/Lambda-Core/lib/gameinfo"
 	"github.com/galaco/Lambda/controllers"
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
 	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/views/properties"
+	"github.com/galaco/Lambda/views/mainmenu"
+	"github.com/galaco/Lambda/views/hierarchy"
 	"github.com/go-gl/gl/v4.1-core/gl"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
@@ -47,14 +54,27 @@ func main() {
 
 	var clearColor imgui.Vec4
 
+	// @TODO This MUST BE CONFIGURABLE
+	gameDirectory := "D:/Program Files/Steamapps/steamapps/common/Counter-Strike Source/cstrike"
+
+	_, err = gameinfo.LoadConfig(gameDirectory)
+	if err != nil {
+		logger.Fatal(err)
+	}
+	filesystem.RegisterGameResourcePaths(gameDirectory, gameinfo.Get())
+	resource.Manager().SetErrorModelName("models/error.mdl")
+	resource.Manager().SetErrorTextureName("materials/error.vtf")
+	defer resource.Manager().Empty()
+
 	event.Singleton().Initialize()
 
 	app := lib.NewApplication()
 	app.AddController(controllers.NewMenuController())
 	app.AddController(controllers.NewSceneController())
 	app.AddController(controllers.NewKeyValuesController())
-	//app.AddWidget(menu.NewWidget())
-	//app.AddWidget(keyvalues.NewWidget())
+	app.AddView(mainmenu.NewWidget())
+	app.AddView(hierarchy.NewWidget())
+	app.AddView(properties.NewWidget())
 
 
 	windowShouldClose := false

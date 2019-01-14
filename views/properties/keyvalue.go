@@ -1,22 +1,22 @@
-package keyvalues
+package properties
 
 import (
 	"fmt"
 	"github.com/inkyblackness/imgui-go"
 )
 
-type keyvalue struct {
+type keyValue struct {
 	isEditable bool
 	Key string
 	Value string
 }
 
-func (kv *keyvalue) Render() {
+func (kv *keyValue) Render() {
 	imgui.Text(fmt.Sprintf("%s : %s", kv.Key, kv.Value))
 }
 
-func newKeyValue(key string, value string, editable bool) keyvalue{
-	return keyvalue{
+func newKeyValue(key string, value string, editable bool) keyValue {
+	return keyValue{
 		isEditable:editable,
 		Key:key,
 		Value:value,
