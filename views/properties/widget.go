@@ -5,21 +5,25 @@ import (
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/inkyblackness/imgui-go"
+	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 
 type Widget struct {
 	selectedEntity *entity.Entity
-	keyValueViews []keyValue
+	keyValueViews  []keyValue
 }
 
 func (mod *Widget) Initialize() {
 	event.Singleton().Subscribe(events.TypeEntitySelected, mod.selectedEntityChanged)
 }
 
-func (mod *Widget) Render() {
+func (mod *Widget) Render(window *glfw.Window) {
+	w, h := window.GetSize()
+	imgui.SetNextWindowPos(imgui.Vec2{X: float32(w - 320), Y: 16})
+	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 16)})
 	if imgui.BeginV("Properties", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
 		imgui.BeginChild("Scrolling")
-		for _,kv := range mod.keyValueViews {
+		for _, kv := range mod.keyValueViews {
 			kv.Render()
 		}
 

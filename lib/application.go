@@ -1,9 +1,11 @@
 package lib
 
+import "github.com/vulkan-go/glfw/v3.3/glfw"
+
 type application struct {
 	controllers []IController
-	views 		[]IView
-	models 		[]IModel
+	views       []IView
+	models      []IModel
 }
 
 // AddController adds a new controller to the
@@ -22,11 +24,10 @@ func (app *application) AddModel(model IModel) {
 	app.models = append(app.models, model)
 }
 
-
 // Render draws the widgets registered with the application.
-func (app *application) Render() {
+func (app *application) Render(window *glfw.Window) {
 	for _, view := range app.views {
-		view.Render()
+		view.Render(window)
 	}
 }
 

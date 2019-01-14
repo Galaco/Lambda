@@ -1,14 +1,14 @@
 package scene
 
 import (
-	"github.com/galaco/Lambda/core/models/world"
+	"github.com/galaco/Lambda/models/world"
 	"github.com/galaco/source-tools-common/entity"
 )
 
 var singleton scene
 
 type scene struct {
-	world *world.World
+	world    *world.World
 	entities *entity.List
 }
 

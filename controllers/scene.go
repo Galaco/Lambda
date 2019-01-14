@@ -18,7 +18,7 @@ func (controller *sceneController) listenerOpenScene(action event.IEvent) {
 	filename := action.(*events.OpenScene).Path()
 
 	importer := importers.VmfImporter{}
-	sceneModel,err := importer.LoadVmf(filename)
+	sceneModel, err := importer.LoadVmf(filename)
 	if err != nil {
 		event.Singleton().Dispatch(events.NewOpenSceneFailed())
 		return

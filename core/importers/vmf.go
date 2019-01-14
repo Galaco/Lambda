@@ -2,9 +2,9 @@ package importers
 
 import (
 	"errors"
+	"github.com/galaco/Lambda/models"
+	"github.com/galaco/Lambda/models/world"
 	"github.com/galaco/source-tools-common/entity"
-	"github.com/galaco/Lambda/core/models"
-	"github.com/galaco/Lambda/core/models/world"
 	"github.com/galaco/vmf"
 	"os"
 	"strconv"
@@ -16,10 +16,10 @@ type VmfImporter struct {
 
 // Public loader function to open and import a vmf file
 // Will error out if the file is malformed or cannot be opened
-func (importer *VmfImporter) LoadVmf(filepath string) (*models.Vmf,error) {
+func (importer *VmfImporter) LoadVmf(filepath string) (*models.Vmf, error) {
 	file, err := os.Open(filepath)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 	defer file.Close()
 
@@ -27,21 +27,21 @@ func (importer *VmfImporter) LoadVmf(filepath string) (*models.Vmf,error) {
 	importable, err := reader.Read()
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	// Create models for different vmf properties
 	versionInfo, err := importer.loadVersionInfo(&importable.VersionInfo)
 	if err != nil || versionInfo == nil {
-		return nil,err
+		return nil, err
 	}
-	visGroups,err := importer.loadVisGroups(&importable.VisGroup)
+	visGroups, err := importer.loadVisGroups(&importable.VisGroup)
 	if err != nil || visGroups == nil {
-		return nil,err
+		return nil, err
 	}
-	worldspawn,err := importer.loadWorld(&importable.World)
+	worldspawn, err := importer.loadWorld(&importable.World)
 	if err != nil || worldspawn == nil {
-		return nil,err
+		return nil, err
 	}
 
 	entities := importer.loadEntities(&importable.Entities)
@@ -81,19 +81,19 @@ func (importer *VmfImporter) loadVersionInfo(root *vmf.Node) (*models.VersionInf
 
 // loadVisgroups loads all visgroup information from the
 // visgroups block of a vmf
-func (importer *VmfImporter) loadVisGroups(root *vmf.Node) (*models.VisGroups, error){
+func (importer *VmfImporter) loadVisGroups(root *vmf.Node) (*models.VisGroups, error) {
 	return &models.VisGroups{}, nil
 }
 
-func (importer *VmfImporter) loadWorld(root *vmf.Node) (*world.World, error){
+func (importer *VmfImporter) loadWorld(root *vmf.Node) (*world.World, error) {
 	solidNodes := root.GetChildrenByKey("solid")
 	worldSpawn := entity.FromVmfNode(root)
 
 	solids := make([]world.Solid, len(solidNodes))
-	for idx,solidNode := range solidNodes {
-		solid,err := importer.loadSolid(&solidNode)
+	for idx, solidNode := range solidNodes {
+		solid, err := importer.loadSolid(&solidNode)
 		if err != nil {
-			return nil,err
+			return nil, err
 		}
 		solids[idx] = *solid
 	}
@@ -105,9 +105,9 @@ func (importer *VmfImporter) loadWorld(root *vmf.Node) (*world.World, error){
 // it into a properly defind model structure for the solid with
 // proper type definitions.
 func (importer *VmfImporter) loadSolid(node *vmf.Node) (*world.Solid, error) {
-	id,err := strconv.ParseInt(node.GetProperty("id"), 10, 64)
+	id, err := strconv.ParseInt(node.GetProperty("id"), 10, 64)
 	if err != nil {
-		return world.NewSolid(-1, nil, nil),err
+		return world.NewSolid(-1, nil, nil), err
 	}
 	sideNodes := node.GetChildrenByKey("side")
 	// Create sides for solid
@@ -120,7 +120,7 @@ func (importer *VmfImporter) loadSolid(node *vmf.Node) (*world.Solid, error) {
 		var rotation, lmScale float64
 		var smoothing bool
 
-		id,err := strconv.ParseInt(sideNode.GetProperty("id"), 10, 64)
+		id, err := strconv.ParseInt(sideNode.GetProperty("id"), 10, 64)
 		if err != nil {
 			return nil, err
 		}
@@ -131,15 +131,15 @@ func (importer *VmfImporter) loadSolid(node *vmf.Node) (*world.Solid, error) {
 		u = *world.NewUVTransformFromString(sideNode.GetProperty("uaxis"))
 		v = *world.NewUVTransformFromString(sideNode.GetProperty("vaxis"))
 
-		rotation,err = strconv.ParseFloat(sideNode.GetProperty("rotation"), 64)
+		rotation, err = strconv.ParseFloat(sideNode.GetProperty("rotation"), 64)
 		if err != nil {
 			return nil, err
 		}
-		lmScale,err = strconv.ParseFloat(sideNode.GetProperty("lightmapscale"), 64)
+		lmScale, err = strconv.ParseFloat(sideNode.GetProperty("lightmapscale"), 64)
 		if err != nil {
 			return nil, err
 		}
-		smoothing,err = strconv.ParseBool(sideNode.GetProperty("smoothing_groups"))
+		smoothing, err = strconv.ParseBool(sideNode.GetProperty("smoothing_groups"))
 		if err != nil {
 			return nil, err
 		}
@@ -152,7 +152,7 @@ func (importer *VmfImporter) loadSolid(node *vmf.Node) (*world.Solid, error) {
 
 // loadEntities creates models from the entity data block
 // from a vmf
-func (importer *VmfImporter) loadEntities(node *vmf.Node) (*entity.List) {
+func (importer *VmfImporter) loadEntities(node *vmf.Node) *entity.List {
 	entities := entity.FromVmfNodeTree(*node)
 
 	return &entities

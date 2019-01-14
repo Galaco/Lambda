@@ -9,7 +9,7 @@ import (
 )
 
 type Item struct {
-	Id int
+	Id    int
 	Label string
 }
 
@@ -22,7 +22,7 @@ func (item *Item) Render() {
 
 func NewItem(id int, label string) Item {
 	return Item{
-		Id: id,
+		Id:    id,
 		Label: label,
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/inkyblackness/imgui-go"
+	"github.com/vulkan-go/glfw/v3.3/glfw"
 	//	"github.com/sqweek/dialog"
 )
 
@@ -14,7 +15,7 @@ func (mod *Widget) Initialize() {
 
 }
 
-func (mod *Widget) Render() {
+func (mod *Widget) Render(window *glfw.Window) {
 	if imgui.BeginMainMenuBar() {
 		if imgui.BeginMenu("File") {
 			if imgui.MenuItemV("New..", "Ctrl+N", false, true) {
@@ -50,7 +51,6 @@ func (mod *Widget) Update() {
 func NewWidget() *Widget {
 	return &Widget{}
 }
-
 
 func openFile() string {
 	//filename, err := dialog.File().Filter("Vmf map file", "vmf").Load()

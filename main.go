@@ -9,9 +9,9 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
 	"github.com/galaco/Lambda/lib/event"
-	"github.com/galaco/Lambda/views/properties"
-	"github.com/galaco/Lambda/views/mainmenu"
 	"github.com/galaco/Lambda/views/hierarchy"
+	"github.com/galaco/Lambda/views/mainmenu"
+	"github.com/galaco/Lambda/views/properties"
 	"github.com/go-gl/gl/v4.1-core/gl"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
@@ -76,7 +76,6 @@ func main() {
 	app.AddView(hierarchy.NewWidget())
 	app.AddView(properties.NewWidget())
 
-
 	windowShouldClose := false
 	event.Singleton().Subscribe(events.TypeWindowClosed, func(action event.IEvent) {
 		windowShouldClose = true
@@ -86,7 +85,7 @@ func main() {
 		glfw.PollEvents()
 		impl.NewFrame()
 
-		app.Render()
+		app.Render(window)
 
 		displayWidth, displayHeight := window.GetFramebufferSize()
 		gl.Viewport(0, 0, int32(displayWidth), int32(displayHeight))

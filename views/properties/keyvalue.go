@@ -7,8 +7,8 @@ import (
 
 type keyValue struct {
 	isEditable bool
-	Key string
-	Value string
+	Key        string
+	Value      string
 }
 
 func (kv *keyValue) Render() {
@@ -17,8 +17,8 @@ func (kv *keyValue) Render() {
 
 func newKeyValue(key string, value string, editable bool) keyValue {
 	return keyValue{
-		isEditable:editable,
-		Key:key,
-		Value:value,
+		isEditable: editable,
+		Key:        key,
+		Value:      value,
 	}
 }

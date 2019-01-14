@@ -5,6 +5,7 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
 	"github.com/inkyblackness/imgui-go"
+	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 
 type Widget struct {
@@ -15,11 +16,13 @@ func (mod *Widget) Initialize() {
 	event.Singleton().Subscribe(events.TypeEntityCreated, mod.newEntityCreated)
 }
 
-func (mod *Widget) Render() {
-	imgui.SetNextWindowPos(imgui.Vec2{X: 0, Y: 48})
+func (mod *Widget) Render(window *glfw.Window) {
+	_, h := window.GetSize()
+	imgui.SetNextWindowPos(imgui.Vec2{X: 0, Y: 16})
+	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 16)})
 	if imgui.BeginV("Hierarchy", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
 		imgui.BeginChild("Scrolling")
-		for _,row := range mod.nodes {
+		for _, row := range mod.nodes {
 			row.Render()
 		}
 		imgui.EndChild()

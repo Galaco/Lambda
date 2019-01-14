@@ -1,6 +1,6 @@
 package events
 
-import "github.com/galaco/Lambda/core/models"
+import "github.com/galaco/Lambda/models"
 
 const TypeNewScene = "NewScene"
 const TypeOpenScene = "OpenScene"

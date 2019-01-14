@@ -20,9 +20,6 @@ func (controller *keyValuesController) listenEntityNodeSelected(action event.IEv
 	event.Singleton().Dispatch(events.NewEntitySelected(ent))
 }
 
-
-
 func NewKeyValuesController() *keyValuesController {
-	return &keyValuesController{
-	}
+	return &keyValuesController{}
 }

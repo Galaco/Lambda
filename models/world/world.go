@@ -4,7 +4,7 @@ import "github.com/galaco/source-tools-common/entity"
 
 type World struct {
 	keyvalues *entity.Entity
-	solids             []Solid
+	solids    []Solid
 }
 
 func (world *World) AddSolid(solid *Solid) error {
@@ -18,6 +18,6 @@ func (world *World) AddSolid(solid *Solid) error {
 func NewWorld(entityKvs *entity.Entity, solids []Solid) *World {
 	return &World{
 		keyvalues: entityKvs,
-		solids: solids,
+		solids:    solids,
 	}
 }
