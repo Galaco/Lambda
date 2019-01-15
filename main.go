@@ -1,10 +1,6 @@
 package main
 
 import (
-	"github.com/galaco/Lambda-Core/core/filesystem"
-	"github.com/galaco/Lambda-Core/core/logger"
-	"github.com/galaco/Lambda-Core/core/resource"
-	"github.com/galaco/Lambda-Core/lib/gameinfo"
 	"github.com/galaco/Lambda/controllers"
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
@@ -53,18 +49,6 @@ func main() {
 	defer impl.Shutdown()
 
 	var clearColor imgui.Vec4
-
-	// @TODO This MUST BE CONFIGURABLE
-	gameDirectory := "D:/Program Files/Steamapps/steamapps/common/Counter-Strike Source/cstrike"
-
-	_, err = gameinfo.LoadConfig(gameDirectory)
-	if err != nil {
-		logger.Fatal(err)
-	}
-	filesystem.RegisterGameResourcePaths(gameDirectory, gameinfo.Get())
-	resource.Manager().SetErrorModelName("models/error.mdl")
-	resource.Manager().SetErrorTextureName("materials/error.vtf")
-	defer resource.Manager().Empty()
 
 	event.Singleton().Initialize()
 

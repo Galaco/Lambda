@@ -4,3 +4,5 @@
 imgui\.ini
 
 *.vmf
+
+\.DS_Store

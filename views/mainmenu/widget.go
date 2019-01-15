@@ -58,6 +58,6 @@ func openFile() string {
 	//	dialog.Message("%s", "Failed to open file").Error()
 	//	return ""
 	//}
-	filename := "./ze_bioshock_v6_4.vmf"
+	filename := "./ze_angel_beats.vmf"
 	return filename
 }
