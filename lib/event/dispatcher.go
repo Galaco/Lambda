@@ -19,28 +19,14 @@ type dispatcher struct {
 	receivers map[string][]Receivable
 
 	messages []IEvent
-	//mutex    sync.Mutex
 }
 
-// Initialize starts the singleton running in a separate routine.
+// Initialize starts the singleton running.
 func (dispatch *dispatcher) Initialize() {
 	if dispatch.running == true {
 		return
 	}
 	dispatch.running = true
-	//
-	//go func() {
-	//	for dispatch.running == true {
-	//		dispatch.mutex.Lock()
-	//		if len(dispatch.messages) == 0 {
-	//			dispatch.mutex.Unlock()
-	//			time.Sleep(time.Millisecond)
-	//			continue
-	//		}
-	//		dispatch.processMessages()
-	//		dispatch.mutex.Unlock()
-	//	}
-	//}()
 }
 
 func (dispatch *dispatcher) processMessages() {
@@ -57,15 +43,6 @@ func (dispatch *dispatcher) processMessages() {
 			}
 		}
 	}
-
-	//for _, message := range dispatch.messages {
-	//	if dispatch.receivers[message.Type()] != nil {
-	//		for _, receiver := range dispatch.receivers[message.Type()] {
-	//			receiver(message)
-	//		}
-	//	}
-	//}
-	//dispatch.messages = make([]IEvent, 0)
 }
 
 // Close tells the dispatcher to finish running.
@@ -77,13 +54,6 @@ func (dispatch *dispatcher) Close() {
 // Dispatch notified the dispatcher that the specified event has occurred,
 // and appends it to the end of the current dispatch queue for processing.
 func (dispatch *dispatcher) Dispatch(action IEvent) {
-	// @TODO This can actually affect dispatch order, but it seems to prevent locking,
-	// fix the cause of locking instead of working around by dispatching in a routine.
-	//go func() {
-	//	dispatch.mutex.Lock()
-	//	dispatch.messages = append(dispatch.messages, action)
-	//	dispatch.mutex.Unlock()
-	//}()
 	dispatch.messages = append(dispatch.messages, action)
 	dispatch.processMessages()
 

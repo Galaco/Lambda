@@ -34,6 +34,9 @@ func (app *application) Render(window *glfw.Window) {
 // Update ensures that views and controllers can update
 // themselves automatically.
 func (app *application) Update() {
+	for _, view := range app.views {
+		view.Update()
+	}
 }
 
 // NewApplication returns a new application.
