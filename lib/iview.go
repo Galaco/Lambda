@@ -11,4 +11,6 @@ type IView interface {
 	Render(*glfw.Window)
 	// Update updates the current view
 	Update()
+	// Correctly destroy any resources (most likely gpu)
+	Destroy()
 }

@@ -16,6 +16,8 @@ github.com/galaco/StudioModel v0.0.0-20181028212841-5b8408bcc2af/go.mod h1:TyLwC
 github.com/galaco/bsp v0.1.2 h1:CFejzoNYfHpWuXNFj+iYAhSS1BovWmDfqa9rVjYGNCg=
 github.com/galaco/bsp v0.1.2/go.mod h1:RcrH7F/FezUOMXKWuYyWYwrHdamdvFxZqD2lg8LFcnc=
 github.com/galaco/gosigl v0.0.0-20181228204141-a4f1befcc399/go.mod h1:bo6fzFnd9DxiwROJFDQ19WrqtSbzRJbJcOTv6lO7lAk=
+github.com/galaco/imgui-go v1.3.0 h1:8zj7ZgHRwEbCueG6rF5QkJSy9AIsgYRI9DYZfDCEmEI=
+github.com/galaco/imgui-go v1.3.0/go.mod h1:Zim0HXzpe4X+h86Rmho3KDKNuQneU2EPp4ONfmk/2wQ=
 github.com/galaco/packrect v0.0.0-20190106134957-d6cd1e9d06f9/go.mod h1:1QOQWDBGRc6sT0tglK344YodNuAGsj6WPqZXzzpv6f4=
 github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 h1:9lAWZWuLo8dMG907qrgciO+hgR826eA6foqvHboEpUw=
 github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37/go.mod h1:1QOQWDBGRc6sT0tglK344YodNuAGsj6WPqZXzzpv6f4=
@@ -31,6 +33,8 @@ github.com/galaco/vpk2 v0.0.0-20181012095330-21e4d1f6c888 h1:QCMt6AZ5gwsJ3SNsvTU
 github.com/galaco/vpk2 v0.0.0-20181012095330-21e4d1f6c888/go.mod h1:jL22XAWuUlYUmONuamxDdbDlGJhuOFkqNRPJwuBA3X8=
 github.com/galaco/vtf v1.0.0 h1:aAisl6NBBzBqCzZd9fsgiQLcTHSNbR3DG3BP5toUeSc=
 github.com/galaco/vtf v1.0.0/go.mod h1:/qXLzN9Et3Ed61RUR4rYXO/eMMFgvEyc4opw/Nw6xkM=
+github.com/gmacd/go-bgfx v0.0.0-20150831131340-e2d56416c25a h1:bRgkjAKKFYsj+tqTfJ+7QqZCT9RJvCfpSmA+kub6AL4=
+github.com/gmacd/go-bgfx v0.0.0-20150831131340-e2d56416c25a/go.mod h1:w7V0NI/0tbSyAXn/C0mgcvupLhmo2COyUSftm+qatgQ=
 github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2 h1:78Hza2KHn2PX1jdydQnffaU2A/xM0g3Nx1xmMdep9Gk=
 github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2/go.mod h1:482civXOzJJCPzJ4ZOX/pwvXBWSnzD4OKMdH4ClKGbk=
 github.com/go-gl/glfw v0.0.0-20181213070059-819e8ce5125f/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
@@ -38,6 +42,8 @@ github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a h1:2n5w2v3knlspzjJWyQ
 github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a/go.mod h1:dvrdneKbyWbK2skTda0nM4B9zSlS2GZSnjX7itr/skQ=
 github.com/inkyblackness/imgui-go v1.3.0 h1:0P8vurDL0ZnRjeo2PYkYcQhS/5NWbEPj1w54wqGCHG4=
 github.com/inkyblackness/imgui-go v1.3.0/go.mod h1:/qnwYnJnAAUR1JW1/+wIMhC6HnHZON4iGuL+aqTvKxI=
+github.com/james4k/go-bgfx v0.0.0-20141026034758-5b19e040f0f8 h1:svwNzW1d9V/MI5aGQnXX+GlhITTFasy/3ZobOlHUBC0=
+github.com/james4k/go-bgfx v0.0.0-20141026034758-5b19e040f0f8/go.mod h1:TlNQdGxMrGEHeQgQukzgY0QaTjnJXbb4rebnfIBE2TA=
 github.com/logrusorgru/aurora v0.0.0-20181002194514-a7b3b318ed4e h1:9MlwzLdW7QSDrhDjFlsEYmxpFyIoXmYRon3dt0io31k=
 github.com/logrusorgru/aurora v0.0.0-20181002194514-a7b3b318ed4e/go.mod h1:7rIyQOR62GCctdiQpZ/zOJlFyk6y+94wXzv6RNZgaR4=
 github.com/mattn/go-gtk v0.0.0-20180216084204-5a311a1830ab/go.mod h1:PwzwfeB5syFHXORC3MtPylVcjIoTDT/9cvkKpEndGVI=
@@ -53,3 +59,5 @@ golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b h1:VHyIDlv3XkfCa5/a81uzaoD
 golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b/go.mod h1:ux5Hcp/YLpHSI86hEcLt0YII63i6oz57MZXIpbrjZUs=
 golang.org/x/image v0.0.0-20181206121112-cd38e8056d9b h1:9WPnadh+EKSlC7bAQtFhmNxmx/rQOj35pa7nFj6b/Dw=
 golang.org/x/image v0.0.0-20181206121112-cd38e8056d9b/go.mod h1:ux5Hcp/YLpHSI86hEcLt0YII63i6oz57MZXIpbrjZUs=
+golang.org/x/image v0.0.0-20190118043309-183bebdce1b2 h1:FNSSV4jv1PrPsiM2iKGpqLPPgYACqh9Muav7Pollk1k=
+golang.org/x/image v0.0.0-20190118043309-183bebdce1b2/go.mod h1:ux5Hcp/YLpHSI86hEcLt0YII63i6oz57MZXIpbrjZUs=
