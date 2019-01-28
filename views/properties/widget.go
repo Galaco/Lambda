@@ -19,8 +19,8 @@ func (mod *Widget) Initialize() {
 
 func (mod *Widget) Render(window *glfw.Window) {
 	w, h := window.GetSize()
-	imgui.SetNextWindowPos(imgui.Vec2{X: float32(w - 320), Y: 16})
-	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 16)})
+	imgui.SetNextWindowPos(imgui.Vec2{X: float32(w - 320), Y: 48})
+	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 48)})
 	if imgui.BeginV("Properties", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
 		imgui.BeginChild("Scrolling")
 		for _, kv := range mod.keyValueViews {
@@ -33,6 +33,10 @@ func (mod *Widget) Render(window *glfw.Window) {
 }
 
 func (mod *Widget) Update() {
+
+}
+
+func (mod *Widget) Destroy() {
 
 }
 

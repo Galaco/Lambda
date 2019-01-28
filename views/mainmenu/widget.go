@@ -48,6 +48,10 @@ func (mod *Widget) Update() {
 
 }
 
+func (mod *Widget) Destroy() {
+
+}
+
 func NewWidget() *Widget {
 	return &Widget{}
 }

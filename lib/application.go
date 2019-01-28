@@ -39,6 +39,14 @@ func (app *application) Update() {
 	}
 }
 
+// Close ensures that any view cleans up
+// after itself if needed.
+func (app *application) Close() {
+	for _, view := range app.views {
+		view.Destroy()
+	}
+}
+
 // NewApplication returns a new application.
 func NewApplication() *application {
 	return &application{}

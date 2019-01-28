@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/galaco/Lambda/core/importers"
-	"github.com/galaco/Lambda/core/persistance/scene"
+	"github.com/galaco/Lambda/services/importers"
+	"github.com/galaco/Lambda/services/persistence/scene"
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
 )

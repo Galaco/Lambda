@@ -33,6 +33,10 @@ func (mod *Widget) Update() {
 
 }
 
+func (mod *Widget) Destroy() {
+
+}
+
 func (mod *Widget) selectedEntityChanged(received event.IEvent) {
 }
 
