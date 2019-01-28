@@ -5,6 +5,7 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib"
 	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/views/assets"
 	"github.com/galaco/Lambda/views/hierarchy"
 	"github.com/galaco/Lambda/views/mainmenu"
 	"github.com/galaco/Lambda/views/properties"
@@ -59,6 +60,7 @@ func main() {
 	app.AddView(mainmenu.NewWidget())
 	app.AddView(hierarchy.NewWidget())
 	app.AddView(properties.NewWidget())
+	app.AddView(assets.NewWidget())
 
 	windowShouldClose := false
 	event.Singleton().Subscribe(events.TypeWindowClosed, func(action event.IEvent) {
