@@ -1,9 +1,7 @@
 package hierarchy
 
 import (
-	"fmt"
 	"github.com/inkyblackness/imgui-go"
-	"log"
 	"strings"
 )
 
@@ -45,7 +43,6 @@ func (mod *allEntities) Filter(filterMode int) {
 		}
 		mod.currentFilterMode = entityFilterNone
 	}
-	log.Println(fmt.Sprintf("Filter mode: %d", filterMode))
 }
 
 func (mod *allEntities) AddEntity(id int, classname string, targetname string) {

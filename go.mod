@@ -14,6 +14,6 @@ require (
 	github.com/inkyblackness/imgui-go v1.3.0
 	github.com/mattn/go-gtk v0.0.0-20181205025739-e9a6766929f6 // indirect
 	github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791 // indirect
-	github.com/sqweek/dialog v0.0.0-20180909141952-8b7906c2c196
+	github.com/sqweek/dialog v0.0.0-20190119053146-f33030e0fda5
 	github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5
 )

@@ -3,9 +3,9 @@ package mainmenu
 import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/views/mainmenu/dialog"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
-	//	"github.com/sqweek/dialog"
 )
 
 type Widget struct {
@@ -53,11 +53,10 @@ func NewWidget() *Widget {
 }
 
 func openFile() string {
-	//filename, err := dialog.File().Filter("Vmf map file", "vmf").Load()
-	//if err != nil {
-	//	dialog.Message("%s", "Failed to open file").Error()
-	//	return ""
-	//}
-	filename := "./ze_angel_beats.vmf"
+	filename,err := dialog.FileOpen()
+	if err != nil {
+		filename = "./ze_bioshock_v6_4.vmf"
+		return ""
+	}
 	return filename
 }
