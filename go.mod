@@ -1,11 +1,10 @@
 module github.com/galaco/Lambda
 
-// replace github.com/galaco/source-tools-common => E:/Users/Josh/go/src/github.com/galaco/source-tools-common
+replace github.com/inkyblackness/imgui-go => E:/Users/Josh/go/src/github.com/galaco/imgui-go
 
 require (
 	github.com/AllenDang/w32 v0.0.0-20180428130237-ad0a36d80adc // indirect
 	github.com/galaco/KeyValues v1.3.0 // indirect
-	github.com/galaco/Lambda-Core v0.2.0
 	github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 // indirect
 	github.com/galaco/source-tools-common v0.0.0-20190112121435-c9332f4bd668
 	github.com/galaco/vmf v0.0.0-20180309175744-7a9ccb6e8abb

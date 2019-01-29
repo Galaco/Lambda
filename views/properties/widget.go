@@ -2,7 +2,7 @@ package properties
 
 import (
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/lib/mvc/event"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"

@@ -2,7 +2,7 @@ package hierarchy
 
 import (
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/lib/mvc/event"
 	"github.com/galaco/Lambda/views/hierarchy/list"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"

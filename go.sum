@@ -20,6 +20,7 @@ github.com/galaco/bsp v0.1.2/go.mod h1:RcrH7F/FezUOMXKWuYyWYwrHdamdvFxZqD2lg8LFc
 github.com/galaco/gosigl v0.0.0-20181228204141-a4f1befcc399/go.mod h1:bo6fzFnd9DxiwROJFDQ19WrqtSbzRJbJcOTv6lO7lAk=
 github.com/galaco/imgui-go v1.3.0 h1:8zj7ZgHRwEbCueG6rF5QkJSy9AIsgYRI9DYZfDCEmEI=
 github.com/galaco/imgui-go v1.3.0/go.mod h1:Zim0HXzpe4X+h86Rmho3KDKNuQneU2EPp4ONfmk/2wQ=
+github.com/galaco/imgui-layouts v0.0.0-20190129194952-d0ce9f8a5a5c/go.mod h1:xsCfdqYd7QHxKQ9MdQEMy8zUWVcF5YFCXT4jkNI1gt4=
 github.com/galaco/packrect v0.0.0-20190106134957-d6cd1e9d06f9/go.mod h1:1QOQWDBGRc6sT0tglK344YodNuAGsj6WPqZXzzpv6f4=
 github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 h1:9lAWZWuLo8dMG907qrgciO+hgR826eA6foqvHboEpUw=
 github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37/go.mod h1:1QOQWDBGRc6sT0tglK344YodNuAGsj6WPqZXzzpv6f4=

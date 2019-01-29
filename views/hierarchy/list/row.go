@@ -3,7 +3,7 @@ package list
 import (
 	"fmt"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/lib/mvc/event"
 	"github.com/inkyblackness/imgui-go"
 	"log"
 )

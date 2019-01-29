@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/galaco/Lambda/controllers"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib"
-	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/lib/mvc"
+	"github.com/galaco/Lambda/lib/mvc/event"
 	"github.com/galaco/Lambda/views/assets"
 	"github.com/galaco/Lambda/views/hierarchy"
 	"github.com/galaco/Lambda/views/mainmenu"
@@ -34,7 +34,7 @@ func main() {
 	event.Singleton().Initialize()
 
 	// Define application
-	app := lib.NewApplication()
+	app := mvc.NewApplication()
 	defer app.Close()
 	app.AddController(controllers.NewMenuController())
 	app.AddController(controllers.NewSceneController())

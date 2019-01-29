@@ -1,4 +1,4 @@
-package lib
+package mvc
 
 import "github.com/vulkan-go/glfw/v3.3/glfw"
 

@@ -1,4 +1,4 @@
-package lib
+package mvc
 
 // IController is a standard Controller interface you'd
 // find in any MVC style application.

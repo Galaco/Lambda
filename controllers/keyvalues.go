@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/galaco/Lambda/services/persistence/scene"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/event"
+	"github.com/galaco/Lambda/lib/mvc/event"
 	"strconv"
 )
 
