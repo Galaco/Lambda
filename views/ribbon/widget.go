@@ -12,7 +12,7 @@ func (mod *Widget) Initialize() {
 }
 
 func (mod *Widget) Render(window *glfw.Window) {
-	w,_ := window.GetSize()
+	w, _ := window.GetSize()
 	imgui.SetNextWindowPos(imgui.Vec2{X: 0, Y: 16})
 	imgui.SetNextWindowSize(imgui.Vec2{X: float32(w), Y: 16})
 	if imgui.BeginV("Ribbon", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus|imgui.WindowFlagsNoTitleBar) {

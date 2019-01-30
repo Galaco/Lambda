@@ -3,6 +3,7 @@ package directory
 import (
 	"github.com/galaco/Lambda/lib/imgui-layouts/directory"
 	"log"
+	"strings"
 )
 
 type Directory struct {
@@ -16,8 +17,9 @@ func (dir *Directory) Render() {
 func NewDirectory(fileList []string) *Directory {
 	thumbs := make([]directory.Thumbnail, len(fileList))
 	for idx, f := range fileList {
-		thumbs[idx] = *directory.NewThumbnail(f, false, func() {
-			log.Println(f)
+		dirName := strings.Split(f, "/")
+		thumbs[idx] = *directory.NewThumbnail(dirName[len(dirName) - 1], false, func() {
+			log.Println(dirName[len(dirName) - 1])
 		})
 	}
 

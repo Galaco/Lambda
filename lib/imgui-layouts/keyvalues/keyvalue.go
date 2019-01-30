@@ -3,8 +3,8 @@ package keyvalues
 import "github.com/inkyblackness/imgui-go"
 
 type keyValue struct {
-	key string
-	value string
+	key      string
+	value    string
 	onChange func(string, string)
 }
 
@@ -32,8 +32,8 @@ func (kv *keyValue) SetValue(value string) {
 // NewKeyValue returns a new keyvalue pair.
 func NewKeyValue(key string, value string, onChange func(string, string)) *keyValue {
 	return &keyValue{
-		key: key,
-		value: value,
+		key:      key,
+		value:    value,
 		onChange: onChange,
 	}
 }

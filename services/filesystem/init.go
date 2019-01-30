@@ -19,7 +19,7 @@ func Init() {
 	// Load GameInfo.txt
 	// GameInfo.txt includes fundamental properties about the game
 	// and its resources locations
-	cfg, err := config.Load("./")
+	cfg, err := config.Load("./lambda.json")
 	if err != nil {
 		logger.Fatal(err)
 	}

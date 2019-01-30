@@ -7,7 +7,7 @@ type View struct {
 
 // Render draws each keyvalue pair
 func (view *View) Render() {
-	for _,kv := range view.keyValues {
+	for _, kv := range view.keyValues {
 		kv.Render()
 	}
 }

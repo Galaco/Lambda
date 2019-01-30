@@ -5,13 +5,13 @@ import (
 )
 
 type fbo struct {
-	framebuffer uint32
+	framebuffer        uint32
 	framebufferTexture uint32
-	width int
-	height int
+	width              int
+	height             int
 }
 
-func (win* fbo) Resize(width int, height int) {
+func (win *fbo) Resize(width int, height int) {
 	win.width = width
 	win.height = height
 
@@ -35,20 +35,20 @@ func (win* fbo) Resize(width int, height int) {
 	win.Unbind()
 }
 
-func (win* fbo) Bind() {
+func (win *fbo) Bind() {
 	gl.BindFramebuffer(gl.FRAMEBUFFER, win.framebuffer)
 }
 
-func (win* fbo) Unbind() {
-	gl.BindFramebuffer(gl.FRAMEBUFFER,0)
+func (win *fbo) Unbind() {
+	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
 
-func (win* fbo) Destroy() {
+func (win *fbo) Destroy() {
 	gl.DeleteFramebuffers(1, &win.framebuffer)
 }
 
 func NewFbo(width int, height int) *fbo {
-	f:= &fbo {}
+	f := &fbo{}
 	gl.CreateFramebuffers(1, &f.framebuffer)
 	f.Resize(width, height)
 	return f

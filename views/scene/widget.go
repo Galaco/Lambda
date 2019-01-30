@@ -7,7 +7,7 @@ import (
 )
 
 type Widget struct {
-	window *renderer.Window
+	window        *renderer.Window
 	width, height int
 }
 
@@ -16,8 +16,8 @@ func (widget *Widget) Initialize() {
 }
 
 func (widget *Widget) Render(window *glfw.Window) {
-	w,h := window.GetSize()
-	widgetWidth := int(w - (2*320))
+	w, h := window.GetSize()
+	widgetWidth := int(w - (2 * 320))
 	widgetHeight := int(h - 48)
 	if widgetWidth != widget.width || widgetHeight != widget.height {
 		widget.width = widgetWidth
@@ -42,8 +42,7 @@ func (widget *Widget) Destroy() {
 
 func NewWidget() *Widget {
 	return &Widget{
-		width: 1024,
+		width:  1024,
 		height: 768,
 	}
 }
-

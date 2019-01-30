@@ -5,17 +5,10 @@ import (
 	"io/ioutil"
 )
 
-const minWidth = 320
-const minHeight = 240
-
 // Project configuration properties
 // Engine needs to know where to locate its game data
 type Config struct {
 	GameDirectory string
-	Video         struct {
-		Width  int
-		Height int
-	}
 }
 
 // @TODO Implement something nicer than this scoped variable
@@ -29,7 +22,7 @@ func Singleton() *Config {
 // Load attempts to open and unmarshall
 // json configuration
 func Load(path string) (*Config, error) {
-	data, err := ioutil.ReadFile(path + "config.json")
+	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return &config, err
 	}
@@ -39,19 +32,5 @@ func Load(path string) (*Config, error) {
 		return &config, err
 	}
 
-	validate()
-
 	return &config, nil
-}
-
-// validate that expected parameters with known
-// boundaries or limitation fall within expectations.
-func validate() {
-	if config.Video.Width < minWidth {
-		config.Video.Width = minWidth
-	}
-
-	if config.Video.Height < minHeight {
-		config.Video.Height = minHeight
-	}
 }

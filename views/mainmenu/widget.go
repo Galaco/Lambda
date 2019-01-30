@@ -57,7 +57,7 @@ func NewWidget() *Widget {
 }
 
 func openFile() string {
-	filename,err := dialog.FileOpen()
+	filename, err := dialog.FileOpen()
 	if err != nil {
 		filename = "./ze_bioshock_v6_4.vmf"
 		return ""

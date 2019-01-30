@@ -23,7 +23,7 @@ func (cache *Cache) ThumbnailAtlas() *[]byte {
 
 // Exists returns whether a particular CacheEntry exists in the cache
 func (cache *Cache) Exists(filePath string) bool {
-	for _,cacheEntry := range cache.cacheFile.FilePaths {
+	for _, cacheEntry := range cache.cacheFile.FilePaths {
 		if cacheEntry == filePath {
 			return true
 		}
@@ -34,10 +34,10 @@ func (cache *Cache) Exists(filePath string) bool {
 
 // Get returns the positional data within the cached atlas image
 func (cache *Cache) Get(filePath string) *CacheEntry {
-	for idx,cacheEntry := range cache.cacheFile.FilePaths {
-		 if cacheEntry == filePath {
-		 	return &cache.cacheFile.Entries[idx]
-		 }
+	for idx, cacheEntry := range cache.cacheFile.FilePaths {
+		if cacheEntry == filePath {
+			return &cache.cacheFile.Entries[idx]
+		}
 	}
 
 	return nil
@@ -62,7 +62,7 @@ func (cache *Cache) FlushToDisk() error {
 
 // deleteFSCopy deletes existing cache on local fs
 func (cache *Cache) deleteFSCopy() error {
-	if _,err := os.Stat(cache.fsPath); err == nil {
+	if _, err := os.Stat(cache.fsPath); err == nil {
 		return os.Remove(cache.fsPath)
 	}
 	return nil
@@ -79,7 +79,7 @@ func (cache *Cache) writeFSCopy() error {
 	cache.cacheFile.Header.FilePathBlockOffset = int32(offset)
 
 	// write filepaths
-	for _,path := range cache.cacheFile.FilePaths {
+	for _, path := range cache.cacheFile.FilePaths {
 		fsCacheBuffer = append(fsCacheBuffer, []byte(path)...)
 		fsCacheBuffer = append(fsCacheBuffer, []byte("\x00")...)
 		offset += len(path) + len("\x00")
@@ -89,7 +89,7 @@ func (cache *Cache) writeFSCopy() error {
 
 	// Write positional entries
 	entrySize := int(unsafe.Sizeof(CacheEntry{}))
-	for _,entry := range cache.cacheFile.Entries {
+	for _, entry := range cache.cacheFile.Entries {
 		var buf bytes.Buffer
 		err := binary.Write(&buf, binary.LittleEndian, entry)
 		if err != nil {
@@ -120,13 +120,13 @@ func (cache *Cache) writeFSCopy() error {
 
 // loadFromFile opens an on-disk cache file and loads it into memory
 func (cache *Cache) loadFromFile() error {
-	f,err := os.Open(cache.fsPath)
+	f, err := os.Open(cache.fsPath)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
 
-	raw,err := ioutil.ReadAll(f)
+	raw, err := ioutil.ReadAll(f)
 	if err != nil {
 		return err
 	}
@@ -154,7 +154,7 @@ func (cache *Cache) loadFromFile() error {
 	cache.cacheFile.Entries = entries
 
 	// Read Cache Texture data
-	cache.cacheFile.Atlas = raw[head.AtlasOffset:head.AtlasOffset+head.AtlasLength]
+	cache.cacheFile.Atlas = raw[head.AtlasOffset : head.AtlasOffset+head.AtlasLength]
 
 	return nil
 }
@@ -164,12 +164,12 @@ func (cache *Cache) loadFromFile() error {
 func InitCache(cachePath string) (*Cache, error) {
 	cache := &Cache{}
 	cache.fsPath = cacheFilenamePrefix + hashDirectory(cachePath)
-	if _,err := os.Stat(cachePath); err == nil {
+	if _, err := os.Stat(cachePath); err == nil {
 		// Cache exists, attempt to load it
 		err = cache.loadFromFile()
 		if err != nil {
 			// Cache is invalid
-			return nil,err
+			return nil, err
 		}
 	} else if os.IsNotExist(err) {
 		// no cache exists to load
@@ -178,5 +178,5 @@ func InitCache(cachePath string) (*Cache, error) {
 		return nil, errors.New(fmt.Sprintf("failed to initialize cache for path: %s", cachePath))
 	}
 
-	return cache,nil
+	return cache, nil
 }

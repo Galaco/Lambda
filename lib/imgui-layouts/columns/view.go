@@ -8,23 +8,23 @@ import (
 // View represents a column view. It wraps imgui's Column functionality to
 // provide a simplified mechanism for rendering columns.
 type View struct {
-	numColumns int
+	numColumns     int
 	columnContents []func()
-	columnWidths []*columnWidth
+	columnWidths   []*columnWidth
 }
 
 // Render draws the current configuration of columns
 func (view *View) Render(width int, height int) {
-	imgui.BeginColumns(view.numColumns)
+	imgui.BeginColumns("Columns", view.numColumns)
 
-	for idx,renderFunc := range view.columnContents {
-		if view.columnWidths[idx].AsPercentage == true {
-			imgui.SetColumnWidth(0, (100 / width) * view.columnWidths[idx].Width)
+	for idx, renderFunc := range view.columnContents {
+		if view.columnWidths[idx].AsPercentage == false {
+			imgui.SetColumnWidth(idx, float32(view.columnWidths[idx].Width))
 			renderFunc()
 		} else {
 			imgui.PushItemWidth(float32(view.columnWidths[idx].Width))
 			renderFunc()
-			imui.PopItemWidth()
+			imgui.PopItemWidth()
 		}
 
 		imgui.NextColumn()
@@ -43,7 +43,7 @@ func (view *View) SetColumnContents(idx int, renderFunc func(), width *columnWid
 	if width != nil {
 		view.columnWidths[idx] = width
 	} else {
-		view.columnWidths[idx] = NewColumnWidth(-1, false)
+		view.columnWidths[idx] = NewColumnWidth(-1, true)
 	}
 
 	return nil
@@ -52,22 +52,22 @@ func (view *View) SetColumnContents(idx int, renderFunc func(), width *columnWid
 // NewColumns returns a new columns view
 func NewColumns(num int) *View {
 	return &View{
-		numColumns: num,
+		numColumns:     num,
 		columnContents: make([]func(), num),
-		columnWidths: make([]*columnWidth, num),
+		columnWidths:   make([]*columnWidth, num),
 	}
 }
 
 // columnWidth provides data about how a column should be sized.
 type columnWidth struct {
 	AsPercentage bool
-	Width int
+	Width        int
 }
 
 // NewColumnWidth returns a new columnWidth struct
 func NewColumnWidth(width int, asPercentage bool) *columnWidth {
 	return &columnWidth{
-		Width: width,
+		Width:        width,
 		AsPercentage: asPercentage,
 	}
 }

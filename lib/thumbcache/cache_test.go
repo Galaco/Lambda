@@ -6,7 +6,7 @@ import (
 
 func TestInitCache(t *testing.T) {
 	path := "./foo"
-	sut,err := InitCache(path)
+	sut, err := InitCache(path)
 
 	if err != nil {
 		t.Error(err)
@@ -18,12 +18,12 @@ func TestInitCache(t *testing.T) {
 
 func TestCache_Add(t *testing.T) {
 	path := "./foo"
-	sut,err := InitCache(path)
+	sut, err := InitCache(path)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if nil == sut.Add(path + "/ika.vtf", 16, 16, []byte{}) {
+	if nil == sut.Add(path+"/ika.vtf", 16, 16, []byte{}) {
 		t.Error("no entry returned for added thumbnail")
 	}
 	if len(sut.cacheFile.FilePaths) == 0 {
@@ -33,16 +33,16 @@ func TestCache_Add(t *testing.T) {
 
 func TestCache_Exists(t *testing.T) {
 	path := "./foo"
-	sut,err := InitCache(path)
+	sut, err := InitCache(path)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if nil == sut.Add(path + "/ika.vtf", 16, 16, []byte{}) {
+	if nil == sut.Add(path+"/ika.vtf", 16, 16, []byte{}) {
 		t.Error("no entry returned for added thumbnail")
 	}
 
-	if false == sut.Exists(path + "/ika.vtf") {
+	if false == sut.Exists(path+"/ika.vtf") {
 		t.Error("no entry found for known existing thumbnail")
 	}
 }
@@ -53,23 +53,23 @@ func TestCache_FlushToDisk(t *testing.T) {
 
 func TestCache_Get(t *testing.T) {
 	path := "./foo"
-	sut,err := InitCache(path)
+	sut, err := InitCache(path)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if nil == sut.Add(path + "/ika.vtf", 16, 16, []byte{}) {
+	if nil == sut.Add(path+"/ika.vtf", 16, 16, []byte{}) {
 		t.Error("no entry returned for added thumbnail")
 	}
 
-	if nil == sut.Get(path + "/ika.vtf") {
+	if nil == sut.Get(path+"/ika.vtf") {
 		t.Error("no entry returned for known existing thumbnail")
 	}
 }
 
 func TestCache_ThumbnailAtlas(t *testing.T) {
 	path := "./foo"
-	sut,err := InitCache(path)
+	sut, err := InitCache(path)
 	if err != nil {
 		t.Error(err)
 	}
