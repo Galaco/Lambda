@@ -5,6 +5,7 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/lib/mvc"
 	"github.com/galaco/Lambda/lib/mvc/event"
+	"github.com/galaco/Lambda/services/filesystem"
 	"github.com/galaco/Lambda/views/assets"
 	"github.com/galaco/Lambda/views/hierarchy"
 	"github.com/galaco/Lambda/views/mainmenu"
@@ -31,6 +32,7 @@ func main() {
 	defer impl.Shutdown()
 
 	// Begin event manager
+	filesystem.Init()
 	event.Singleton().Initialize()
 
 	// Define application
@@ -86,7 +88,6 @@ func initOpenGL() uint32 {
 }
 
 func initGlfw() *glfw.Window {
-
 	runtime.LockOSThread()
 
 	err := glfw.Init()

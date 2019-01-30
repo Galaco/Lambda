@@ -1,4 +1,4 @@
-package thumbnail
+package directory
 
 import (
 	"github.com/inkyblackness/imgui-go"

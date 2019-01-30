@@ -1,12 +1,12 @@
 package directory
 
 import (
-	"github.com/galaco/Lambda/lib/imgui-layouts/thumbnail"
+	"github.com/galaco/Lambda/lib/imgui-layouts/directory"
 	"log"
 )
 
 type Directory struct {
-	viewDir *thumbnail.Directory
+	viewDir *directory.Directory
 }
 
 func (dir *Directory) Render() {
@@ -14,14 +14,14 @@ func (dir *Directory) Render() {
 }
 
 func NewDirectory(fileList []string) *Directory {
-	thumbs := make([]thumbnail.Thumbnail, len(fileList))
+	thumbs := make([]directory.Thumbnail, len(fileList))
 	for idx, f := range fileList {
-		thumbs[idx] = *thumbnail.NewThumbnail(f, false, func() {
+		thumbs[idx] = *directory.NewThumbnail(f, false, func() {
 			log.Println(f)
 		})
 	}
 
 	return &Directory{
-		viewDir: thumbnail.NewDirectory(thumbs),
+		viewDir: directory.NewDirectory(thumbs),
 	}
 }
