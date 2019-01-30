@@ -3,6 +3,8 @@ package main
 import "github.com/inkyblackness/imgui-go"
 
 func applyImguiStyles() {
+	fontAtlas := imgui.CurrentIO().Fonts()
+	fontAtlas.AddFontFromFileTTF("./FiraCode-Regular.ttf", 16)
 	style := imgui.CurrentStyle()
 	style.SetColor(imgui.StyleColorText, imgui.Vec4{0.31, 0.25, 0.24, 1.00})
 	style.SetColor(imgui.StyleColorWindowBg, imgui.Vec4{0.94, 0.94, 0.94, 1.00})
