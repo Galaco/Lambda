@@ -1,6 +1,6 @@
 package events
 
-import "github.com/galaco/Lambda/models"
+import "github.com/galaco/Lambda/valve"
 
 const TypeNewScene = "NewScene"
 const TypeOpenScene = "OpenScene"
@@ -12,18 +12,18 @@ const TypeSceneNodeSelected = "SceneNodeSelected"
 // no actual distinction between an empty and a populated scene
 // for the purpose of a whole scene load.
 type NewScene struct {
-	scene *models.Vmf
+	scene *valve.Vmf
 }
 
 func (act *NewScene) Type() string {
 	return TypeNewScene
 }
 
-func (act *NewScene) Model() *models.Vmf {
+func (act *NewScene) Model() *valve.Vmf {
 	return act.scene
 }
 
-func NewNewScene(scene *models.Vmf) *NewScene {
+func NewNewScene(scene *valve.Vmf) *NewScene {
 	return &NewScene{
 		scene: scene,
 	}

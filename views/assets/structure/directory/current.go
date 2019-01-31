@@ -1,7 +1,7 @@
 package directory
 
 import (
-	"github.com/galaco/Lambda/lib/imgui-layouts/directory"
+	"github.com/galaco/Lambda/ui/imgui-layouts/directory"
 	"log"
 	"strings"
 )

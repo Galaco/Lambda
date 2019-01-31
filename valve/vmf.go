@@ -1,7 +1,7 @@
-package models
+package valve
 
 import (
-	"github.com/galaco/Lambda/models/world"
+	"github.com/galaco/Lambda/valve/world"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/go-gl/mathgl/mgl64"
 )

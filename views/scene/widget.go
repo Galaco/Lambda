@@ -1,9 +1,9 @@
 package scene
 
 import (
+	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/scene/renderer"
 	"github.com/inkyblackness/imgui-go"
-	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 
 type Widget struct {
@@ -15,8 +15,8 @@ func (widget *Widget) Initialize() {
 	widget.window = renderer.NewWindow(widget.width, widget.height)
 }
 
-func (widget *Widget) Render(window *glfw.Window) {
-	w, h := window.GetSize()
+func (widget *Widget) Render(ctx *context.Context) {
+	w, h := ctx.Window().GetSize()
 	widgetWidth := int(w - (2 * 320))
 	widgetHeight := int(h - 48)
 	if widgetWidth != widget.width || widgetHeight != widget.height {

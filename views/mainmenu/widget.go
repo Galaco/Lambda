@@ -1,21 +1,26 @@
 package mainmenu
 
 import (
+	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/mvc/event"
+	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/filesystem/importers"
+	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/mainmenu/dialog"
 	"github.com/inkyblackness/imgui-go"
-	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 
 type Widget struct {
+	dispatcher *event.Dispatcher
+	importer *importers.VmfImporter
+	model *project.Model
 }
 
-func (mod *Widget) Initialize() {
+func (widget *Widget) Initialize() {
 
 }
 
-func (mod *Widget) Render(window *glfw.Window) {
+func (widget *Widget) Render(ctx *context.Context) {
 	if imgui.BeginMainMenuBar() {
 		if imgui.BeginMenu("File") {
 			if imgui.MenuItemV("New..", "Ctrl+N", false, true) {
@@ -25,7 +30,8 @@ func (mod *Widget) Render(window *glfw.Window) {
 				/* Do stuff */
 				// This needs to dispatch an event that will actually call load elsewhere
 				if filename := openFile(); filename != "" {
-					event.Singleton().Dispatch(events.NewOpenScene(filename))
+					widget.loadVmf(filename)
+					//widget.dispatcher.Dispatch(events.NewOpenScene(filename))
 				}
 			}
 			if imgui.MenuItemV("Save", "Ctrl+S", false, true) {
@@ -35,7 +41,7 @@ func (mod *Widget) Render(window *glfw.Window) {
 				/* Do stuff */
 			}
 			if imgui.MenuItem("Exit") {
-				event.Singleton().Dispatch(events.NewWindowClosed())
+				widget.dispatcher.Dispatch(events.NewWindowClosed())
 				/* Do stuff */
 			}
 			imgui.EndMenu()
@@ -44,16 +50,36 @@ func (mod *Widget) Render(window *glfw.Window) {
 	}
 }
 
-func (mod *Widget) Update() {
+func (widget *Widget) Update() {
 
 }
 
-func (mod *Widget) Destroy() {
+func (widget *Widget) Destroy() {
 
 }
 
-func NewWidget() *Widget {
-	return &Widget{}
+func (widget *Widget) loadVmf(filename string) {
+	widget.dispatcher.Dispatch(events.NewOpenScene(filename))
+
+	sceneModel, err := widget.importer.LoadVmf(filename)
+	if err != nil {
+		widget.dispatcher.Dispatch(events.NewOpenSceneFailed())
+		return
+	}
+	widget.model.Scene().SetWorld(sceneModel.Worldspawn())
+	widget.model.Scene().SetEntities(sceneModel.Entities())
+
+	for i := 0; i < widget.model.Scene().Entities().Length(); i++ {
+		widget.dispatcher.Dispatch(events.NewEntityCreated(widget.model.Scene().Entities().Get(i)))
+	}
+}
+
+func NewWidget(dispatcher *event.Dispatcher, importer *importers.VmfImporter, model *project.Model) *Widget {
+	return &Widget{
+		dispatcher: dispatcher,
+		importer:importer,
+		model:model,
+	}
 }
 
 func openFile() string {

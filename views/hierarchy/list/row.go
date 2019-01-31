@@ -2,8 +2,6 @@ package list
 
 import (
 	"fmt"
-	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/mvc/event"
 	"github.com/inkyblackness/imgui-go"
 	"log"
 )
@@ -14,19 +12,21 @@ type row struct {
 	Classname  string
 	TargetName string
 	label      string
+
+	onClick func(id int)
 }
 
 // render renders the row as a imgui::Selectable.
 // It also dispatches a notification when the row is selected.
 func (item *row) render() {
 	if imgui.Selectable(item.label) {
-		event.Singleton().Dispatch(events.NewSceneNodeSelected(item.Id))
+		item.onClick(item.Id)
 		log.Println(fmt.Sprintf("%d selected", item.Id))
 	}
 }
 
 // newRow returns a new row
-func newRow(id int, classname string, targetname string) row {
+func newRow(id int, classname string, targetname string, onClick func(id int)) row {
 	format := "%d %s"
 	if targetname != "" {
 		format += " : %s"
@@ -39,5 +39,6 @@ func newRow(id int, classname string, targetname string) row {
 		Classname:  classname,
 		TargetName: targetname,
 		label:      fmt.Sprintf(format, id, classname, targetname),
+		onClick:onClick,
 	}
 }

@@ -1,23 +1,25 @@
 package hierarchy
 
 import (
+	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/mvc/event"
+	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/hierarchy/list"
 	"github.com/inkyblackness/imgui-go"
-	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 
 type Widget struct {
+	dispatcher *event.Dispatcher
+
 	list entityList
 }
 
 func (widget *Widget) Initialize() {
-	event.Singleton().Subscribe(events.TypeEntityCreated, widget.newEntityCreated)
+	widget.dispatcher.Subscribe(events.TypeEntityCreated, widget.newEntityCreated)
 }
 
-func (widget *Widget) Render(window *glfw.Window) {
-	_, h := window.GetSize()
+func (widget *Widget) Render(ctx *context.Context) {
+	_, h := ctx.Window().GetSize()
 	imgui.SetNextWindowPos(imgui.Vec2{X: 0, Y: 48})
 	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 48)})
 	if imgui.BeginV("Hierarchy", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus|imgui.WindowFlagsMenuBar) {
@@ -73,9 +75,14 @@ func (widget *Widget) newEntityCreated(received event.IEvent) {
 	widget.list.addEntity(
 		ent.IntForKey("id"),
 		ent.ValueForKey("classname"),
-		ent.ValueForKey("targetname"))
+		ent.ValueForKey("targetname"),
+		func(id int) {
+			widget.dispatcher.Dispatch(events.NewSceneNodeSelected(id))
+		})
 }
 
-func NewWidget() *Widget {
-	return &Widget{}
+func NewWidget(dispatcher *event.Dispatcher) *Widget {
+	return &Widget{
+		dispatcher: dispatcher,
+	}
 }

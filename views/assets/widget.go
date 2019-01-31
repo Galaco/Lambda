@@ -1,24 +1,27 @@
 package assets
 
 import (
-	"github.com/galaco/Lambda/lib/imgui-layouts/columns"
-	"github.com/galaco/Lambda/lib/mvc/event"
-	"github.com/galaco/Lambda/services/filesystem"
+	lambdaFS "github.com/galaco/Lambda-Core/core/filesystem"
+	"github.com/galaco/Lambda/event"
+	"github.com/galaco/Lambda/ui/context"
+	"github.com/galaco/Lambda/ui/imgui-layouts/columns"
 	"github.com/galaco/Lambda/views/assets/structure"
 	"github.com/galaco/Lambda/views/assets/structure/directory"
 	"github.com/inkyblackness/imgui-go"
-	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"log"
 )
 
 type Widget struct {
+	dispatcher *event.Dispatcher
+	fileSystem *lambdaFS.FileSystem
+
 	twoPanel 		*columns.View
 	directoryList    *structure.Tree
 	currentDirectory *directory.Directory
 }
 
 func (widget *Widget) Initialize() {
-	widget.currentDirectory = directory.NewDirectory(filesystem.Singleton().EnumerateResourcePaths())
+	widget.currentDirectory = directory.NewDirectory(widget.fileSystem.EnumerateResourcePaths())
 
 	widget.twoPanel = columns.NewColumns(2)
 	err := widget.twoPanel.SetColumnContents(0, widget.directoryList.Render, columns.NewColumnWidth(100, false))
@@ -31,8 +34,8 @@ func (widget *Widget) Initialize() {
 	}
 }
 
-func (widget *Widget) Render(window *glfw.Window) {
-	w, h := window.GetSize()
+func (widget *Widget) Render(ctx *context.Context) {
+	w, h := ctx.Window().GetSize()
 	imgui.SetNextWindowPos(imgui.Vec2{X: float32(320), Y: float32(h / 2)})
 	imgui.SetNextWindowSize(imgui.Vec2{X: float32(w - 640), Y: float32(h / 2)})
 	if imgui.BeginV("Assets", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
@@ -52,8 +55,10 @@ func (widget *Widget) Destroy() {
 func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 }
 
-func NewWidget() *Widget {
+func NewWidget(dispatcher *event.Dispatcher, fileSystem *lambdaFS.FileSystem) *Widget {
 	return &Widget{
+		dispatcher: dispatcher,
+		fileSystem: fileSystem,
 		directoryList:    structure.NewTree(),
 		currentDirectory: directory.NewDirectory([]string{}),
 	}

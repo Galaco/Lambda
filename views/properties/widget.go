@@ -1,29 +1,35 @@
 package properties
 
 import (
+	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/lib/mvc/event"
+	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/inkyblackness/imgui-go"
-	"github.com/vulkan-go/glfw/v3.3/glfw"
+	"strconv"
 )
 
 type Widget struct {
+	dispatcher *event.Dispatcher
+	model *project.Model
+
+
 	selectedEntity *entity.Entity
 	keyValueViews  []keyValue
 }
 
-func (mod *Widget) Initialize() {
-	event.Singleton().Subscribe(events.TypeEntitySelected, mod.selectedEntityChanged)
+func (widget *Widget) Initialize() {
+	widget.dispatcher.Subscribe(events.TypeSceneNodeSelected, widget.selectedEntityChanged)
 }
 
-func (mod *Widget) Render(window *glfw.Window) {
-	w, h := window.GetSize()
+func (widget *Widget) Render(ctx *context.Context) {
+	w, h := ctx.Window().GetSize()
 	imgui.SetNextWindowPos(imgui.Vec2{X: float32(w - 320), Y: 48})
 	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 48)})
 	if imgui.BeginV("Properties", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
 		imgui.BeginChild("Scrolling")
-		for _, kv := range mod.keyValueViews {
+		for _, kv := range widget.keyValueViews {
 			kv.Render()
 		}
 
@@ -32,26 +38,29 @@ func (mod *Widget) Render(window *glfw.Window) {
 	}
 }
 
-func (mod *Widget) Update() {
+func (widget *Widget) Update() {
 
 }
 
-func (mod *Widget) Destroy() {
+func (widget *Widget) Destroy() {
 
 }
 
-func (mod *Widget) selectedEntityChanged(received event.IEvent) {
-	evt := received.(*events.EntitySelected)
-	mod.selectedEntity = evt.Target()
-	mod.keyValueViews = make([]keyValue, 0)
+func (widget *Widget) selectedEntityChanged(received event.IEvent) {
+	evt := received.(*events.SceneNodeSelected)
+	widget.selectedEntity = widget.model.Scene().Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
+	widget.keyValueViews = make([]keyValue, 0)
 
-	kv := mod.selectedEntity.EPairs
+	kv := widget.selectedEntity.EPairs
 	for kv != nil {
-		mod.keyValueViews = append(mod.keyValueViews, newKeyValue(kv.Key, kv.Value, false))
+		widget.keyValueViews = append(widget.keyValueViews, newKeyValue(kv.Key, kv.Value, false))
 		kv = kv.Next
 	}
 }
 
-func NewWidget() *Widget {
-	return &Widget{}
+func NewWidget(dispatcher *event.Dispatcher, model *project.Model) *Widget {
+	return &Widget{
+		dispatcher: dispatcher,
+		model:model,
+	}
 }
