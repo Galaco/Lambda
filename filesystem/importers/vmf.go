@@ -2,8 +2,8 @@ package importers
 
 import (
 	"errors"
-	"github.com/galaco/Lambda/models"
-	"github.com/galaco/Lambda/models/world"
+	"github.com/galaco/Lambda/valve"
+	"github.com/galaco/Lambda/valve/world"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/galaco/vmf"
 	"os"
@@ -16,7 +16,7 @@ type VmfImporter struct {
 
 // Public loader function to open and import a vmf file
 // Will error out if the file is malformed or cannot be opened
-func (importer *VmfImporter) LoadVmf(filepath string) (*models.Vmf, error) {
+func (importer *VmfImporter) LoadVmf(filepath string) (*valve.Vmf, error) {
 	file, err := os.Open(filepath)
 	if err != nil {
 		return nil, err
@@ -46,12 +46,12 @@ func (importer *VmfImporter) LoadVmf(filepath string) (*models.Vmf, error) {
 
 	entities := importer.loadEntities(&importable.Entities)
 
-	return models.NewVmf(versionInfo, visGroups, worldspawn, entities), nil
+	return valve.NewVmf(versionInfo, visGroups, worldspawn, entities), nil
 }
 
 // loadVersionInfo creates a VersionInfo model
 // from the versioninfo vmf block
-func (importer *VmfImporter) loadVersionInfo(root *vmf.Node) (*models.VersionInfo, error) {
+func (importer *VmfImporter) loadVersionInfo(root *vmf.Node) (*valve.VersionInfo, error) {
 	if root == nil {
 		return nil, errors.New("missing versioninfo")
 	}
@@ -76,13 +76,13 @@ func (importer *VmfImporter) loadVersionInfo(root *vmf.Node) (*models.VersionInf
 		prefab = true
 	}
 
-	return models.NewVersionInfo(int(editorVersion), int(editorBuild), int(mapVersion), int(formatVersion), prefab), nil
+	return valve.NewVersionInfo(int(editorVersion), int(editorBuild), int(mapVersion), int(formatVersion), prefab), nil
 }
 
 // loadVisgroups loads all visgroup information from the
 // visgroups block of a vmf
-func (importer *VmfImporter) loadVisGroups(root *vmf.Node) (*models.VisGroups, error) {
-	return &models.VisGroups{}, nil
+func (importer *VmfImporter) loadVisGroups(root *vmf.Node) (*valve.VisGroups, error) {
+	return &valve.VisGroups{}, nil
 }
 
 func (importer *VmfImporter) loadWorld(root *vmf.Node) (*world.World, error) {
@@ -156,4 +156,8 @@ func (importer *VmfImporter) loadEntities(node *vmf.Node) *entity.List {
 	entities := entity.FromVmfNodeTree(*node)
 
 	return &entities
+}
+
+func NewVmfImporter() *VmfImporter {
+	return &VmfImporter{}
 }

@@ -1,7 +1,6 @@
 package structure
 
 type Tree struct {
-
 }
 
 func (tree *Tree) Render() {

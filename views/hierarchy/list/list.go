@@ -32,6 +32,6 @@ func (mod *List) Filter(filterMode int) *FilteredList {
 }
 
 // AddRow adds a new row to the end of the list.
-func (mod *List) AddRow(id int, classname string, targetname string) {
-	mod.nodes = append(mod.nodes, newRow(id, classname, targetname))
+func (mod *List) AddRow(id int, classname string, targetname string, onClick func(id int)) {
+	mod.nodes = append(mod.nodes, newRow(id, classname, targetname, onClick))
 }

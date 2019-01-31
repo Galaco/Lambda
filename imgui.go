@@ -3,6 +3,8 @@ package main
 import "github.com/inkyblackness/imgui-go"
 
 func applyImguiStyles() {
+	fontAtlas := imgui.CurrentIO().Fonts()
+	fontAtlas.AddFontFromFileTTF("./FiraCode-Regular.ttf", 16)
 	style := imgui.CurrentStyle()
 	style.SetColor(imgui.StyleColorText, imgui.Vec4{0.31, 0.25, 0.24, 1.00})
 	style.SetColor(imgui.StyleColorWindowBg, imgui.Vec4{0.94, 0.94, 0.94, 1.00})
@@ -27,7 +29,7 @@ func applyImguiStyles() {
 	style.SetColor(imgui.StyleColorButtonActive, imgui.Vec4{0.72, 1.00, 1.00, 0.86})
 	style.SetColor(imgui.StyleColorHeader, imgui.Vec4{0.65, 0.78, 0.84, 0.80})
 	style.SetColor(imgui.StyleColorHeaderHovered, imgui.Vec4{0.75, 0.88, 0.94, 0.80})
-	style.SetColor(imgui.StyleColorHeaderActive, imgui.Vec4{0.55, 0.68, 0.74, 0.80})//imgui.Vec4{0.46, 0.84, 0.90, 1.00});
+	style.SetColor(imgui.StyleColorHeaderActive, imgui.Vec4{0.55, 0.68, 0.74, 0.80}) //imgui.Vec4{0.46, 0.84, 0.90, 1.00});
 	style.SetColor(imgui.StyleColorResizeGrip, imgui.Vec4{0.60, 0.60, 0.80, 0.30})
 	style.SetColor(imgui.StyleColorResizeGripHovered, imgui.Vec4{1.00, 1.00, 1.00, 0.60})
 	style.SetColor(imgui.StyleColorResizeGripActive, imgui.Vec4{1.00, 1.00, 1.00, 0.90})

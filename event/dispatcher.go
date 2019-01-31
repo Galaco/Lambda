@@ -1,8 +1,6 @@
 package event
 
-var singleton *dispatcher
-
-// dispatcher is a very basic event subscribe/dispatch manager
+// Dispatcher is a very basic event subscribe/dispatch manager
 // it exposes a Singleton that anything can subscribe to or publish
 // events to.
 // Events are processed FIFO, and dispatched to subscribers in subscription
@@ -11,10 +9,10 @@ var singleton *dispatcher
 // Since callbacks are handled in the context of a routine, any actions that are required to
 // run within a specific threads context must be used cautiously.
 //
-// The main purpose of the dispatcher is to provide an event management system to decouple
+// The main purpose of the Dispatcher is to provide an event management system to decouple
 // and allow the views and controllers to safely communicate with each other
 // asynchronously.
-type dispatcher struct {
+type Dispatcher struct {
 	running   bool
 	receivers map[string][]Receivable
 
@@ -22,14 +20,14 @@ type dispatcher struct {
 }
 
 // Initialize starts the singleton running.
-func (dispatch *dispatcher) Initialize() {
+func (dispatch *Dispatcher) Initialize() {
 	if dispatch.running == true {
 		return
 	}
 	dispatch.running = true
 }
 
-func (dispatch *dispatcher) processMessages() {
+func (dispatch *Dispatcher) processMessages() {
 	if len(dispatch.messages) == 0 {
 		return
 	}
@@ -45,15 +43,15 @@ func (dispatch *dispatcher) processMessages() {
 	}
 }
 
-// Close tells the dispatcher to finish running.
+// Close tells the Dispatcher to finish running.
 // It will execute any events currently in the queue first.
-func (dispatch *dispatcher) Close() {
+func (dispatch *Dispatcher) Close() {
 	dispatch.running = false
 }
 
-// Dispatch notified the dispatcher that the specified event has occurred,
+// Dispatch notified the Dispatcher that the specified event has occurred,
 // and appends it to the end of the current dispatch queue for processing.
-func (dispatch *dispatcher) Dispatch(action IEvent) {
+func (dispatch *Dispatcher) Dispatch(action IEvent) {
 	dispatch.messages = append(dispatch.messages, action)
 	dispatch.processMessages()
 
@@ -61,7 +59,7 @@ func (dispatch *dispatcher) Dispatch(action IEvent) {
 
 // Subscribe registers a callback against a particular event.
 // Whenever a specified event occurs, the callback is executed.
-func (dispatch *dispatcher) Subscribe(action string, receiver Receivable) {
+func (dispatch *Dispatcher) Subscribe(action string, receiver Receivable) {
 	//dispatch.mutex.Lock()
 	if dispatch.receivers[action] == nil {
 		dispatch.receivers[action] = make([]Receivable, 0)
@@ -70,14 +68,11 @@ func (dispatch *dispatcher) Subscribe(action string, receiver Receivable) {
 	//dispatch.mutex.Unlock()
 }
 
-// Singleton returns the dispatcher.
-// There should only be 1 event dispatcher, which should run in the background for the
+// NewDispatcher returns the Dispatcher.
+// There should only be 1 event Dispatcher, which should run in the background for the
 // lifetime of an application.
-func Singleton() *dispatcher {
-	if singleton == nil {
-		singleton = &dispatcher{
-			receivers: map[string][]Receivable{},
-		}
+func NewDispatcher() *Dispatcher {
+	return &Dispatcher{
+		receivers: map[string][]Receivable{},
 	}
-	return singleton
 }

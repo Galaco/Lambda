@@ -1,4 +1,4 @@
-package thumbnail
+package directory
 
 import (
 	"github.com/inkyblackness/imgui-go"
@@ -7,7 +7,7 @@ import (
 const thumbnailSizeDefault = 4
 
 type Directory struct {
-	thumbnails []Thumbnail
+	thumbnails    []Thumbnail
 	thumbnailSize int
 
 	displayColumns [][]*Thumbnail
@@ -17,7 +17,7 @@ func (dir *Directory) Render() {
 	imgui.BeginChild("Scrolling")
 	imgui.BeginColumns("Files", dir.thumbnailSize)
 	for i := 0; i < dir.thumbnailSize; i++ {
-		for _,thumb := range dir.displayColumns[i] {
+		for _, thumb := range dir.displayColumns[i] {
 			thumb.Render()
 		}
 		imgui.NextColumn()
@@ -35,12 +35,12 @@ func (dir *Directory) SetThumbnailSize(size int) {
 
 func (dir *Directory) reorderThumbnails() {
 	cols := make([][]*Thumbnail, dir.thumbnailSize)
-	for i :=0; i< dir.thumbnailSize; i++ {
+	for i := 0; i < dir.thumbnailSize; i++ {
 		cols[i] = []*Thumbnail{}
 	}
 	for idx := range dir.thumbnails {
 		for i := dir.thumbnailSize; i >= 1; i-- {
-			if idx % i == 0 {
+			if idx%i == 0 {
 				cols[i-1] = append(cols[i-1], &dir.thumbnails[idx])
 				break
 			}
@@ -52,7 +52,7 @@ func (dir *Directory) reorderThumbnails() {
 
 func NewDirectory(thumbnails []Thumbnail) *Directory {
 	dir := &Directory{
-		thumbnails:thumbnails,
+		thumbnails:    thumbnails,
 		thumbnailSize: thumbnailSizeDefault,
 	}
 	dir.reorderThumbnails()

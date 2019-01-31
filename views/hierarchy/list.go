@@ -11,8 +11,8 @@ type entityList struct {
 }
 
 // addEntity adds a new entity to the list
-func (l *entityList) addEntity(id int, classname string, targetname string) {
-	l.entityList.AddRow(id, classname, targetname)
+func (l *entityList) addEntity(id int, classname string, targetname string, onClick func(id int)) {
+	l.entityList.AddRow(id, classname, targetname, onClick)
 	l.filter()
 }
 

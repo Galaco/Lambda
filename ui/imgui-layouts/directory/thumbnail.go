@@ -1,11 +1,11 @@
-package thumbnail
+package directory
 
 import (
 	"github.com/inkyblackness/imgui-go"
 )
 
 type Thumbnail struct {
-	label string
+	label   string
 	preview bool
 	onClick func()
 }
@@ -18,7 +18,7 @@ func (thumb *Thumbnail) Render() {
 
 func NewThumbnail(label string, preview bool, onClick func()) *Thumbnail {
 	return &Thumbnail{
-		label: label,
+		label:   label,
 		preview: preview,
 		onClick: onClick,
 	}

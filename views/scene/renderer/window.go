@@ -1,13 +1,12 @@
 package renderer
 
 type Window struct {
-	width int
-	height int
+	width       int
+	height      int
 	frameBuffer *fbo
 }
 
-
-func (win* Window) DrawFrame() {
+func (win *Window) DrawFrame() {
 	win.frameBuffer.Bind()
 
 	//RENDER
@@ -15,7 +14,7 @@ func (win* Window) DrawFrame() {
 	win.frameBuffer.Unbind()
 }
 
-func (win* Window) SetSize(width int, height int) {
+func (win *Window) SetSize(width int, height int) {
 	win.width = width
 	win.height = height
 	win.frameBuffer.Destroy()
@@ -24,9 +23,9 @@ func (win* Window) SetSize(width int, height int) {
 }
 
 func NewWindow(width int, height int) *Window {
-	return &Window {
-		width: width,
-		height: height,
+	return &Window{
+		width:       width,
+		height:      height,
 		frameBuffer: NewFbo(width, height),
 	}
 }

@@ -14,6 +14,8 @@ github.com/galaco/Lambda-Core v0.1.0 h1:2hxgggvQUbF5HoFUAbDaoXey1By9DFZ3z7RiPaw7
 github.com/galaco/Lambda-Core v0.1.0/go.mod h1:/tLp69JLf3aNHtV76RQFwv8/oXtLk1m1+p0SahUVHqQ=
 github.com/galaco/Lambda-Core v0.2.0 h1:g2Ks2EzL1uiHb9kPL+4spNbOe6tCpPBWA3aIoRMyvPY=
 github.com/galaco/Lambda-Core v0.2.0/go.mod h1:/tLp69JLf3aNHtV76RQFwv8/oXtLk1m1+p0SahUVHqQ=
+github.com/galaco/Lambda-Core v0.2.1 h1:18FtYnlxbvnNUzLbSwLq/HgdgWnWK0v2Hy4yLxtfHGg=
+github.com/galaco/Lambda-Core v0.2.1/go.mod h1:/tLp69JLf3aNHtV76RQFwv8/oXtLk1m1+p0SahUVHqQ=
 github.com/galaco/StudioModel v0.0.0-20181028212841-5b8408bcc2af/go.mod h1:TyLwCRckWSsaQhePyfTOwfSXlEUJ411MwYaVkbPwOMo=
 github.com/galaco/bsp v0.1.2 h1:CFejzoNYfHpWuXNFj+iYAhSS1BovWmDfqa9rVjYGNCg=
 github.com/galaco/bsp v0.1.2/go.mod h1:RcrH7F/FezUOMXKWuYyWYwrHdamdvFxZqD2lg8LFcnc=
@@ -50,8 +52,10 @@ github.com/james4k/go-bgfx v0.0.0-20141026034758-5b19e040f0f8/go.mod h1:TlNQdGxM
 github.com/logrusorgru/aurora v0.0.0-20181002194514-a7b3b318ed4e h1:9MlwzLdW7QSDrhDjFlsEYmxpFyIoXmYRon3dt0io31k=
 github.com/logrusorgru/aurora v0.0.0-20181002194514-a7b3b318ed4e/go.mod h1:7rIyQOR62GCctdiQpZ/zOJlFyk6y+94wXzv6RNZgaR4=
 github.com/mattn/go-gtk v0.0.0-20180216084204-5a311a1830ab/go.mod h1:PwzwfeB5syFHXORC3MtPylVcjIoTDT/9cvkKpEndGVI=
+github.com/mattn/go-gtk v0.0.0-20181205025739-e9a6766929f6 h1:cIH2UrZrjFFpzc5vjmT30rpDRCyx78J7EnJAFQsm0gg=
 github.com/mattn/go-gtk v0.0.0-20181205025739-e9a6766929f6/go.mod h1:PwzwfeB5syFHXORC3MtPylVcjIoTDT/9cvkKpEndGVI=
 github.com/mattn/go-pointer v0.0.0-20171114154726-1d30dc4b6f28/go.mod h1:2zXcozF6qYGgmsG+SeTZz3oAbFLdD3OWqnUbNvJZAlc=
+github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791 h1:PfHMsLQJwoc0ccjK0sam6J0wQo4s8mOuAo2yQGw+T2U=
 github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791/go.mod h1:2zXcozF6qYGgmsG+SeTZz3oAbFLdD3OWqnUbNvJZAlc=
 github.com/skelterjohn/go.wde v0.0.0-20180104102407-a0324cbf3ffe/go.mod h1:zXxNsJHeUYIqpg890APBNEn9GoCbA4Cdnvuv3mx4fBk=
 github.com/sqweek/dialog v0.0.0-20180909141952-8b7906c2c196 h1:pGRry1F/OWuTp+niREJMWMVRKX1YoUriNcqq130XoR4=
