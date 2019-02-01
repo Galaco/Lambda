@@ -15,7 +15,7 @@ type Widget struct {
 	dispatcher *event.Dispatcher
 	fileSystem *lambdaFS.FileSystem
 
-	twoPanel 		*columns.View
+	twoPanel         *columns.View
 	directoryList    *structure.Tree
 	currentDirectory *directory.Directory
 }
@@ -39,7 +39,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 	imgui.SetNextWindowPos(imgui.Vec2{X: float32(320), Y: float32(h / 2)})
 	imgui.SetNextWindowSize(imgui.Vec2{X: float32(w - 640), Y: float32(h / 2)})
 	if imgui.BeginV("Assets", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
-		widget.twoPanel.Render(w - 640, h / 2)
+		widget.twoPanel.Render(w-640, h/2)
 		imgui.End()
 	}
 }
@@ -57,8 +57,8 @@ func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 
 func NewWidget(dispatcher *event.Dispatcher, fileSystem *lambdaFS.FileSystem) *Widget {
 	return &Widget{
-		dispatcher: dispatcher,
-		fileSystem: fileSystem,
+		dispatcher:       dispatcher,
+		fileSystem:       fileSystem,
 		directoryList:    structure.NewTree(),
 		currentDirectory: directory.NewDirectory([]string{}),
 	}

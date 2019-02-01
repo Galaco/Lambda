@@ -3,8 +3,9 @@ package main
 import (
 	"github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/event"
-	"github.com/galaco/Lambda/project"
 	"github.com/galaco/Lambda/filesystem/importers"
+	"github.com/galaco/Lambda/graphics"
+	"github.com/galaco/Lambda/project"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/assets"
 	"github.com/galaco/Lambda/views/hierarchy"
@@ -16,26 +17,27 @@ import (
 )
 
 type Application struct {
-	uiContext *context.Context
+	uiContext       *context.Context
+	GraphicsAdapter graphics.Adapter
 
 	// Tools
-	FileSystem *filesystem.FileSystem
+	FileSystem      *filesystem.FileSystem
 	EventDispatcher *event.Dispatcher
-	VmfImporter *importers.VmfImporter
+	VmfImporter     *importers.VmfImporter
 
 	// Model
 	Model *project.Model
 
 	//Views
-	assetsView *assets.Widget
-	hierarchyView *hierarchy.Widget
-	mainMenuView *mainmenu.Widget
+	assetsView           *assets.Widget
+	hierarchyView        *hierarchy.Widget
+	mainMenuView         *mainmenu.Widget
 	entityPropertiesView *properties.Widget
-	toolRibbonView *ribbon.Widget
-	scenePreviewView *scene.Widget
+	toolRibbonView       *ribbon.Widget
+	scenePreviewView     *scene.Widget
 }
 
-func (app *Application) InitializeUIContext() *context.Context{
+func (app *Application) InitializeUIContext() *context.Context {
 	// Window & OpenGL
 	app.uiContext = context.NewContext()
 
@@ -43,12 +45,14 @@ func (app *Application) InitializeUIContext() *context.Context{
 }
 
 func (app *Application) Render() {
+	//app.scenePreviewView.Render(app.uiContext)
+
+	app.uiContext.Imgui().NewFrame()
 	app.assetsView.Render(app.uiContext)
 	app.hierarchyView.Render(app.uiContext)
 	app.mainMenuView.Render(app.uiContext)
 	app.entityPropertiesView.Render(app.uiContext)
 	app.toolRibbonView.Render(app.uiContext)
-	//app.scenePreviewView.Render(app.uiContext)
 }
 
 func (app *Application) InitializeViews() {
@@ -57,7 +61,7 @@ func (app *Application) InitializeViews() {
 	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.VmfImporter, app.Model)
 	app.entityPropertiesView = properties.NewWidget(app.EventDispatcher, app.Model)
 	app.toolRibbonView = ribbon.NewWidget()
-	//app.scenePreviewView = scene.NewWidget()
+	app.scenePreviewView = scene.NewWidget()
 
 	app.assetsView.Initialize()
 	app.hierarchyView.Initialize()

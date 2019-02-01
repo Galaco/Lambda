@@ -1,8 +1,8 @@
 package context
 
 import (
-	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"github.com/go-gl/gl/v4.1-core/gl"
+	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"log"
 	"runtime"
 )

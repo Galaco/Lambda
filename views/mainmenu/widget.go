@@ -3,8 +3,8 @@ package mainmenu
 import (
 	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/project"
 	"github.com/galaco/Lambda/filesystem/importers"
+	"github.com/galaco/Lambda/project"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/mainmenu/dialog"
 	"github.com/inkyblackness/imgui-go"
@@ -12,8 +12,8 @@ import (
 
 type Widget struct {
 	dispatcher *event.Dispatcher
-	importer *importers.VmfImporter
-	model *project.Model
+	importer   *importers.VmfImporter
+	model      *project.Model
 }
 
 func (widget *Widget) Initialize() {
@@ -77,8 +77,8 @@ func (widget *Widget) loadVmf(filename string) {
 func NewWidget(dispatcher *event.Dispatcher, importer *importers.VmfImporter, model *project.Model) *Widget {
 	return &Widget{
 		dispatcher: dispatcher,
-		importer:importer,
-		model:model,
+		importer:   importer,
+		model:      model,
 	}
 }
 

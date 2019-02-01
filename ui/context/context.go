@@ -6,9 +6,9 @@ import (
 )
 
 type Context struct {
-	window *glfw.Window
+	window       *glfw.Window
 	imguiContext *imgui.Context
-	imguiBind *imguiGlfw3
+	imguiBind    *imguiGlfw3
 }
 
 func (ctx *Context) Window() *glfw.Window {
@@ -25,15 +25,14 @@ func (ctx *Context) Close() {
 	defer ctx.imguiBind.Shutdown()
 }
 
-func NewContext() *Context{
+func NewContext() *Context {
 	window := initGlfw()
 	initOpenGL()
 	ctx := &Context{
-		window: window,
+		window:       window,
 		imguiContext: imgui.CreateContext(nil),
-		imguiBind: imguiGlfw3Init(window),
+		imguiBind:    imguiGlfw3Init(window),
 	}
-
 
 	return ctx
 }

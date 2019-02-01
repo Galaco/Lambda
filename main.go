@@ -3,9 +3,10 @@ package main
 import (
 	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/project"
 	"github.com/galaco/Lambda/filesystem"
 	"github.com/galaco/Lambda/filesystem/importers"
+	"github.com/galaco/Lambda/graphics/opengl"
+	"github.com/galaco/Lambda/project"
 	"github.com/go-gl/gl/v4.1-core/gl"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
@@ -20,6 +21,7 @@ func main() {
 	app.EventDispatcher = event.NewDispatcher()
 	app.VmfImporter = importers.NewVmfImporter()
 	app.Model = project.NewModel()
+	app.GraphicsAdapter = &opengl.OpenGL{}
 
 	uiContext := app.InitializeUIContext()
 	app.InitializeGUITheme()
@@ -33,20 +35,18 @@ func main() {
 
 	for !uiContext.Window().ShouldClose() && !windowShouldClose {
 		glfw.PollEvents()
-		uiContext.Imgui().NewFrame()
 
 		app.Render()
 
 		displayWidth, displayHeight := uiContext.Window().GetFramebufferSize()
-		gl.Viewport(0, 0, int32(displayWidth), int32(displayHeight))
-		gl.ClearColor(0, 0, 0, 0)
-		gl.Clear(gl.COLOR_BUFFER_BIT)
+		app.GraphicsAdapter.Viewport(0, 0, int32(displayWidth), int32(displayHeight))
+		app.GraphicsAdapter.ClearColor(0, 0, 0, 0)
+		app.GraphicsAdapter.Clear(gl.COLOR_BUFFER_BIT)
 
 		imgui.Render()
 		uiContext.Imgui().Render(imgui.RenderedDrawData())
 
 		uiContext.Window().SwapBuffers()
-		//app2.Update()
 		<-time.After(time.Millisecond * 25)
 	}
 }

@@ -10,10 +10,12 @@ type keyValue struct {
 
 // Render draws this keyvalue as 2 columns.
 func (kv *keyValue) Render() {
-	imgui.BeginColumns(2)
+	imgui.BeginColumns("KeyValues", 2)
 	imgui.Text(kv.key)
 	imgui.NextColumn()
+	imgui.PushTextWrapPos()
 	imgui.Text(kv.value)
+	imgui.PopTextWrapPos()
 	imgui.NextColumn()
 }
 

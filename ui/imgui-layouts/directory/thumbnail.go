@@ -11,9 +11,11 @@ type Thumbnail struct {
 }
 
 func (thumb *Thumbnail) Render() {
+	imgui.PushTextWrapPos()
 	if imgui.Selectable(thumb.label) {
 		thumb.onClick()
 	}
+	imgui.PopTextWrapPos()
 }
 
 func NewThumbnail(label string, preview bool, onClick func()) *Thumbnail {

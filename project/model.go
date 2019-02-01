@@ -1,6 +1,5 @@
 package project
 
-
 type Model struct {
 	scene *Scene
 }

@@ -39,6 +39,6 @@ func newRow(id int, classname string, targetname string, onClick func(id int)) r
 		Classname:  classname,
 		TargetName: targetname,
 		label:      fmt.Sprintf(format, id, classname, targetname),
-		onClick:onClick,
+		onClick:    onClick,
 	}
 }
