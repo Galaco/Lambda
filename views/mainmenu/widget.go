@@ -1,25 +1,31 @@
 package mainmenu
 
 import (
+	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
+	"github.com/galaco/Lambda/filesystem/exporters"
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/project"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/mainmenu/dialog"
 	"github.com/inkyblackness/imgui-go"
+	"io/ioutil"
 )
 
 type Widget struct {
 	dispatcher *event.Dispatcher
 	importer   *importers.VmfImporter
+	exporter *exporters.VmfExporter
 	model      *project.Model
 }
 
+// Initialize sets up widget specific properties.
 func (widget *Widget) Initialize() {
 
 }
 
+// Render draws the main menu bar across the top of the screen
 func (widget *Widget) Render(ctx *context.Context) {
 	if imgui.BeginMainMenuBar() {
 		if imgui.BeginMenu("File") {
@@ -27,15 +33,31 @@ func (widget *Widget) Render(ctx *context.Context) {
 				/* Do stuff */
 			}
 			if imgui.MenuItemV("Open..", "Ctrl+O", false, true) {
-				/* Do stuff */
-				// This needs to dispatch an event that will actually call load elsewhere
 				if filename := openFile(); filename != "" {
 					widget.loadVmf(filename)
-					//widget.dispatcher.Dispatch(events.NewOpenScene(filename))
 				}
 			}
 			if imgui.MenuItemV("Save", "Ctrl+S", false, true) {
-				/* Do stuff */
+				data,err := widget.exporter.Export(widget.model.Vmf)
+				if err == nil {
+					err = saveFile(widget.model.Filename, data)
+					if err != nil {
+						logger.Error(err)
+					}
+				} else {
+					logger.Error(err)
+				}
+			}
+			if imgui.MenuItemV("Save As", "", false, true) {
+				data,err := widget.exporter.Export(widget.model.Vmf)
+				if err == nil {
+					err = saveFile("", data)
+					if err != nil {
+						logger.Error(err)
+					}
+				} else {
+					logger.Error(err)
+				}
 			}
 			if imgui.MenuItemV("Close", "Ctrl+W", false, true) {
 				/* Do stuff */
@@ -50,14 +72,6 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 }
 
-func (widget *Widget) Update() {
-
-}
-
-func (widget *Widget) Destroy() {
-
-}
-
 func (widget *Widget) loadVmf(filename string) {
 	widget.dispatcher.Dispatch(events.NewOpenScene(filename))
 
@@ -66,19 +80,20 @@ func (widget *Widget) loadVmf(filename string) {
 		widget.dispatcher.Dispatch(events.NewOpenSceneFailed())
 		return
 	}
-	widget.model.Scene().SetWorld(sceneModel.Worldspawn())
-	widget.model.Scene().SetEntities(sceneModel.Entities())
+	widget.model.Vmf = sceneModel
+	widget.model.Filename = filename
 
-	for i := 0; i < widget.model.Scene().Entities().Length(); i++ {
-		widget.dispatcher.Dispatch(events.NewEntityCreated(widget.model.Scene().Entities().Get(i)))
+	for i := 0; i < widget.model.Vmf.Entities().Length(); i++ {
+		widget.dispatcher.Dispatch(events.NewEntityCreated(widget.model.Vmf.Entities().Get(i)))
 	}
 }
 
-func NewWidget(dispatcher *event.Dispatcher, importer *importers.VmfImporter, model *project.Model) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, model *project.Model, importer *importers.VmfImporter, exporter *exporters.VmfExporter) *Widget {
 	return &Widget{
 		dispatcher: dispatcher,
 		importer:   importer,
 		model:      model,
+		exporter:   exporter,
 	}
 }
 
@@ -89,4 +104,16 @@ func openFile() string {
 		return ""
 	}
 	return filename
+}
+
+func saveFile(filename string, data string) (err error) {
+	// Saving a new file
+	if filename == "" {
+		filename,err = dialog.FileSave()
+		if err != nil {
+			return err
+		}
+	}
+
+	return ioutil.WriteFile(filename, []byte(data), 755)
 }

@@ -45,20 +45,20 @@ func (vmf *Vmf) Cordons() *Cordon {
 }
 
 type VersionInfo struct {
-	editorVersion int
-	editorBuild   int
-	mapVersion    int
-	formatVersion int
-	prefab        bool
+	EditorVersion int
+	EditorBuild   int
+	MapVersion    int
+	FormatVersion int
+	Prefab        bool
 }
 
 func NewVersionInfo(version int, build int, mapRevision int, format int, isPrefab bool) *VersionInfo {
 	return &VersionInfo{
-		editorVersion: version,
-		editorBuild:   build,
-		mapVersion:    mapRevision,
-		formatVersion: format,
-		prefab:        isPrefab,
+		EditorVersion: version,
+		EditorBuild:   build,
+		MapVersion:    mapRevision,
+		FormatVersion: format,
+		Prefab:        isPrefab,
 	}
 }
 
@@ -66,11 +66,11 @@ type VisGroups struct {
 }
 
 type ViewSettings struct {
-	snapToGrid      bool
-	showGrid        bool
-	showLogicalGrid bool
-	gridSpacing     int
-	show3DGrid      bool
+	SnapToGrid      bool
+	ShowGrid        bool
+	ShowLogicalGrid bool
+	GridSpacing     int
+	Show3DGrid      bool
 }
 
 type Cameras struct {

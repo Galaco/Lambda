@@ -21,14 +21,6 @@ func (mod *Widget) Render(ctx *context.Context) {
 	}
 }
 
-func (mod *Widget) Update() {
-
-}
-
-func (mod *Widget) Destroy() {
-
-}
-
 func NewWidget() *Widget {
 	return &Widget{}
 }

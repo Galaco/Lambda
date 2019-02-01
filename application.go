@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/event"
+	"github.com/galaco/Lambda/filesystem/exporters"
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/graphics"
 	"github.com/galaco/Lambda/project"
@@ -24,6 +25,7 @@ type Application struct {
 	FileSystem      *filesystem.FileSystem
 	EventDispatcher *event.Dispatcher
 	VmfImporter     *importers.VmfImporter
+	VmfExporter     *exporters.VmfExporter
 
 	// Model
 	Model *project.Model
@@ -58,7 +60,7 @@ func (app *Application) Render() {
 func (app *Application) InitializeViews() {
 	app.assetsView = assets.NewWidget(app.EventDispatcher, app.FileSystem)
 	app.hierarchyView = hierarchy.NewWidget(app.EventDispatcher)
-	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.VmfImporter, app.Model)
+	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.Model, app.VmfImporter, app.VmfExporter)
 	app.entityPropertiesView = properties.NewWidget(app.EventDispatcher, app.Model)
 	app.toolRibbonView = ribbon.NewWidget()
 	app.scenePreviewView = scene.NewWidget()

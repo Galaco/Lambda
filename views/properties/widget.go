@@ -41,26 +41,16 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 }
 
-func (widget *Widget) Update() {
-
-}
-
-func (widget *Widget) Destroy() {
-
-}
-
 func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 	widget.keyValueView = keyvalues.NewKeyValues()
 	evt := received.(*events.SceneNodeSelected)
-	widget.selectedEntity = widget.model.Scene().Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
-	//widget.keyValueViews = make([]keyValue, 0)
+	widget.selectedEntity = widget.model.Vmf.Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
 
 	kv := widget.selectedEntity.EPairs
 	for kv != nil {
 		widget.keyValueView.AddKeyValue(keyvalues.NewKeyValue(kv.Key, kv.Value, func(k, v string) {
 			log.Println(k + " " + v)
 		}))
-		//widget.keyValueViews = append(widget.keyValueViews, newKeyValue(kv.Key, kv.Value, false))
 		kv = kv.Next
 	}
 }

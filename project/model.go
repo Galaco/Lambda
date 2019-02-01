@@ -1,15 +1,14 @@
 package project
 
-type Model struct {
-	scene *Scene
-}
+import "github.com/galaco/Lambda/valve"
 
-func (mod *Model) Scene() *Scene {
-	return mod.scene
+type Model struct {
+	Filename string
+	Vmf *valve.Vmf
 }
 
 func NewModel() *Model {
 	return &Model{
-		scene: NewScene(),
+		Vmf: &valve.Vmf{},
 	}
 }

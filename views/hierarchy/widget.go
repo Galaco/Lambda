@@ -29,13 +29,6 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 }
 
-func (widget *Widget) Update() {
-}
-
-func (widget *Widget) Destroy() {
-
-}
-
 func (widget *Widget) renderMenuBar() {
 	if imgui.BeginMenuBar() {
 		if imgui.BeginMenu("View") {

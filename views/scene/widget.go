@@ -32,14 +32,6 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 }
 
-func (widget *Widget) Update() {
-
-}
-
-func (widget *Widget) Destroy() {
-
-}
-
 func NewWidget() *Widget {
 	return &Widget{
 		width:  1024,

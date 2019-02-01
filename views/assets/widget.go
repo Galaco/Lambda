@@ -44,14 +44,6 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 }
 
-func (widget *Widget) Update() {
-
-}
-
-func (widget *Widget) Destroy() {
-
-}
-
 func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 }
 

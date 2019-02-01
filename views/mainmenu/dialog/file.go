@@ -13,3 +13,7 @@ func FileOpen() (string, error) {
 
 	return filename, nil
 }
+
+func FileSave() (string, error) {
+	return dialog.File().Save()
+}
