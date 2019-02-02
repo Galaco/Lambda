@@ -47,7 +47,7 @@ func (app *Application) InitializeUIContext() *context.Context {
 }
 
 func (app *Application) Render() {
-	//app.scenePreviewView.Render(app.uiContext)
+	app.scenePreviewView.RenderScene(app.uiContext)
 
 	app.uiContext.Imgui().NewFrame()
 	app.assetsView.Render(app.uiContext)
@@ -55,6 +55,7 @@ func (app *Application) Render() {
 	app.mainMenuView.Render(app.uiContext)
 	app.entityPropertiesView.Render(app.uiContext)
 	app.toolRibbonView.Render(app.uiContext)
+	app.scenePreviewView.Render(app.uiContext)
 }
 
 func (app *Application) InitializeViews() {
@@ -63,14 +64,14 @@ func (app *Application) InitializeViews() {
 	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.Model, app.VmfImporter, app.VmfExporter)
 	app.entityPropertiesView = properties.NewWidget(app.EventDispatcher, app.Model)
 	app.toolRibbonView = ribbon.NewWidget()
-	app.scenePreviewView = scene.NewWidget()
+	app.scenePreviewView = scene.NewWidget(app.EventDispatcher)
 
 	app.assetsView.Initialize()
 	app.hierarchyView.Initialize()
 	app.mainMenuView.Initialize()
 	app.entityPropertiesView.Initialize()
 	app.toolRibbonView.Initialize()
-	//app.scenePreviewView.Initialize()
+	app.scenePreviewView.Initialize()
 }
 
 func (app *Application) InitializeGUITheme() {

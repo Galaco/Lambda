@@ -35,7 +35,6 @@ func main() {
 
 	for !uiContext.Window().ShouldClose() && !windowShouldClose {
 		glfw.PollEvents()
-
 		app.Render()
 
 		displayWidth, displayHeight := uiContext.Window().GetFramebufferSize()
