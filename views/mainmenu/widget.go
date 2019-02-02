@@ -86,6 +86,10 @@ func (widget *Widget) loadVmf(filename string) {
 	for i := 0; i < widget.model.Vmf.Entities().Length(); i++ {
 		widget.dispatcher.Dispatch(events.NewEntityCreated(widget.model.Vmf.Entities().Get(i)))
 	}
+
+	for i := 0; i < len(widget.model.Vmf.Worldspawn().Solids); i++ {
+		widget.dispatcher.Dispatch(events.NewNewSolidCreated(&widget.model.Vmf.Worldspawn().Solids[i]))
+	}
 }
 
 func NewWidget(dispatcher *event.Dispatcher, model *project.Model, importer *importers.VmfImporter, exporter *exporters.VmfExporter) *Widget {

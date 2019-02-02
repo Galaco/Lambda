@@ -17,7 +17,7 @@ func (mod *List) Filter(filterMode int) *FilteredList {
 	switch filterMode {
 	case EntityFilterPropOnly:
 		for idx, n := range mod.nodes {
-			if strings.HasPrefix(n.Classname, "prop_") == true {
+			if strings.Contains(n.label, " prop_") == true {
 				filtered = append(filtered, &mod.nodes[idx])
 			}
 		}
@@ -32,6 +32,6 @@ func (mod *List) Filter(filterMode int) *FilteredList {
 }
 
 // AddRow adds a new row to the end of the list.
-func (mod *List) AddRow(id int, classname string, targetname string, onClick func(id int)) {
-	mod.nodes = append(mod.nodes, newRow(id, classname, targetname, onClick))
+func (mod *List) AddRow(id int, label string, onClick func(id int)) {
+	mod.nodes = append(mod.nodes, newRow(id, label, onClick))
 }

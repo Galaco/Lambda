@@ -12,19 +12,22 @@ type Widget struct {
 	dispatcher *event.Dispatcher
 
 	list entityList
+	solidList entityList
 }
 
 func (widget *Widget) Initialize() {
 	widget.dispatcher.Subscribe(events.TypeEntityCreated, widget.newEntityCreated)
+	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
 }
 
 func (widget *Widget) Render(ctx *context.Context) {
 	_, h := ctx.Window().GetSize()
 	imgui.SetNextWindowPos(imgui.Vec2{X: 0, Y: 48})
-	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 48)})
+	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 368)})
 	if imgui.BeginV("Hierarchy", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus|imgui.WindowFlagsMenuBar) {
 		widget.renderMenuBar()
 		widget.list.getFiltered().Render()
+		widget.solidList.getFiltered().Render()
 		imgui.End()
 	}
 }
@@ -67,10 +70,19 @@ func (widget *Widget) newEntityCreated(received event.IEvent) {
 	ent := received.(*events.EntityCreated).Target()
 	widget.list.addEntity(
 		ent.IntForKey("id"),
-		ent.ValueForKey("classname"),
-		ent.ValueForKey("targetname"),
+		ent.ValueForKey("classname") + " " + ent.ValueForKey("targetname"),
 		func(id int) {
-			widget.dispatcher.Dispatch(events.NewSceneNodeSelected(id))
+			widget.dispatcher.Dispatch(events.NewEntityNodeSelected(id))
+		})
+}
+
+func (widget *Widget) newSolidCreated(received event.IEvent) {
+	ent := received.(*events.NewSolidCreated).Target()
+	widget.solidList.addEntity(
+		ent.Id,
+		"Solid",
+		func(id int) {
+			widget.dispatcher.Dispatch(events.NewSolidNodeSelected(id))
 		})
 }
 

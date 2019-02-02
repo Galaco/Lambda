@@ -6,9 +6,9 @@ import (
 )
 
 type Solid struct {
-	id     int
-	sides  []Side
-	editor *Editor
+	Id     int
+	Sides  []Side
+	Editor *Editor
 }
 
 type Side struct {
@@ -39,9 +39,9 @@ type Plane [3]mgl64.Vec3
 
 func NewSolid(id int, sides []Side, editor *Editor) *Solid {
 	return &Solid{
-		id:     id,
-		sides:  sides,
-		editor: editor,
+		Id:     id,
+		Sides:  sides,
+		Editor: editor,
 	}
 }
 

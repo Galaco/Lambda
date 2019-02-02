@@ -5,7 +5,8 @@ import "github.com/galaco/Lambda/valve"
 const TypeNewScene = "NewScene"
 const TypeOpenScene = "OpenScene"
 const TypeOpenSceneFailed = "OpenSceneFailed"
-const TypeSceneNodeSelected = "SceneNodeSelected"
+const TypeEntityNodeSelected = "EntityNodeSelected"
+const TypeSolidNodeSelected = "SolidNodeSelected"
 
 // NewScene action includes a payload of the new scene
 // Note that NewScene is also a loaded scene, as there is
@@ -62,18 +63,32 @@ func NewOpenSceneFailed() *OpenSceneFailed {
 	return &OpenSceneFailed{}
 }
 
-// SceneNodeSelected provides the unique id of the selected
+// EntityNodeSelected provides the unique id of the selected
 // object in the scene.
-type SceneNodeSelected struct {
+type EntityNodeSelected struct {
 	Id int
 }
 
-func (act *SceneNodeSelected) Type() string {
-	return TypeSceneNodeSelected
+func (act *EntityNodeSelected) Type() string {
+	return TypeEntityNodeSelected
 }
 
-func NewSceneNodeSelected(id int) *SceneNodeSelected {
-	return &SceneNodeSelected{
+func NewEntityNodeSelected(id int) *EntityNodeSelected {
+	return &EntityNodeSelected{
+		Id: id,
+	}
+}
+
+type SolidNodeSelected struct {
+	Id int
+}
+
+func (act *SolidNodeSelected) Type() string {
+	return TypeSolidNodeSelected
+}
+
+func NewSolidNodeSelected(id int) *SolidNodeSelected {
+	return &SolidNodeSelected{
 		Id: id,
 	}
 }

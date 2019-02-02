@@ -38,8 +38,8 @@ func TestNewScene_Model(t *testing.T) {
 }
 
 func TestNewSceneNodeSelected(t *testing.T) {
-	sut := NewEntitySelected(nil)
-	if reflect.TypeOf(sut) == reflect.TypeOf(EntitySelected{}) {
+	sut := NewEntityNodeSelected(1)
+	if reflect.TypeOf(sut) == reflect.TypeOf(EntityNodeSelected{}) {
 		t.Error("unexpected type returned")
 	}
 }
@@ -66,7 +66,7 @@ func TestOpenSceneFailed_Type(t *testing.T) {
 }
 
 func TestSceneNodeSelected_Type(t *testing.T) {
-	sut := NewSceneNodeSelected(0)
+	sut := NewEntityNodeSelected(0)
 	if sut.Type() != TypeSceneNodeSelected {
 		t.Error("unexpected event type for event")
 	}

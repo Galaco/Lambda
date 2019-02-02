@@ -9,8 +9,6 @@ import (
 // row is a single row in a list
 type row struct {
 	Id         int
-	Classname  string
-	TargetName string
 	label      string
 
 	onClick func(id int)
@@ -26,19 +24,12 @@ func (item *row) render() {
 }
 
 // newRow returns a new row
-func newRow(id int, classname string, targetname string, onClick func(id int)) row {
+func newRow(id int, label string, onClick func(id int)) row {
 	format := "%d %s"
-	if targetname != "" {
-		format += " : %s"
-	} else {
-		format += "%s"
-	}
 
 	return row{
 		Id:         id,
-		Classname:  classname,
-		TargetName: targetname,
-		label:      fmt.Sprintf(format, id, classname, targetname),
+		label:      fmt.Sprintf(format, id, label),
 		onClick:    onClick,
 	}
 }

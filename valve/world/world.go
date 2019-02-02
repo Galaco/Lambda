@@ -9,7 +9,7 @@ type World struct {
 
 func (world *World) AddSolid(solid *Solid) error {
 	// @TODO
-	// Assign an id to a solid that is unique, and check
+	// Assign an Id to a solid that is unique, and check
 	world.Solids = append(world.Solids, *solid)
 
 	return nil

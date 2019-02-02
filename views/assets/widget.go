@@ -36,8 +36,8 @@ func (widget *Widget) Initialize() {
 
 func (widget *Widget) Render(ctx *context.Context) {
 	w, h := ctx.Window().GetSize()
-	imgui.SetNextWindowPos(imgui.Vec2{X: float32(320), Y: float32(h / 2)})
-	imgui.SetNextWindowSize(imgui.Vec2{X: float32(w - 640), Y: float32(h / 2)})
+	imgui.SetNextWindowPos(imgui.Vec2{X: float32(0), Y: float32(h / 2)})
+	imgui.SetNextWindowSize(imgui.Vec2{X: float32(w - 320), Y: float32(h / 2)})
 	if imgui.BeginV("Assets", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
 		widget.twoPanel.Render(w-640, h/2)
 		imgui.End()

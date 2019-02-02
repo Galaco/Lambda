@@ -22,7 +22,8 @@ type Widget struct {
 }
 
 func (widget *Widget) Initialize() {
-	widget.dispatcher.Subscribe(events.TypeSceneNodeSelected, widget.selectedEntityChanged)
+	widget.dispatcher.Subscribe(events.TypeEntityNodeSelected, widget.selectedEntityChanged)
+	widget.dispatcher.Subscribe(events.TypeSolidNodeSelected, widget.selectedSolidChanged)
 }
 
 func (widget *Widget) Render(ctx *context.Context) {
@@ -43,7 +44,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 
 func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 	widget.keyValueView = keyvalues.NewKeyValues()
-	evt := received.(*events.SceneNodeSelected)
+	evt := received.(*events.EntityNodeSelected)
 	widget.selectedEntity = widget.model.Vmf.Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
 
 	kv := widget.selectedEntity.EPairs
@@ -53,6 +54,14 @@ func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 		}))
 		kv = kv.Next
 	}
+}
+
+func (widget *Widget) selectedSolidChanged(received event.IEvent) {
+	widget.keyValueView = keyvalues.NewKeyValues()
+	evt := received.(*events.SolidNodeSelected)
+	widget.keyValueView.AddKeyValue(keyvalues.NewKeyValue("solid id", strconv.FormatInt(int64(evt.Id), 10), func(k, v string) {
+		log.Println(k + " " + v)
+	}))
 }
 
 func NewWidget(dispatcher *event.Dispatcher, model *project.Model) *Widget {
