@@ -1,24 +1,9 @@
 package context
 
 import (
-	"github.com/go-gl/gl/v4.1-core/gl"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
-	"log"
 	"runtime"
 )
-
-// initOpenGL initializes OpenGL and returns an initialized program.
-func initOpenGL() uint32 {
-	if err := gl.Init(); err != nil {
-		panic(err)
-	}
-	version := gl.GoStr(gl.GetString(gl.VERSION))
-	log.Println("OpenGL version", version)
-
-	prog := gl.CreateProgram()
-	gl.LinkProgram(prog)
-	return prog
-}
 
 func initGlfw() *glfw.Window {
 	runtime.LockOSThread()

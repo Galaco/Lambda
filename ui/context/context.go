@@ -1,6 +1,7 @@
 package context
 
 import (
+	"github.com/galaco/Lambda/graphics"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
@@ -25,9 +26,9 @@ func (ctx *Context) Close() {
 	defer ctx.imguiBind.Shutdown()
 }
 
-func NewContext() *Context {
+func NewContext(adapter graphics.Adapter) *Context {
 	window := initGlfw()
-	initOpenGL()
+	adapter.Init()
 	ctx := &Context{
 		window:       window,
 		imguiContext: imgui.CreateContext(nil),

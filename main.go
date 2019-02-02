@@ -7,7 +7,6 @@ import (
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/graphics/opengl"
 	"github.com/galaco/Lambda/project"
-	"github.com/go-gl/gl/v4.1-core/gl"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"time"
@@ -40,7 +39,7 @@ func main() {
 		displayWidth, displayHeight := uiContext.Window().GetFramebufferSize()
 		app.GraphicsAdapter.Viewport(0, 0, int32(displayWidth), int32(displayHeight))
 		app.GraphicsAdapter.ClearColor(0, 0, 0, 0)
-		app.GraphicsAdapter.Clear(gl.COLOR_BUFFER_BIT)
+		app.GraphicsAdapter.ClearAll()
 
 		imgui.Render()
 		uiContext.Imgui().Render(imgui.RenderedDrawData())

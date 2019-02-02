@@ -3,6 +3,7 @@ package scene
 import (
 	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
+	"github.com/galaco/Lambda/graphics"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/valve/world"
 	"github.com/galaco/Lambda/views/scene/renderer"
@@ -11,6 +12,7 @@ import (
 
 type Widget struct {
 	dispatcher *event.Dispatcher
+	graphicsAdapter graphics.Adapter
 
 	window        *renderer.Window
 	solids 		  []*world.Solid
@@ -18,7 +20,7 @@ type Widget struct {
 }
 
 func (widget *Widget) Initialize() {
-	widget.window = renderer.NewWindow(widget.width, widget.height)
+	widget.window = renderer.NewWindow(widget.graphicsAdapter, widget.width, widget.height)
 	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
 }
 
@@ -58,9 +60,10 @@ func (widget *Widget) newSolidCreated(received event.IEvent) {
 	widget.solids = append(widget.solids, received.(*events.NewSolidCreated).Target())
 }
 
-func NewWidget(dispatcher *event.Dispatcher) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, graphicsAdapter graphics.Adapter) *Widget {
 	return &Widget{
 		dispatcher: dispatcher,
+		graphicsAdapter:  graphicsAdapter,
 		width:  1024,
 		height: 768,
 		solids: make([]*world.Solid, 0),

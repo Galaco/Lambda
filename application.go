@@ -41,7 +41,7 @@ type Application struct {
 
 func (app *Application) InitializeUIContext() *context.Context {
 	// Window & OpenGL
-	app.uiContext = context.NewContext()
+	app.uiContext = context.NewContext(app.GraphicsAdapter)
 
 	return app.uiContext
 }
@@ -64,7 +64,7 @@ func (app *Application) InitializeViews() {
 	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.Model, app.VmfImporter, app.VmfExporter)
 	app.entityPropertiesView = properties.NewWidget(app.EventDispatcher, app.Model)
 	app.toolRibbonView = ribbon.NewWidget()
-	app.scenePreviewView = scene.NewWidget(app.EventDispatcher)
+	app.scenePreviewView = scene.NewWidget(app.EventDispatcher, app.GraphicsAdapter)
 
 	app.assetsView.Initialize()
 	app.hierarchyView.Initialize()
