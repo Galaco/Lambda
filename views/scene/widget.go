@@ -14,13 +14,13 @@ type Widget struct {
 	dispatcher *event.Dispatcher
 	graphicsAdapter graphics.Adapter
 
-	window        *renderer.Window
+	window        *renderer.RenderWindow
 	solids 		  []*world.Solid
 	width, height int
 }
 
 func (widget *Widget) Initialize() {
-	widget.window = renderer.NewWindow(widget.graphicsAdapter, widget.width, widget.height)
+	widget.window = renderer.NewRenderWindow(widget.graphicsAdapter, widget.width, widget.height)
 	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
 }
 
@@ -40,20 +40,32 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 	imgui.SetNextWindowPos(imgui.Vec2{X: float32(320), Y: 48})
 	imgui.SetNextWindowSize(imgui.Vec2{X: float32(widgetWidth), Y: float32(widgetHeight)})
-	if imgui.BeginV("Scene", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
-		imgui.SetCursorPos(imgui.Vec2{
-			X: float32(320) + float32(widget.width / 2),
-			Y: float32(48) + float32(widget.height / 2),
-		})
-		imgui.ImageV(imgui.TextureID(widget.window.BufferId()),
-			imgui.Vec2{},
-			imgui.Vec2{X: 0, Y: 1},
-			imgui.Vec2{X: 1, Y: 0},
-			imgui.Vec4{X: 1, Y: 1, Z: 1, W: 1},
-			imgui.Vec4{X: 0, Y: 0, Z: 0, W: 0})
 
+	imgui.PushStyleColor(imgui.StyleColorChildBg, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 1})
+	imgui.PushStyleVarVec2(imgui.StyleVarWindowPadding, imgui.Vec2{X: 0, Y: 0})
+	//if imgui.Begin("Scene") {
+	if imgui.BeginV("Scene", nil, imgui.WindowFlagsNoResize |
+		imgui.WindowFlagsNoMove |
+		imgui.WindowFlagsNoBringToFrontOnFocus |
+		imgui.WindowFlagsNoScrollbar |
+		imgui.WindowFlagsNoScrollWithMouse |
+		imgui.WindowFlagsNoNav) {
+	//	imgui.SetCursorPos(imgui.Vec2{
+	//		X: float32(widget.width / 2),
+	//		Y: float32(widget.height / 2),
+	//	})
+		widget.graphicsAdapter.Viewport(0, 0, int32(widget.width), int32(widget.height))
+		imgui.ImageV(imgui.TextureID(widget.window.BufferId()), imgui.Vec2{
+			X: float32(widget.width),
+			Y: float32(widget.height)},
+			imgui.Vec2{},
+			imgui.Vec2{1, 1},
+			imgui.Vec4{X: 1, Y: 1, Z: 1, W: 1}, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 0})
+		widget.graphicsAdapter.Viewport(0, 0, int32(w), int32(h))
 		imgui.End()
 	}
+	imgui.PopStyleVar()
+	imgui.PopStyleColor()
 }
 
 func (widget *Widget) newSolidCreated(received event.IEvent) {
