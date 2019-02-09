@@ -50,7 +50,7 @@ func (app *Application) Render() {
 	app.scenePreviewView.RenderScene(app.uiContext)
 
 	app.uiContext.Imgui().NewFrame()
-	app.assetsView.Render(app.uiContext)
+	//app.assetsView.Render(app.uiContext)
 	app.hierarchyView.Render(app.uiContext)
 	app.mainMenuView.Render(app.uiContext)
 	app.entityPropertiesView.Render(app.uiContext)

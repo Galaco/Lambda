@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/Lambda/graphics"
-	"github.com/go-gl/gl/v4.1-core/gl"
 )
 
 type fbo struct {
@@ -24,23 +23,15 @@ func (win *fbo) Resize(width int, height int) {
 	win.Bind()
 
 	if win.framebufferTexture != 0 {
-
 		win.adapter.DeleteTextures(1, &win.framebufferTexture)
 	}
 
 	win.adapter.LambdaCreateTexture2D(&win.framebufferTexture, int32(win.width), int32(win.height), nil)
-
 	win.adapter.LambdaBindTexture2D(win.framebufferTexture)
-	if glError := gl.GetError(); glError != gl.NO_ERROR {
-		logger.Error("error: %d\n", glError)
-	}
-
 	win.adapter.LambdaBindTexture2DToFramebuffer(win.framebufferTexture)
-
-	if glError := gl.GetError(); glError != gl.NO_ERROR {
-		logger.Error("error: %d\n", glError)
-	}
-
+	win.adapter.ClearColor(0,0,0, 0)
+	win.adapter.ClearAll()
+	win.adapter.LambdaBindTexture2D(0)
 
 	win.Unbind()
 }

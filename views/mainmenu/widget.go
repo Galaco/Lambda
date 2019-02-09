@@ -90,6 +90,11 @@ func (widget *Widget) loadVmf(filename string) {
 	for i := 0; i < len(widget.model.Vmf.Worldspawn().Solids); i++ {
 		widget.dispatcher.Dispatch(events.NewNewSolidCreated(&widget.model.Vmf.Worldspawn().Solids[i]))
 	}
+
+	for i := 0; i < len(widget.model.Vmf.Cameras().CameraList); i++ {
+		widget.dispatcher.Dispatch(events.NewNewCameraCreated(&widget.model.Vmf.Cameras().CameraList[i]))
+	}
+	widget.dispatcher.Dispatch(events.NewCameraChanged(&widget.model.Vmf.Cameras().CameraList[widget.model.Vmf.Cameras().ActiveCamera]))
 }
 
 func NewWidget(dispatcher *event.Dispatcher, model *project.Model, importer *importers.VmfImporter, exporter *exporters.VmfExporter) *Widget {

@@ -1,6 +1,7 @@
 package renderer
 
 import (
+	"github.com/galaco/Lambda-Core/core/entity"
 	"github.com/galaco/Lambda/graphics"
 	"github.com/galaco/gosigl"
 	"github.com/go-gl/gl/v4.1-core/gl"
@@ -11,8 +12,7 @@ type RenderWindow struct {
 	width       int
 	height      int
 	frameBuffer *fbo
-
-	shader *gosigl.Context
+	renderer *Renderer
 
 	// temp
 	verts []float32
@@ -25,19 +25,22 @@ func (win *RenderWindow) BufferId() uint32 {
 	return win.frameBuffer.framebufferTexture
 }
 
-func (win *RenderWindow) DrawFrame() {
-	win.shader.UseProgram()
+func (win *RenderWindow) StartFrame(camera *entity.Camera) {
+	win.renderer.StartFrame()
+	win.renderer.BindCamera(camera)
+}
+
+func (win *RenderWindow) DrawFrame(scene *Scene) {
+	win.StartFrame(scene.activeCamera)
 
 	win.frameBuffer.Bind()
 
 	gl.BindVertexArray(win.vao)
 	gl.DrawArrays(gl.TRIANGLES, 0, 3)
 
-	//export := make([]byte, win.width * win.height * 3)
-	//gl.ReadPixels(0, 0, int32(win.width), int32(win.height), gl.RGB, gl.UNSIGNED_BYTE, gl.Ptr(export))
-	//ioutil.WriteFile("dump.raw", export, 0644)
-	//
-	//logger.Fatal(fmt.Sprintf("%d, %d", win.width, win.height))
+	for _,solid := range scene.RenderableSolids {
+		win.renderer.DrawSolid(solid)
+	}
 
 	win.frameBuffer.Unbind()
 }
@@ -67,12 +70,14 @@ func (win *RenderWindow) prepTriangle() {
 func NewRenderWindow(adapter graphics.Adapter, width int, height int) *RenderWindow {
 	r := &RenderWindow{
 		adapter:     adapter,
-		shader:		 loadShader(),
 		width:       width,
 		height:      height,
 		frameBuffer: nil,
+		renderer: newRenderer(),
 	}
-	r.shader.UseProgram()
+
+
+	r.renderer.BindShader(loadShader())
 	r.frameBuffer = NewFbo(adapter, width, height)
 
 	r.prepTriangle()

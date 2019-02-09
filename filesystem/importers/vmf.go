@@ -44,9 +44,14 @@ func (importer *VmfImporter) LoadVmf(filepath string) (*valve.Vmf, error) {
 		return nil, err
 	}
 
+	cameras,err := importer.loadCameras(&importable.Cameras)
+	if err != nil || cameras == nil {
+		return nil, err
+	}
+
 	entities := importer.loadEntities(&importable.Entities)
 
-	return valve.NewVmf(versionInfo, visGroups, worldspawn, entities), nil
+	return valve.NewVmf(versionInfo, visGroups, worldspawn, entities, cameras), nil
 }
 
 // loadVersionInfo creates a VersionInfo model
@@ -157,6 +162,25 @@ func (importer *VmfImporter) loadEntities(node *vmf.Node) *entity.List {
 
 	return &entities
 }
+
+// loadCameras creates cameras from the vmf camera list
+func (importer *VmfImporter) loadCameras(node *vmf.Node) (*valve.Cameras, error) {
+	activeCamProp := node.GetProperty("activecamera")
+	activeCamIdx,_ := strconv.ParseInt(activeCamProp, 10, 32)
+
+	cameras := make([]valve.Camera, 0)
+
+	cameraProps := node.GetChildrenByKey("camera")
+	for _,camProp := range cameraProps {
+		pos := camProp.GetProperty("position")
+		look := camProp.GetProperty("look")
+
+		cameras = append(cameras, *valve.NewCamera(world.NewVec3FromString(pos), world.NewVec3FromString(look)))
+	}
+
+	return valve.NewCameras(int(activeCamIdx), cameras), nil
+}
+
 
 func NewVmfImporter() *VmfImporter {
 	return &VmfImporter{}

@@ -24,11 +24,14 @@ func loadShader() *gosigl.Context {
 var vertexSource = `
 #version 410
 
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
 layout(location = 0) in vec3 vertexPosition_modelspace;
 
 void main() {
-  gl_Position.xyz = vertexPosition_modelspace;
-  gl_Position.w = 1.0;
+	gl_Position = projection * view * model * vec4(vertexPosition_modelspace, 1.0);
 }
 ` + "\x00"
 

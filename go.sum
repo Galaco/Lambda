@@ -7,6 +7,7 @@ github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym
 github.com/BurntSushi/xgbutil v0.0.0-20160919175755-f7c97cef3b4e/go.mod h1:uw9h2sd4WWHOPdJ13MQpwK5qYWKYDumDqxWWIknEQ+k=
 github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf h1:FPsprx82rdrX2jiKyS17BH6IrTmUBYqZa/CXT4uvb+I=
 github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf/go.mod h1:peYoMncQljjNS6tZwI9WVyQB3qZS6u79/N3mBOcnd3I=
+github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/galaco/KeyValues v1.2.3/go.mod h1:EByNBjnai9BpKGMykvBD3G28R+L6OubVnRkvZrYxP2Y=
 github.com/galaco/KeyValues v1.3.0 h1:ahNJWGMWfZZwSKBFr8bPsz5qz3G1DzrtQzswM+dAB3w=
 github.com/galaco/KeyValues v1.3.0/go.mod h1:EByNBjnai9BpKGMykvBD3G28R+L6OubVnRkvZrYxP2Y=
@@ -58,11 +59,14 @@ github.com/mattn/go-gtk v0.0.0-20181205025739-e9a6766929f6/go.mod h1:PwzwfeB5syF
 github.com/mattn/go-pointer v0.0.0-20171114154726-1d30dc4b6f28/go.mod h1:2zXcozF6qYGgmsG+SeTZz3oAbFLdD3OWqnUbNvJZAlc=
 github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791 h1:PfHMsLQJwoc0ccjK0sam6J0wQo4s8mOuAo2yQGw+T2U=
 github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791/go.mod h1:2zXcozF6qYGgmsG+SeTZz3oAbFLdD3OWqnUbNvJZAlc=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/skelterjohn/go.wde v0.0.0-20180104102407-a0324cbf3ffe/go.mod h1:zXxNsJHeUYIqpg890APBNEn9GoCbA4Cdnvuv3mx4fBk=
 github.com/sqweek/dialog v0.0.0-20180909141952-8b7906c2c196 h1:pGRry1F/OWuTp+niREJMWMVRKX1YoUriNcqq130XoR4=
 github.com/sqweek/dialog v0.0.0-20180909141952-8b7906c2c196/go.mod h1:Kc6/c797JhtafidksHLY90OFQnih/fEo+JAERhKxcLY=
 github.com/sqweek/dialog v0.0.0-20190119053146-f33030e0fda5 h1:1fOhBzy74IPGDEr5zogMEMdwVVPQs1F+/7HJIp9YrXc=
 github.com/sqweek/dialog v0.0.0-20190119053146-f33030e0fda5/go.mod h1:QSrNdZLZB8VoFPGlZ2vDuA2oNaVdhld3g0PZLc7soX8=
+github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
+github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5 h1:m2ubjBfoVgaHlyMAeZZYetN8HKDv+BQBgmbMN3XIMjY=
 github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5/go.mod h1:qui9jo5J26j9fXv2x3bySGThxYkQZt4SgsPIZRtZAbQ=
 golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b h1:VHyIDlv3XkfCa5/a81uzaoDkHH4rr81Z62g+xlnO8uM=
