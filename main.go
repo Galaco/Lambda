@@ -45,6 +45,8 @@ func main() {
 		uiContext.Window().SwapBuffers()
 		app.GraphicsAdapter.ClearColor(0, 0, 0, 0)
 		app.GraphicsAdapter.ClearAll()
+
+		app.Update()
 		<-time.After(time.Millisecond * 25)
 	}
 }

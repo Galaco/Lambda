@@ -6,11 +6,15 @@ import (
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/graphics"
 	"github.com/galaco/Lambda/ui/context"
+	"github.com/galaco/Lambda/ui/imgui-layouts"
 	"github.com/galaco/Lambda/views/scene/renderer"
 	"github.com/inkyblackness/imgui-go"
 )
 
 type Widget struct {
+	imgui_layouts.Panel
+	controls *Controls
+
 	dispatcher *event.Dispatcher
 	graphicsAdapter graphics.Adapter
 
@@ -20,6 +24,8 @@ type Widget struct {
 
 	scene 		  *renderer.Scene
 	camera 	      *entity.Camera
+
+	isActive bool
 }
 
 func (widget *Widget) Initialize() {
@@ -27,6 +33,9 @@ func (widget *Widget) Initialize() {
 	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
 	widget.dispatcher.Subscribe(events.TypeNewCameraCreated, widget.newCameraCreated)
 	widget.dispatcher.Subscribe(events.TypeCameraChanged, widget.cameraChanged)
+
+	widget.DisplayProperties.HasTitleBar = true
+	widget.DisplayProperties.HasMenuBar = false
 }
 
 func (widget *Widget) RenderScene(ctx *context.Context) {
@@ -55,6 +64,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 		imgui.WindowFlagsNoScrollWithMouse |
 		imgui.WindowFlagsNoNav |
 		imgui.WindowFlagsNoInputs) {
+
 		imgui.SetCursorPos(imgui.Vec2{
 			X: 0,//float32(widget.width / 2),
 			Y: 0, //float32(widget.height / 2),
@@ -71,6 +81,23 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 	imgui.PopStyleVar()
 	imgui.PopStyleColor()
+}
+
+func (widget *Widget) Update(dt float64) {
+	widget.controls.Update()
+
+	if widget.controls.Actions.Forward {
+		widget.scene.ActiveCamera().Forwards(dt)
+	}
+	if widget.controls.Actions.Left {
+		widget.scene.ActiveCamera().Left(dt)
+	}
+	if widget.controls.Actions.Backwards {
+		widget.scene.ActiveCamera().Backwards(dt)
+	}
+	if widget.controls.Actions.Right {
+		widget.scene.ActiveCamera().Right(dt)
+	}
 }
 
 func (widget *Widget) newSolidCreated(received event.IEvent) {
@@ -92,5 +119,6 @@ func NewWidget(dispatcher *event.Dispatcher, graphicsAdapter graphics.Adapter) *
 		width:  1024,
 		height: 768,
 		scene: renderer.NewScene(),
+		controls: newControls(),
 	}
 }

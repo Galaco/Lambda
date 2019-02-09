@@ -1,6 +1,8 @@
 package keyvalues
 
-import "github.com/inkyblackness/imgui-go"
+import (
+	"github.com/inkyblackness/imgui-go"
+)
 
 type keyValue struct {
 	key      string

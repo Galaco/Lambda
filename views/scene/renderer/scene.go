@@ -19,6 +19,10 @@ type Scene struct {
 	activeCamera *entity.Camera
 }
 
+func (scene *Scene) ActiveCamera() *entity.Camera {
+	return scene.activeCamera
+}
+
 func (scene *Scene) AddSolid(solid *world.Solid) {
 	scene.Solids[solid.Id] = solid
 

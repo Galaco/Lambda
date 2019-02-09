@@ -5,6 +5,8 @@ import (
 	lambdaMesh "github.com/galaco/Lambda-Core/core/mesh"
 	lambdaModel "github.com/galaco/Lambda-Core/core/model"
 	"github.com/galaco/Lambda/valve/world"
+	"github.com/galaco/gosigl"
+	"math"
 )
 
 func SolidToModel(solid *world.Solid) *lambdaModel.Model{
@@ -34,9 +36,23 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 
 		// Compute new vertex
 		vert4 := side.Plane[2].Sub(side.Plane[1].Sub(side.Plane[0]))
-		verts = append(verts, float32(vert4.X()), float32(vert4.Y()), float32(vert4.Z()))
+		verts = append(verts, float32(vert4.X()), float32(vert4.Y()), 0)
+
+
+
+		// @TODO
+		// This is for debugging! It flattens the solid onto the X/Y plane
+		for idx, v := range verts {
+			if (idx + 1) % 3 == 0 {
+				verts[idx] = 0
+				continue
+			}
+			perc := math.Abs(float64((float32(v) / 16384.0))) - 0.5
+			verts[idx] = float32(perc)
+		}
 
 		mesh.AddVertex(verts...)
+		gosigl.FinishMesh()
 	}
 
 	// Material

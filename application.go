@@ -58,6 +58,10 @@ func (app *Application) Render() {
 	app.scenePreviewView.Render(app.uiContext)
 }
 
+func (app *Application) Update() {
+	app.scenePreviewView.Update(1000.0 / 60)
+}
+
 func (app *Application) InitializeViews() {
 	app.assetsView = assets.NewWidget(app.EventDispatcher, app.FileSystem)
 	app.hierarchyView = hierarchy.NewWidget(app.EventDispatcher)
