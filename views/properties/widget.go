@@ -24,6 +24,7 @@ type Widget struct {
 func (widget *Widget) Initialize() {
 	widget.dispatcher.Subscribe(events.TypeEntityNodeSelected, widget.selectedEntityChanged)
 	widget.dispatcher.Subscribe(events.TypeSolidNodeSelected, widget.selectedSolidChanged)
+	widget.dispatcher.Subscribe(events.TypeSceneClosed, widget.sceneClosed)
 }
 
 func (widget *Widget) Render(ctx *context.Context) {
@@ -62,6 +63,10 @@ func (widget *Widget) selectedSolidChanged(received event.IEvent) {
 	widget.keyValueView.AddKeyValue(keyvalues.NewKeyValue("solid id", strconv.FormatInt(int64(evt.Id), 10), func(k, v string) {
 		log.Println(k + " " + v)
 	}))
+}
+
+func (widget *Widget) sceneClosed(received event.IEvent) {
+	widget.keyValueView = keyvalues.NewKeyValues()
 }
 
 func NewWidget(dispatcher *event.Dispatcher, model *project.Model) *Widget {

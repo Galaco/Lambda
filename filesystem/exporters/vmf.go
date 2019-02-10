@@ -78,10 +78,6 @@ func (exporter *VmfExporter) exportWorldspawn(model *world.World) (export string
 
 		kv = kv.Next
 	}
-	//
-	//for _,solid := range model.Solids {
-	//
-	//}
 
 
 	export += `}

@@ -74,13 +74,27 @@ type ViewSettings struct {
 }
 
 type Cameras struct {
-	activeCamera int
-	cameraList   []Camera
+	ActiveCamera int
+	CameraList   []Camera
+}
+
+func NewCameras(activeCameraIndex int, cameras []Camera) *Cameras {
+	return &Cameras{
+		ActiveCamera: activeCameraIndex,
+		CameraList: cameras,
+	}
 }
 
 type Camera struct {
-	position mgl64.Vec3
-	look     mgl64.Vec3
+	Position mgl64.Vec3
+	Look     mgl64.Vec3
+}
+
+func NewCamera(position mgl64.Vec3, look mgl64.Vec3) *Camera{
+	return &Camera{
+		Position:position,
+		Look: look,
+	}
 }
 
 type Cordon struct {
@@ -89,11 +103,12 @@ type Cordon struct {
 	active bool
 }
 
-func NewVmf(version *VersionInfo, visgroups *VisGroups, worldSpawn *world.World, entities *entity.List) *Vmf {
+func NewVmf(version *VersionInfo, visgroups *VisGroups, worldSpawn *world.World, entities *entity.List, cameras *Cameras) *Vmf {
 	return &Vmf{
 		versionInfo: *version,
 		visGroups:   *visgroups,
 		world:       *worldSpawn,
 		entities:    *entities,
+		cameras:     *cameras,
 	}
 }

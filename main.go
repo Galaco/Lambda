@@ -38,13 +38,15 @@ func main() {
 
 		displayWidth, displayHeight := uiContext.Window().GetFramebufferSize()
 		app.GraphicsAdapter.Viewport(0, 0, int32(displayWidth), int32(displayHeight))
-		app.GraphicsAdapter.ClearColor(0, 0, 0, 0)
-		app.GraphicsAdapter.ClearAll()
 
 		imgui.Render()
 		uiContext.Imgui().Render(imgui.RenderedDrawData())
 
 		uiContext.Window().SwapBuffers()
+		app.GraphicsAdapter.ClearColor(0, 0, 0, 0)
+		app.GraphicsAdapter.ClearAll()
+
+		app.Update()
 		<-time.After(time.Millisecond * 25)
 	}
 }

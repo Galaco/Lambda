@@ -15,7 +15,7 @@ type View struct {
 
 // Render draws the current configuration of columns
 func (view *View) Render(width int, height int) {
-	imgui.BeginColumns("Columns", view.numColumns)
+	imgui.BeginColumns(view.numColumns, "Columns")
 
 	for idx, renderFunc := range view.columnContents {
 		if view.columnWidths[idx].AsPercentage == false {

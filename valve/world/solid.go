@@ -12,19 +12,19 @@ type Solid struct {
 }
 
 type Side struct {
-	id              int
-	plane           Plane
-	material        string
-	uAxis           UVTransform
-	vAxis           UVTransform
-	rotation        float64
-	lightmapScale   float64
-	smoothingGroups bool
+	Id              int
+	Plane           Plane
+	Material        string
+	UAxis           UVTransform
+	VAxis           UVTransform
+	Rotation        float64
+	LightmapScale   float64
+	SmoothingGroups bool
 }
 
 type UVTransform struct {
-	transform mgl64.Vec4
-	scale     float64
+	Transform mgl64.Vec4
+	Scale     float64
 }
 
 type Editor struct {
@@ -47,14 +47,14 @@ func NewSolid(id int, sides []Side, editor *Editor) *Solid {
 
 func NewSide(id int, plane Plane, material string, uAxis UVTransform, vAxis UVTransform, rotation float64, lightmapScale float64, smoothingGroups bool) *Side {
 	return &Side{
-		id:              id,
-		plane:           plane,
-		material:        material,
-		uAxis:           uAxis,
-		vAxis:           vAxis,
-		rotation:        rotation,
-		lightmapScale:   lightmapScale,
-		smoothingGroups: smoothingGroups,
+		Id:              id,
+		Plane:           plane,
+		Material:        material,
+		UAxis:           uAxis,
+		VAxis:           vAxis,
+		Rotation:        rotation,
+		LightmapScale:   lightmapScale,
+		SmoothingGroups: smoothingGroups,
 	}
 }
 
@@ -85,8 +85,8 @@ func NewPlaneFromString(marshalled string) *Plane {
 
 func NewUVTransform(transform mgl64.Vec4, scale float64) *UVTransform {
 	return &UVTransform{
-		transform: transform,
-		scale:     scale,
+		Transform: transform,
+		Scale:     scale,
 	}
 }
 

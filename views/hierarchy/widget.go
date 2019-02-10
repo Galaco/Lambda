@@ -11,13 +11,14 @@ import (
 type Widget struct {
 	dispatcher *event.Dispatcher
 
-	list entityList
+	list      entityList
 	solidList entityList
 }
 
 func (widget *Widget) Initialize() {
 	widget.dispatcher.Subscribe(events.TypeEntityCreated, widget.newEntityCreated)
 	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
+	widget.dispatcher.Subscribe(events.TypeSceneClosed, widget.sceneClosed)
 }
 
 func (widget *Widget) Render(ctx *context.Context) {
@@ -84,6 +85,11 @@ func (widget *Widget) newSolidCreated(received event.IEvent) {
 		func(id int) {
 			widget.dispatcher.Dispatch(events.NewSolidNodeSelected(id))
 		})
+}
+
+func (widget *Widget) sceneClosed(received event.IEvent) {
+	widget.list = entityList{}
+	widget.solidList = entityList{}
 }
 
 func NewWidget(dispatcher *event.Dispatcher) *Widget {

@@ -16,14 +16,18 @@ func (win *fbo) Resize(width int, height int) {
 	win.width = width
 	win.height = height
 
+	win.Bind()
+
 	if win.framebufferTexture != 0 {
 		win.adapter.DeleteTextures(1, &win.framebufferTexture)
 	}
 
 	win.adapter.LambdaCreateTexture2D(&win.framebufferTexture, int32(win.width), int32(win.height), nil)
-
-	win.Bind()
+	win.adapter.LambdaBindTexture2D(win.framebufferTexture)
 	win.adapter.LambdaBindTexture2DToFramebuffer(win.framebufferTexture)
+	win.adapter.ClearColor(0,0,0, 0)
+	win.adapter.ClearAll()
+	win.adapter.LambdaBindTexture2D(0)
 
 	win.Unbind()
 }

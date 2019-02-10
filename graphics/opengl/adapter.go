@@ -25,7 +25,7 @@ func (ogl *OpenGL) LambdaCreateTexture2D(id *uint32, width, height int32, data [
 		p = nil
 	}
 
-	ogl.TexImage2D(gl.TEXTURE_2D, 0, gl.RGB, width, height, 0, gl.RGB, gl.UNSIGNED_BYTE, p)
+	ogl.TexImage2D(gl.TEXTURE_2D, 0, gl.RGB, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, p)
 
 	ogl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
 	ogl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
@@ -69,9 +69,14 @@ func (ogl *OpenGL) BindFramebuffer(target uint32, framebuffer uint32) {
 func (ogl *OpenGL) DeleteFramebuffers(n int32, framebuffers *uint32) {
 	gl.DeleteFramebuffers(n, framebuffers)
 }
-func (ogl *OpenGL) FramebufferTexture2D(target uint32, attachment uint32, textarget uint32, texture uint32, level int32) {
-	gl.FramebufferTexture2D(target, attachment, textarget, textarget, level)
+func (ogl *OpenGL) FramebufferTexture(target uint32, attachment uint32, texture uint32, level int32) {
+	gl.FramebufferTexture(target, attachment, texture, level)
 }
+func (ogl *OpenGL) FramebufferTexture2D(target uint32, attachment uint32, textarget uint32, texture uint32, level int32) {
+	gl.FramebufferTexture2D(target, attachment, textarget, texture, level)
+}
+
+// Textures
 
 func (ogl *OpenGL) DeleteTextures(n int32, textures *uint32) {
 	gl.DeleteTextures(n, textures)

@@ -18,6 +18,8 @@ type Widget struct {
 	importer   *importers.VmfImporter
 	exporter *exporters.VmfExporter
 	model      *project.Model
+
+	isProjectLoaded bool
 }
 
 // Initialize sets up widget specific properties.
@@ -37,7 +39,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 					widget.loadVmf(filename)
 				}
 			}
-			if imgui.MenuItemV("Save", "Ctrl+S", false, true) {
+			if imgui.MenuItemV("Save", "Ctrl+S", false, widget.isProjectLoaded) {
 				data,err := widget.exporter.Export(widget.model.Vmf)
 				if err == nil {
 					err = saveFile(widget.model.Filename, data)
@@ -48,7 +50,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 					logger.Error(err)
 				}
 			}
-			if imgui.MenuItemV("Save As", "", false, true) {
+			if imgui.MenuItemV("Save As", "", false, widget.isProjectLoaded) {
 				data,err := widget.exporter.Export(widget.model.Vmf)
 				if err == nil {
 					err = saveFile("", data)
@@ -59,12 +61,12 @@ func (widget *Widget) Render(ctx *context.Context) {
 					logger.Error(err)
 				}
 			}
-			if imgui.MenuItemV("Close", "Ctrl+W", false, true) {
-				/* Do stuff */
+			if imgui.MenuItemV("Close", "Ctrl+W", false, widget.isProjectLoaded) {
+				widget.dispatcher.Dispatch(events.NewSceneClosed())
+				widget.isProjectLoaded = false
 			}
 			if imgui.MenuItem("Exit") {
 				widget.dispatcher.Dispatch(events.NewWindowClosed())
-				/* Do stuff */
 			}
 			imgui.EndMenu()
 		}
@@ -90,6 +92,15 @@ func (widget *Widget) loadVmf(filename string) {
 	for i := 0; i < len(widget.model.Vmf.Worldspawn().Solids); i++ {
 		widget.dispatcher.Dispatch(events.NewNewSolidCreated(&widget.model.Vmf.Worldspawn().Solids[i]))
 	}
+
+	for i := 0; i < len(widget.model.Vmf.Cameras().CameraList); i++ {
+		widget.dispatcher.Dispatch(events.NewNewCameraCreated(&widget.model.Vmf.Cameras().CameraList[i]))
+	}
+	if widget.model.Vmf.Cameras().ActiveCamera != -1 {
+		widget.dispatcher.Dispatch(events.NewCameraChanged(&widget.model.Vmf.Cameras().CameraList[widget.model.Vmf.Cameras().ActiveCamera]))
+	}
+
+	widget.isProjectLoaded = true
 }
 
 func NewWidget(dispatcher *event.Dispatcher, model *project.Model, importer *importers.VmfImporter, exporter *exporters.VmfExporter) *Widget {

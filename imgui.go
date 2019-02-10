@@ -7,7 +7,8 @@ func applyImguiStyles() {
 	fontAtlas.AddFontFromFileTTF("./FiraCode-Regular.ttf", 16)
 	style := imgui.CurrentStyle()
 
-	lightTheme(&style)
+	//lightTheme(&style)
+	darkTheme(&style)
 }
 
 func lightTheme(style *imgui.Style) {
