@@ -40,8 +40,8 @@ void main() {
 var fragmentSource = `
 #version 410
 
-out vec3 color;
+out vec4 color;
 void main() {
-  color = vec3(1,0,0);
+  color = vec4(1,0,0, 0.03);
 }
 ` + "\x00"

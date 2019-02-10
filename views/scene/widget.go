@@ -33,6 +33,7 @@ func (widget *Widget) Initialize() {
 	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
 	widget.dispatcher.Subscribe(events.TypeNewCameraCreated, widget.newCameraCreated)
 	widget.dispatcher.Subscribe(events.TypeCameraChanged, widget.cameraChanged)
+	widget.dispatcher.Subscribe(events.TypeSceneClosed, widget.sceneClosed)
 
 	widget.DisplayProperties.HasTitleBar = true
 	widget.DisplayProperties.HasMenuBar = false
@@ -110,6 +111,18 @@ func (widget *Widget) newCameraCreated(received event.IEvent) {
 
 func (widget *Widget) cameraChanged(received event.IEvent) {
 	widget.scene.ChangeCamera(received.(*events.CameraChanged).Target())
+}
+
+func (widget *Widget) sceneClosed(received event.IEvent) {
+	widget.scene.Close()
+	widget.scene = renderer.NewScene()
+	widget.controls = newControls()
+	widget.window = renderer.NewRenderWindow(widget.graphicsAdapter, widget.width, widget.height)
+}
+
+func (widget *Widget) Close() {
+	widget.scene.Close()
+	widget.window.Close()
 }
 
 func NewWidget(dispatcher *event.Dispatcher, graphicsAdapter graphics.Adapter) *Widget {

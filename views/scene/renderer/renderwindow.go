@@ -44,6 +44,10 @@ func (win *RenderWindow) SetSize(width int, height int) {
 	win.frameBuffer = NewFbo(win.adapter, width, height)
 }
 
+func (win *RenderWindow) Close() {
+	win.frameBuffer.Destroy()
+}
+
 func NewRenderWindow(adapter graphics.Adapter, width int, height int) *RenderWindow {
 	r := &RenderWindow{
 		adapter:     adapter,

@@ -1,8 +1,6 @@
 package renderer
 
 import (
-	"fmt"
-	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/Lambda/graphics"
 )
 
@@ -17,8 +15,6 @@ type fbo struct {
 func (win *fbo) Resize(width int, height int) {
 	win.width = width
 	win.height = height
-
-	logger.Notice(fmt.Sprintf("%d, %d", width, height))
 
 	win.Bind()
 

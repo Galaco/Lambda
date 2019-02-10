@@ -62,11 +62,11 @@ func (widget *Widget) Render(ctx *context.Context) {
 				}
 			}
 			if imgui.MenuItemV("Close", "Ctrl+W", false, widget.isProjectLoaded) {
-				/* Do stuff */
+				widget.dispatcher.Dispatch(events.NewSceneClosed())
+				widget.isProjectLoaded = false
 			}
 			if imgui.MenuItem("Exit") {
 				widget.dispatcher.Dispatch(events.NewWindowClosed())
-				/* Do stuff */
 			}
 			imgui.EndMenu()
 		}
@@ -96,7 +96,9 @@ func (widget *Widget) loadVmf(filename string) {
 	for i := 0; i < len(widget.model.Vmf.Cameras().CameraList); i++ {
 		widget.dispatcher.Dispatch(events.NewNewCameraCreated(&widget.model.Vmf.Cameras().CameraList[i]))
 	}
-	widget.dispatcher.Dispatch(events.NewCameraChanged(&widget.model.Vmf.Cameras().CameraList[widget.model.Vmf.Cameras().ActiveCamera]))
+	if widget.model.Vmf.Cameras().ActiveCamera != -1 {
+		widget.dispatcher.Dispatch(events.NewCameraChanged(&widget.model.Vmf.Cameras().CameraList[widget.model.Vmf.Cameras().ActiveCamera]))
+	}
 
 	widget.isProjectLoaded = true
 }

@@ -56,6 +56,14 @@ func (scene *Scene) ChangeCamera(camera *valve.Camera) {
 	}
 }
 
+func (scene *Scene) Close() {
+	for _,solids := range scene.RenderableSolids {
+		for _,solid := range solids {
+			gosigl.DeleteMesh(solid)
+		}
+	}
+}
+
 func NewScene() *Scene {
 	return &Scene{
 		Solids: map[int]*world.Solid{},

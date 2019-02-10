@@ -7,6 +7,7 @@ const TypeOpenScene = "OpenScene"
 const TypeOpenSceneFailed = "OpenSceneFailed"
 const TypeEntityNodeSelected = "EntityNodeSelected"
 const TypeSolidNodeSelected = "SolidNodeSelected"
+const TypeSceneClosed = "SceneClosed"
 
 // NewScene action includes a payload of the new scene
 // Note that NewScene is also a loaded scene, as there is
@@ -91,4 +92,15 @@ func NewSolidNodeSelected(id int) *SolidNodeSelected {
 	return &SolidNodeSelected{
 		Id: id,
 	}
+}
+
+type SceneClosed struct {
+}
+
+func (act *SceneClosed) Type() string {
+	return TypeSceneClosed
+}
+
+func NewSceneClosed() *SceneClosed {
+	return &SceneClosed{}
 }
