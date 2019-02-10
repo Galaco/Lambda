@@ -2,6 +2,9 @@
 [![Go report card](https://goreportcard.com/badge/github.com/galaco/Lambda)](https://goreportcard.com/badge/github.com/galaco/Lambda)
 
 # Lambda
-A custom Source Engine level editor written in Go
+A custom Source Engine level editor written in Go.
 
 ##### This is in very early stages of active development.
+
+
+![Editor](https://raw.githubusercontent.com/Galaco/Lambda/master/docs/repo/editor.png)
