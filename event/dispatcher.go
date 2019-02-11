@@ -27,6 +27,35 @@ func (dispatch *Dispatcher) Initialize() {
 	dispatch.running = true
 }
 
+// Close tells the Dispatcher to finish running.
+// It will execute any events currently in the queue first.
+func (dispatch *Dispatcher) Close() {
+	dispatch.running = false
+}
+
+// Dispatch notified the Dispatcher that the specified event has occurred,
+// and appends it to the end of the current dispatch queue for processing.
+func (dispatch *Dispatcher) Dispatch(action IEvent) {
+	dispatch.messages = append(dispatch.messages, action)
+	//dispatch.processMessages()
+}
+
+// Subscribe registers a callback against a particular event.
+// Whenever a specified event occurs, the callback is executed.
+func (dispatch *Dispatcher) Subscribe(action string, receiver Receivable) {
+	//dispatch.mutex.Lock()
+	if dispatch.receivers[action] == nil {
+		dispatch.receivers[action] = make([]Receivable, 0)
+	}
+	dispatch.receivers[action] = append(dispatch.receivers[action], receiver)
+	//dispatch.mutex.Unlock()
+}
+
+// Process processes any in-queue messages
+func (dispatch *Dispatcher) Process() {
+	dispatch.processMessages()
+}
+
 func (dispatch *Dispatcher) processMessages() {
 	if len(dispatch.messages) == 0 {
 		return
@@ -41,31 +70,6 @@ func (dispatch *Dispatcher) processMessages() {
 			}
 		}
 	}
-}
-
-// Close tells the Dispatcher to finish running.
-// It will execute any events currently in the queue first.
-func (dispatch *Dispatcher) Close() {
-	dispatch.running = false
-}
-
-// Dispatch notified the Dispatcher that the specified event has occurred,
-// and appends it to the end of the current dispatch queue for processing.
-func (dispatch *Dispatcher) Dispatch(action IEvent) {
-	dispatch.messages = append(dispatch.messages, action)
-	dispatch.processMessages()
-
-}
-
-// Subscribe registers a callback against a particular event.
-// Whenever a specified event occurs, the callback is executed.
-func (dispatch *Dispatcher) Subscribe(action string, receiver Receivable) {
-	//dispatch.mutex.Lock()
-	if dispatch.receivers[action] == nil {
-		dispatch.receivers[action] = make([]Receivable, 0)
-	}
-	dispatch.receivers[action] = append(dispatch.receivers[action], receiver)
-	//dispatch.mutex.Unlock()
 }
 
 // NewDispatcher returns the Dispatcher.

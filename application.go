@@ -59,6 +59,8 @@ func (app *Application) Render() {
 }
 
 func (app *Application) Update() {
+	app.EventDispatcher.Process()
+
 	app.scenePreviewView.Update(1000.0 / 60)
 }
 

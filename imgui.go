@@ -7,8 +7,24 @@ func applyImguiStyles() {
 	fontAtlas.AddFontFromFileTTF("./FiraCode-Regular.ttf", 16)
 	style := imgui.CurrentStyle()
 
+	commonLayout(&style)
+
 	//lightTheme(&style)
 	darkTheme(&style)
+}
+
+func commonLayout(style *imgui.Style) {
+	imgui.PushStyleVarVec2(imgui.StyleVarWindowPadding, imgui.Vec2{15, 15})
+	imgui.PushStyleVarFloat(imgui.StyleVarWindowRounding, 0)
+	imgui.PushStyleVarVec2(imgui.StyleVarFramePadding, imgui.Vec2{5, 5})
+	imgui.PushStyleVarFloat(imgui.StyleVarFrameRounding, 0)
+	imgui.PushStyleVarVec2(imgui.StyleVarItemSpacing, imgui.Vec2{12, 8})
+	imgui.PushStyleVarVec2(imgui.StyleVarItemInnerSpacing, imgui.Vec2{8, 6})
+	imgui.PushStyleVarFloat(imgui.StyleVarIndentSpacing, 25)
+	imgui.PushStyleVarFloat(imgui.StyleVarScrollbarSize, 16)
+	imgui.PushStyleVarFloat(imgui.StyleVarScrollbarRounding, 0)
+	imgui.PushStyleVarFloat(imgui.StyleVarGrabMinSize, 5)
+	imgui.PushStyleVarFloat(imgui.StyleVarGrabRounding, 0)
 }
 
 func lightTheme(style *imgui.Style) {
@@ -51,18 +67,6 @@ func lightTheme(style *imgui.Style) {
 }
 
 func darkTheme(style *imgui.Style) {
-	imgui.PushStyleVarVec2(imgui.StyleVarWindowPadding, imgui.Vec2{15, 15})
-	imgui.PushStyleVarFloat(imgui.StyleVarWindowRounding, 5)
-	imgui.PushStyleVarVec2(imgui.StyleVarFramePadding, imgui.Vec2{5, 5})
-	imgui.PushStyleVarFloat(imgui.StyleVarFrameRounding, 4)
-	imgui.PushStyleVarVec2(imgui.StyleVarItemSpacing, imgui.Vec2{12, 8})
-	imgui.PushStyleVarVec2(imgui.StyleVarItemInnerSpacing, imgui.Vec2{8, 6})
-	imgui.PushStyleVarFloat(imgui.StyleVarIndentSpacing, 25)
-	imgui.PushStyleVarFloat(imgui.StyleVarScrollbarSize, 16)
-	imgui.PushStyleVarFloat(imgui.StyleVarScrollbarRounding, 9)
-	imgui.PushStyleVarFloat(imgui.StyleVarGrabMinSize, 5)
-	imgui.PushStyleVarFloat(imgui.StyleVarGrabRounding, 3)
-
 	style.SetColor(imgui.StyleColorText, imgui.Vec4{0.80, 0.80, 0.83, 1.00})
 	style.SetColor(imgui.StyleColorTextDisabled, imgui.Vec4{0.24, 0.23, 0.29, 1.00})
 	style.SetColor(imgui.StyleColorWindowBg, imgui.Vec4{0.06, 0.05, 0.07, 1.00})

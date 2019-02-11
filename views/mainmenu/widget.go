@@ -10,7 +10,6 @@ import (
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/mainmenu/dialog"
 	"github.com/inkyblackness/imgui-go"
-	"io/ioutil"
 )
 
 type Widget struct {
@@ -20,6 +19,8 @@ type Widget struct {
 	model      *project.Model
 
 	isProjectLoaded bool
+
+	dialogPreferences *dialog.Preferences
 }
 
 // Initialize sets up widget specific properties.
@@ -70,7 +71,17 @@ func (widget *Widget) Render(ctx *context.Context) {
 			}
 			imgui.EndMenu()
 		}
+		if imgui.BeginMenu("Edit") {
+			if imgui.MenuItem("Preferences") {
+				widget.dialogPreferences.Open()
+			}
+			imgui.EndMenu()
+		}
 		imgui.EndMainMenuBar()
+	}
+
+	if widget.dialogPreferences.IsOpen() {
+		widget.dialogPreferences.Render(dialogWidth, dialogHeight)
 	}
 }
 
@@ -109,26 +120,6 @@ func NewWidget(dispatcher *event.Dispatcher, model *project.Model, importer *imp
 		importer:   importer,
 		model:      model,
 		exporter:   exporter,
+		dialogPreferences: dialog.NewPreferences(),
 	}
-}
-
-func openFile() string {
-	filename, err := dialog.FileOpen()
-	if err != nil {
-		filename = "./ze_bioshock_v6_4.vmf"
-		return ""
-	}
-	return filename
-}
-
-func saveFile(filename string, data string) (err error) {
-	// Saving a new file
-	if filename == "" {
-		filename,err = dialog.FileSave()
-		if err != nil {
-			return err
-		}
-	}
-
-	return ioutil.WriteFile(filename, []byte(data), 755)
 }
