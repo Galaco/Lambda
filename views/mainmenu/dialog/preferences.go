@@ -12,7 +12,7 @@ type Preferences struct {
 	twoPanel *columns.View
 	sidebar *preferences.Sidebar
 
-	pages []preferences.IPage
+	pages map[string]preferences.IPage
 	currentPage preferences.IPage
 }
 
@@ -30,10 +30,16 @@ func (d *Preferences) Render(width, height int) {
 		imgui.EndPopup()
 	}
 	imgui.PopStyleVar()
+
+	d.currentPage = d.pages[d.sidebar.CurrentTab()]
 }
 
 func (d *Preferences) renderTab() {
 	d.currentPage.Render()
+
+	if imgui.Button("Cancel") {
+		d.close()
+	}
 }
 
 func NewPreferences() *Preferences{
@@ -43,12 +49,15 @@ func NewPreferences() *Preferences{
 		},
 		sidebar: preferences.NewNavbar(),
 		twoPanel: columns.NewColumns(2),
+		pages: map[string]preferences.IPage{},
 	}
 
-	dialog.pages = append(dialog.pages, &preferences.PageGeneral{})
-	dialog.currentPage = dialog.pages[0]
+	dialog.pages["general"] = &preferences.PageGeneral{}
+	dialog.pages["appearance"] = preferences.NewPageAppearance()
 
-	dialog.twoPanel.SetColumnContents(0, dialog.sidebar.Render, columns.NewColumnWidth(100, false))
+	dialog.currentPage = dialog.pages[dialog.sidebar.CurrentTab()]
+
+	dialog.twoPanel.SetColumnContents(0, dialog.sidebar.Render, columns.NewColumnWidth(120, false))
 	dialog.twoPanel.SetColumnContents(1, dialog.renderTab, nil)
 
 	return dialog
