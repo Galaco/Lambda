@@ -17,7 +17,7 @@ notifications:
   email: false
 
 before_script:
-  - go install -mod vendor github.com/golangci/golangci-lint/cmd/golangci-lint
+  - go get -v github.com/golangci/golangci-lint/cmd/golangci-lint
 
 script:
   - golangci-lint run       # run a bunch of code checkers/linters in parallel
