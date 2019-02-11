@@ -7,6 +7,7 @@ import (
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/graphics/opengl"
 	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/ui"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"time"
@@ -30,6 +31,9 @@ func main() {
 	windowShouldClose := false
 	app.EventDispatcher.Subscribe(events.TypeWindowClosed, func(action event.IEvent) {
 		windowShouldClose = true
+	})
+	app.EventDispatcher.Subscribe(events.TypePreferencesUpdated, func(action event.IEvent) {
+		ui.ApplyImguiStyles(action.(*events.PreferencesUpdated).Appearance.Theme)
 	})
 
 	for !uiContext.Window().ShouldClose() && !windowShouldClose {

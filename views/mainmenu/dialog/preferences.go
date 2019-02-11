@@ -1,6 +1,8 @@
 package dialog
 
 import (
+	"github.com/galaco/Lambda/event"
+	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/ui/imgui-layouts/columns"
 	"github.com/galaco/Lambda/views/mainmenu/dialog/preferences"
 	"github.com/inkyblackness/imgui-go"
@@ -8,6 +10,7 @@ import (
 
 type Preferences struct {
 	Dialog
+	dispatcher *event.Dispatcher
 
 	twoPanel *columns.View
 	sidebar *preferences.Sidebar
@@ -37,16 +40,25 @@ func (d *Preferences) Render(width, height int) {
 func (d *Preferences) renderTab() {
 	d.currentPage.Render()
 
+	if imgui.Button("Save") {
+		evt := events.NewPreferencesUpdated()
+		evt.Appearance.Theme = d.pages["appearance"].(*preferences.PageAppearance).CurrentOption
+		d.dispatcher.Dispatch(evt)
+	}
+	imgui.SameLine()
+
 	if imgui.Button("Cancel") {
 		d.close()
 	}
 }
 
-func NewPreferences() *Preferences{
+func NewPreferences(dispatch *event.Dispatcher) *Preferences{
 	dialog := &Preferences{
 		Dialog: Dialog{
 			name: "Preferences",
 		},
+		dispatcher: dispatch,
+
 		sidebar: preferences.NewNavbar(),
 		twoPanel: columns.NewColumns(2),
 		pages: map[string]preferences.IPage{},

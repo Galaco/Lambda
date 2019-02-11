@@ -120,6 +120,6 @@ func NewWidget(dispatcher *event.Dispatcher, model *project.Model, importer *imp
 		importer:   importer,
 		model:      model,
 		exporter:   exporter,
-		dialogPreferences: dialog.NewPreferences(),
+		dialogPreferences: dialog.NewPreferences(dispatcher),
 	}
 }

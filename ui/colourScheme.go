@@ -1,19 +1,23 @@
-package main
+package ui
 
 import "github.com/inkyblackness/imgui-go"
 
-func applyImguiStyles() {
+func ApplyImguiStyles(themeId int) {
 	fontAtlas := imgui.CurrentIO().Fonts()
 	fontAtlas.AddFontFromFileTTF("./FiraCode-Regular.ttf", 16)
 	style := imgui.CurrentStyle()
 
-	commonLayout(&style)
+	commonLayout()
 
-	//lightTheme(&style)
-	darkTheme(&style)
+	switch themeId {
+	case 1:
+		darkTheme(&style)
+	default:
+		lightTheme(&style)
+	}
 }
 
-func commonLayout(style *imgui.Style) {
+func commonLayout() {
 	imgui.PushStyleVarVec2(imgui.StyleVarWindowPadding, imgui.Vec2{15, 15})
 	imgui.PushStyleVarFloat(imgui.StyleVarWindowRounding, 0)
 	imgui.PushStyleVarVec2(imgui.StyleVarFramePadding, imgui.Vec2{5, 5})

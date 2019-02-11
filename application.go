@@ -7,6 +7,7 @@ import (
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/graphics"
 	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/ui"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/assets"
 	"github.com/galaco/Lambda/views/hierarchy"
@@ -81,7 +82,7 @@ func (app *Application) InitializeViews() {
 }
 
 func (app *Application) InitializeGUITheme() {
-	applyImguiStyles()
+	ui.ApplyImguiStyles(0)
 }
 
 func (app *Application) Close() {

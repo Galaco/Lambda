@@ -1,28 +1,30 @@
 package preferences
 
-import "github.com/inkyblackness/imgui-go"
+import (
+	"github.com/inkyblackness/imgui-go"
+)
 
 type PageAppearance struct {
-	themeOptions []string
 	themeLabels []string
+
+	CurrentOption int
 }
 
 func (d *PageAppearance) Render() {
 	imgui.Text("Theme")
-		if imgui.BeginCombo("Theme", d.themeLabels[0]) {
-			for _,label := range d.themeLabels {
-				imgui.Selectable(label)
+	if imgui.BeginCombo("Theme", d.themeLabels[d.CurrentOption]) {
+		for idx,label := range d.themeLabels {
+			if imgui.Selectable(label) {
+				d.CurrentOption = idx
 			}
-			imgui.EndCombo()
 		}
+		imgui.EndCombo()
+	}
 }
 
 func NewPageAppearance() *PageAppearance {
-	page := &PageAppearance{}
-
-	page.themeOptions = []string{
-		"0",
-		"1",
+	page := &PageAppearance{
+		CurrentOption: 0,
 	}
 
 	page.themeLabels = []string{
