@@ -1,14 +1,14 @@
-package project
+package model
 
 import "github.com/galaco/Lambda/valve"
 
-type Model struct {
+type Project struct {
 	Filename string
 	Vmf *valve.Vmf
 }
 
-func NewModel() *Model {
-	return &Model{
+func NewProject() *Project {
+	return &Project{
 		Vmf: &valve.Vmf{},
 	}
 }

@@ -1,4 +1,4 @@
-package project
+package model
 
 import (
 	"github.com/galaco/Lambda/valve/world"

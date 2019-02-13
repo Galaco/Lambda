@@ -3,7 +3,7 @@ package properties
 import (
 	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/model"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/ui/imgui-layouts/keyvalues"
 	"github.com/galaco/source-tools-common/entity"
@@ -14,7 +14,7 @@ import (
 
 type Widget struct {
 	dispatcher *event.Dispatcher
-	model      *project.Model
+	model      *model.Model
 
 	keyValueView *keyvalues.View
 	selectedEntity *entity.Entity
@@ -46,7 +46,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 	widget.keyValueView = keyvalues.NewKeyValues()
 	evt := received.(*events.EntityNodeSelected)
-	widget.selectedEntity = widget.model.Vmf.Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
+	widget.selectedEntity = widget.model.Project.Vmf.Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
 
 	kv := widget.selectedEntity.EPairs
 	for kv != nil {
@@ -69,7 +69,7 @@ func (widget *Widget) sceneClosed(received event.IEvent) {
 	widget.keyValueView = keyvalues.NewKeyValues()
 }
 
-func NewWidget(dispatcher *event.Dispatcher, model *project.Model) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, model *model.Model) *Widget {
 	return &Widget{
 		dispatcher: dispatcher,
 		model:      model,
