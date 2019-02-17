@@ -17,5 +17,5 @@ require (
 	github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791 // indirect
 	github.com/sqweek/dialog v0.0.0-20190119053146-f33030e0fda5
 	github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5
-	golang.org/x/image v0.0.0-20190118043309-183bebdce1b2 // indirect
+	golang.org/x/image v0.0.0-20190217232958-ef4a1470e0dc // indirect
 )
