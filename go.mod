@@ -6,7 +6,7 @@ require (
 	github.com/AllenDang/w32 v0.0.0-20180428130237-ad0a36d80adc // indirect
 	github.com/galaco/KeyValues v1.3.0 // indirect
 	github.com/galaco/Lambda-Core v0.2.1
-	github.com/galaco/gosigl v0.0.0-20181228204141-a4f1befcc399
+	github.com/galaco/gosigl v0.0.0-20190217220302-633335646da6
 	github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 // indirect
 	github.com/galaco/source-tools-common v0.0.0-20190112121435-c9332f4bd668
 	github.com/galaco/vmf v0.0.0-20180309175744-7a9ccb6e8abb
