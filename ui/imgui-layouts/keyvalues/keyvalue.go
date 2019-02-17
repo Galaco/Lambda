@@ -12,7 +12,7 @@ type keyValue struct {
 
 // Render draws this keyvalue as 2 columns.
 func (kv *keyValue) Render() {
-	imgui.BeginColumns(2, "KeyValues")
+	imgui.Columns(2, "KeyValues")
 	imgui.Text(kv.key)
 	imgui.NextColumn()
 	imgui.PushTextWrapPos()

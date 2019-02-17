@@ -1,7 +1,9 @@
 package opengl
 
 import (
+	"github.com/galaco/gosigl"
 	"github.com/go-gl/gl/v4.1-core/gl"
+	"log"
 	"unsafe"
 )
 
@@ -92,4 +94,23 @@ func (ogl *OpenGL) TexImage2D(target uint32, level int32, internalformat int32, 
 }
 func (ogl *OpenGL) TexParameteri(target uint32, pname uint32, param int32) {
 	gl.TexParameteri(target, pname, param)
+}
+
+
+func (ogl *OpenGL) EnableBlend() {
+	gosigl.EnableBlend()
+}
+func (ogl *OpenGL) EnableDepthTest() {
+	gosigl.EnableDepthTest()
+}
+func (ogl *OpenGL) EnableCullFaceBack() {
+	gosigl.EnableCullFace(gosigl.Back, gosigl.WindingClockwise)
+}
+
+func (ogl *OpenGL) Error() bool {
+	if err := gl.GetError(); err != 0 {
+		log.Println(err)
+		return true
+	}
+	return false
 }

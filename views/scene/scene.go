@@ -1,11 +1,12 @@
-package renderer
+package scene
 
 import (
 	"github.com/galaco/Lambda-Core/core/entity"
 	lambdaModel "github.com/galaco/Lambda-Core/core/model"
+	"github.com/galaco/Lambda/renderer/conversion"
+	"github.com/galaco/Lambda/renderer/render3d"
 	"github.com/galaco/Lambda/valve"
 	"github.com/galaco/Lambda/valve/world"
-	"github.com/galaco/Lambda/views/scene/renderer/conversion"
 	"github.com/galaco/gosigl"
 	"github.com/go-gl/mathgl/mgl32"
 )
@@ -13,14 +14,38 @@ import (
 type Scene struct {
 	Solids map[int]*world.Solid
 	SolidMeshes map[int]*lambdaModel.Model
-	RenderableSolids map[int][]*gosigl.VertexObject
+	//RenderableSolids map[int][]*gosigl.VertexObject
 
 	cameras map[*valve.Camera]*entity.Camera
 	activeCamera *entity.Camera
+
+	frameCompositor *render3d.Compositor
+	frameComposed *render3d.Composition
+	frameMesh *gosigl.VertexObject
 }
 
 func (scene *Scene) ActiveCamera() *entity.Camera {
 	return scene.activeCamera
+}
+
+func (scene *Scene) ComposedMesh() *gosigl.VertexObject {
+	if !scene.frameCompositor.IsOutdated() {
+		return scene.frameMesh
+	}
+
+	if scene.frameMesh != nil {
+		gosigl.DeleteMesh(scene.frameMesh)
+	}
+
+	scene.frameComposed = scene.frameCompositor.ComposeScene()
+	sceneMesh := gosigl.NewMesh(scene.frameComposed.Vertices())
+	gosigl.CreateVertexAttributeArrayBuffer(sceneMesh, scene.frameComposed.UVs(), 2)
+	gosigl.CreateVertexAttributeElementArrayBuffer(sceneMesh, scene.frameComposed.Indices(), 1)
+	gosigl.FinishMesh()
+
+	scene.frameMesh = sceneMesh
+
+	return scene.frameMesh
 }
 
 func (scene *Scene) AddSolid(solid *world.Solid) {
@@ -29,14 +54,16 @@ func (scene *Scene) AddSolid(solid *world.Solid) {
 	model := conversion.SolidToModel(solid)
 	scene.SolidMeshes[solid.Id] = model
 
-	scene.RenderableSolids[solid.Id] = make([]*gosigl.VertexObject, 0)
+	//scene.RenderableSolids[solid.Id] = make([]*gosigl.VertexObject, 0)
 
-	for _,mesh := range model.GetMeshes() {
-		vobj := gosigl.NewMesh(mesh.Vertices())
-		gosigl.CreateVertexAttribute(vobj, mesh.UVs(), 2)
-		gosigl.FinishMesh()
+	for idx := range model.GetMeshes() {
+		//vobj := gosigl.NewMesh(mesh.Vertices())
+		//gosigl.CreateVertexAttributeArrayBuffer(vobj, mesh.UVs(), 2)
+		//gosigl.FinishMesh()
 
-		scene.RenderableSolids[solid.Id] = append(scene.RenderableSolids[solid.Id], vobj)
+		//scene.RenderableSolids[solid.Id] = append(scene.RenderableSolids[solid.Id], vobj)
+
+		scene.frameCompositor.AddMesh(model.GetMeshes()[idx])
 	}
 }
 
@@ -57,20 +84,17 @@ func (scene *Scene) ChangeCamera(camera *valve.Camera) {
 }
 
 func (scene *Scene) Close() {
-	for _,solids := range scene.RenderableSolids {
-		for _,solid := range solids {
-			gosigl.DeleteMesh(solid)
-		}
-	}
+	gosigl.DeleteMesh(scene.frameMesh)
 }
 
 func NewScene() *Scene {
 	return &Scene{
 		Solids: map[int]*world.Solid{},
 		SolidMeshes: map[int]*lambdaModel.Model{},
-		RenderableSolids: map[int][]*gosigl.VertexObject{},
+		//RenderableSolids: map[int][]*gosigl.VertexObject{},
 		cameras: map[*valve.Camera]*entity.Camera{},
 		activeCamera: entity.NewCamera(90, 1024/768),
+		frameCompositor: &render3d.Compositor{},
 	}
 }
 

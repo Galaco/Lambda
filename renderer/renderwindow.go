@@ -1,7 +1,6 @@
 package renderer
 
 import (
-	"github.com/galaco/Lambda-Core/core/entity"
 	"github.com/galaco/Lambda/graphics"
 )
 
@@ -10,31 +9,21 @@ type RenderWindow struct {
 	width       int
 	height      int
 	frameBuffer *fbo
-	renderer *Renderer
 }
 
 func (win *RenderWindow) BufferId() uint32 {
 	return win.frameBuffer.framebufferTexture
 }
 
-func (win *RenderWindow) StartFrame(camera *entity.Camera) {
-	win.renderer.StartFrame()
-	win.renderer.BindCamera(camera)
-}
-
-func (win *RenderWindow) DrawFrame(scene *Scene) {
-	win.StartFrame(scene.activeCamera)
-
+func (win *RenderWindow) Bind() {
 	win.adapter.Viewport(0, 0, int32(win.width), int32(win.height))
 	win.frameBuffer.Bind()
 
-	for _,solid := range scene.RenderableSolids {
-		win.renderer.DrawSolid(solid)
-	}
+	win.adapter.ClearAll()
+}
 
+func (win *RenderWindow) Unbind() {
 	win.frameBuffer.Unbind()
-
-	scene.activeCamera.Update(1000.0/60)
 }
 
 func (win *RenderWindow) SetSize(width int, height int) {
@@ -54,11 +43,7 @@ func NewRenderWindow(adapter graphics.Adapter, width int, height int) *RenderWin
 		width:       width,
 		height:      height,
 		frameBuffer: nil,
-		renderer: newRenderer(),
 	}
-
-
-	r.renderer.BindShader(loadShader())
 	r.frameBuffer = NewFbo(adapter, width, height)
 
 	return r

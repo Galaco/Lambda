@@ -5,7 +5,7 @@ import (
 	"github.com/galaco/gosigl"
 )
 
-func loadShader() *gosigl.Context {
+func LoadShader() *gosigl.Context {
 	shader := gosigl.NewShader()
 	err := shader.AddShader(vertexSource, gosigl.VertexShader)
 	if err != nil {
@@ -31,8 +31,8 @@ uniform mat4 model;
 layout(location = 0) in vec3 vertexPosition_modelspace;
 
 void main() {
-	//gl_Position = projection * view * model * vec4(vertexPosition_modelspace, 1.0);
-	gl_Position = vec4(vertexPosition_modelspace, 1.0);
+	gl_Position = projection * view * model * vec4(vertexPosition_modelspace, 1.0);
+	//gl_Position = vec4(vertexPosition_modelspace, 1.0);
 }
 ` + "\x00"
 

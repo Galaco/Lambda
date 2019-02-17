@@ -82,7 +82,7 @@ func (app *Application) InitializeViews() {
 }
 
 func (app *Application) InitializeGUITheme() {
-	ui.ApplyImguiStyles(0)
+	ui.ApplyImguiStyles(1)
 }
 
 func (app *Application) Close() {

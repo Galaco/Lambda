@@ -2,39 +2,44 @@ package render3d
 
 import (
 	"github.com/galaco/Lambda-Core/core/mesh"
-	"github.com/galaco/Lambda-Core/core/model"
 )
 
 // Compositor is a struct that provides a mechanism to compose 1 or more models into a single renderable set of data,
 // indexed by material.
 // This is super handy for reducing draw calls down a bunch.
-// A resultant composition should result in a single set of vertex data + 1 pair of index offset+length info per material
+// A resultant Composition should result in a single set of vertex data + 1 pair of index offset+length info per material
 // referenced by all models composed.
 type Compositor struct {
-	models []*model.Model
+	meshes []mesh.IMesh
+
+	isOutdated bool
 }
 
 // AddModel adds a new model to be composed.
-func (compositor *Compositor) AddModel(m *model.Model) {
-	compositor.models = append(compositor.models, m)
+func (compositor *Compositor) AddMesh(m mesh.IMesh) {
+	compositor.meshes = append(compositor.meshes, m)
+	compositor.isOutdated = true
+}
+
+func (compositor *Compositor) IsOutdated() bool {
+	return compositor.isOutdated
 }
 
 // ComposeScene builds a sceneComposition mesh for rendering
-func (compositor *Compositor) ComposeScene() *composition {
+func (compositor *Compositor) ComposeScene() *Composition {
+	compositor.isOutdated = false
 	texMappings := map[string][]mesh.IMesh{}
 
 	// Step 1. Map meshes into contiguous groups by texture
-	for _,mod := range compositor.models {
-		for _,m := range mod.GetMeshes() {
-			if _, ok := texMappings[m.GetMaterial().GetFilePath()]; !ok {
-				texMappings[m.GetMaterial().GetFilePath()] = make([]mesh.IMesh, 0)
-			}
-
-			texMappings[m.GetMaterial().GetFilePath()] = append(texMappings[m.GetMaterial().GetFilePath()], m)
+	for _,m := range compositor.meshes {
+		if _, ok := texMappings[m.GetMaterial().GetFilePath()]; !ok {
+			texMappings[m.GetMaterial().GetFilePath()] = make([]mesh.IMesh, 0)
 		}
+
+		texMappings[m.GetMaterial().GetFilePath()] = append(texMappings[m.GetMaterial().GetFilePath()], m)
 	}
 
-	// Step 2. Construct a single vertex object composition ordered by material
+	// Step 2. Construct a single vertex object Composition ordered by material
 	sceneComposition := NewComposition()
 	vertCount := 0
 	for key,texMesh := range texMappings {
@@ -46,11 +51,12 @@ func (compositor *Compositor) ComposeScene() *composition {
 			sceneComposition.AddNormal(sMesh.Normals()...)
 			sceneComposition.AddUV(sMesh.UVs()...)
 
-			vertCount += len(sMesh.Vertices()) / 3
+			matVertCount += len(sMesh.Vertices()) / 3
 		}
 
 		sceneComposition.GenerateTangents()
-		sceneComposition.AddMesh(NewCompositionMesh(key, matVertOffset, matVertCount - matVertOffset))
+		sceneComposition.AddMesh(NewCompositionMesh(key, matVertOffset, matVertCount))
+		vertCount += matVertCount
 	}
 
 	// Step 3. Generate indices from composed materials

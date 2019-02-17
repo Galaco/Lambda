@@ -7,7 +7,7 @@ import (
 	"github.com/galaco/Lambda/graphics"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/ui/imgui-layouts"
-	"github.com/galaco/Lambda/views/scene/renderer"
+	"github.com/galaco/Lambda/renderer"
 	"github.com/inkyblackness/imgui-go"
 )
 
@@ -19,10 +19,12 @@ type Widget struct {
 	graphicsAdapter graphics.Adapter
 
 	window        *renderer.RenderWindow
+	renderer      *renderer.Renderer
+
 	width, height int
 
 
-	scene 		  *renderer.Scene
+	scene 		  *Scene
 	camera 	      *entity.Camera
 
 	isActive bool
@@ -37,10 +39,21 @@ func (widget *Widget) Initialize() {
 
 	widget.DisplayProperties.HasTitleBar = true
 	widget.DisplayProperties.HasMenuBar = false
+
+	widget.controls.Enable()
+	widget.renderer.BindShader(renderer.LoadShader())
 }
 
 func (widget *Widget) RenderScene(ctx *context.Context) {
-	widget.window.DrawFrame(widget.scene)
+	widget.renderer.StartFrame()
+	widget.renderer.BindCamera(widget.scene.ActiveCamera())
+	widget.window.Bind()
+	widget.renderer.DrawComposition(widget.scene.frameComposed, widget.scene.ComposedMesh())
+	widget.graphicsAdapter.Error()
+	widget.window.Unbind()
+
+	// @TODO remove me
+	widget.scene.ActiveCamera().Update(1000 / 60)
 }
 
 func (widget *Widget) Render(ctx *context.Context) {
@@ -99,6 +112,9 @@ func (widget *Widget) Update(dt float64) {
 	if widget.controls.Actions.Right {
 		widget.scene.ActiveCamera().Right(dt)
 	}
+
+	//widget.scene.ActiveCamera().Rotate(float32(dt), 0, 0)
+	widget.scene.ActiveCamera().Rotate(float32(dt) * 0.1, 0, float32(dt)*0.04)
 }
 
 func (widget *Widget) newSolidCreated(received event.IEvent) {
@@ -115,8 +131,9 @@ func (widget *Widget) cameraChanged(received event.IEvent) {
 
 func (widget *Widget) sceneClosed(received event.IEvent) {
 	widget.scene.Close()
-	widget.scene = renderer.NewScene()
+	widget.scene = NewScene()
 	widget.controls = newControls()
+	widget.window.Close()
 	widget.window = renderer.NewRenderWindow(widget.graphicsAdapter, widget.width, widget.height)
 }
 
@@ -131,7 +148,8 @@ func NewWidget(dispatcher *event.Dispatcher, graphicsAdapter graphics.Adapter) *
 		graphicsAdapter:  graphicsAdapter,
 		width:  1024,
 		height: 768,
-		scene: renderer.NewScene(),
+		scene: NewScene(),
 		controls: newControls(),
+		renderer: renderer.NewRenderer(graphicsAdapter),
 	}
 }
