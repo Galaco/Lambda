@@ -5,6 +5,7 @@ import (
 )
 
 const TypeNewSolidCreated = "NewSolidCreated"
+
 type NewSolidCreated struct {
 	solid *world.Solid
 }

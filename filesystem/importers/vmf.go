@@ -44,7 +44,7 @@ func (importer *VmfImporter) LoadVmf(filepath string) (*valve.Vmf, error) {
 		return nil, err
 	}
 
-	cameras,err := importer.loadCameras(&importable.Cameras)
+	cameras, err := importer.loadCameras(&importable.Cameras)
 	if err != nil || cameras == nil {
 		return nil, err
 	}
@@ -166,12 +166,12 @@ func (importer *VmfImporter) loadEntities(node *vmf.Node) *entity.List {
 // loadCameras creates cameras from the vmf camera list
 func (importer *VmfImporter) loadCameras(node *vmf.Node) (*valve.Cameras, error) {
 	activeCamProp := node.GetProperty("activecamera")
-	activeCamIdx,_ := strconv.ParseInt(activeCamProp, 10, 32)
+	activeCamIdx, _ := strconv.ParseInt(activeCamProp, 10, 32)
 
 	cameras := make([]valve.Camera, 0)
 
 	cameraProps := node.GetChildrenByKey("camera")
-	for _,camProp := range cameraProps {
+	for _, camProp := range cameraProps {
 		pos := camProp.GetProperty("position")
 		look := camProp.GetProperty("look")
 
@@ -180,7 +180,6 @@ func (importer *VmfImporter) loadCameras(node *vmf.Node) (*valve.Cameras, error)
 
 	return valve.NewCameras(int(activeCamIdx), cameras), nil
 }
-
 
 func NewVmfImporter() *VmfImporter {
 	return &VmfImporter{}

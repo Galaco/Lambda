@@ -8,8 +8,8 @@ import (
 
 // row is a single row in a list
 type row struct {
-	Id         int
-	label      string
+	Id    int
+	label string
 
 	onClick func(id int)
 }
@@ -28,8 +28,8 @@ func newRow(id int, label string, onClick func(id int)) row {
 	format := "%d %s"
 
 	return row{
-		Id:         id,
-		label:      fmt.Sprintf(format, id, label),
-		onClick:    onClick,
+		Id:      id,
+		label:   fmt.Sprintf(format, id, label),
+		onClick: onClick,
 	}
 }

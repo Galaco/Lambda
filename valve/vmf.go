@@ -81,7 +81,7 @@ type Cameras struct {
 func NewCameras(activeCameraIndex int, cameras []Camera) *Cameras {
 	return &Cameras{
 		ActiveCamera: activeCameraIndex,
-		CameraList: cameras,
+		CameraList:   cameras,
 	}
 }
 
@@ -90,10 +90,10 @@ type Camera struct {
 	Look     mgl64.Vec3
 }
 
-func NewCamera(position mgl64.Vec3, look mgl64.Vec3) *Camera{
+func NewCamera(position mgl64.Vec3, look mgl64.Vec3) *Camera {
 	return &Camera{
-		Position:position,
-		Look: look,
+		Position: position,
+		Look:     look,
 	}
 }
 

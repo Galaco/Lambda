@@ -5,7 +5,7 @@ import (
 )
 
 type fbo struct {
-	adapter 		   graphics.Adapter
+	adapter            graphics.Adapter
 	framebuffer        uint32
 	framebufferTexture uint32
 	width              int
@@ -25,7 +25,7 @@ func (win *fbo) Resize(width int, height int) {
 	win.adapter.LambdaCreateTexture2D(&win.framebufferTexture, int32(win.width), int32(win.height), nil)
 	win.adapter.LambdaBindTexture2D(win.framebufferTexture)
 	win.adapter.LambdaBindTexture2DToFramebuffer(win.framebufferTexture)
-	win.adapter.ClearColor(0,0,0, 0)
+	win.adapter.ClearColor(0, 0, 0, 0)
 	win.adapter.ClearAll()
 	win.adapter.LambdaBindTexture2D(0)
 

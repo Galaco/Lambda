@@ -1,8 +1,9 @@
 package events
 
 const TypePreferencesUpdated = "TypePreferencesUpdated"
+
 type PreferencesUpdated struct {
-	General struct {}
+	General    struct{}
 	Appearance struct {
 		Theme int
 	}
@@ -13,6 +14,5 @@ func (act *PreferencesUpdated) Type() string {
 }
 
 func NewPreferencesUpdated() *PreferencesUpdated {
-	return &PreferencesUpdated{
-	}
+	return &PreferencesUpdated{}
 }

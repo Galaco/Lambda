@@ -13,7 +13,7 @@ type PageAppearance struct {
 func (d *PageAppearance) Render() {
 	imgui.Text("Theme")
 	if imgui.BeginCombo("Theme", d.themeLabels[d.CurrentOption]) {
-		for idx,label := range d.themeLabels {
+		for idx, label := range d.themeLabels {
 			if imgui.Selectable(label) {
 				d.CurrentOption = idx
 			}

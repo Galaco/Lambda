@@ -15,7 +15,7 @@ type Directory struct {
 
 func (dir *Directory) Render() {
 	imgui.BeginChild("Scrolling")
-	imgui.BeginColumns(dir.thumbnailSize, "Files")
+	imgui.Columns(dir.thumbnailSize, "Files")
 	for i := 0; i < dir.thumbnailSize; i++ {
 		for _, thumb := range dir.displayColumns[i] {
 			thumb.Render()

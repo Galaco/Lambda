@@ -20,7 +20,7 @@ func openFile() string {
 func saveFile(filename string, data string) (err error) {
 	// Saving a new file
 	if filename == "" {
-		filename,err = dialog.FileSave()
+		filename, err = dialog.FileSave()
 		if err != nil {
 			return err
 		}

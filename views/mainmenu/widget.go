@@ -15,7 +15,7 @@ import (
 type Widget struct {
 	dispatcher *event.Dispatcher
 	importer   *importers.VmfImporter
-	exporter *exporters.VmfExporter
+	exporter   *exporters.VmfExporter
 	model      *project.Model
 
 	isProjectLoaded bool
@@ -41,7 +41,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 				}
 			}
 			if imgui.MenuItemV("Save", "Ctrl+S", false, widget.isProjectLoaded) {
-				data,err := widget.exporter.Export(widget.model.Vmf)
+				data, err := widget.exporter.Export(widget.model.Vmf)
 				if err == nil {
 					err = saveFile(widget.model.Filename, data)
 					if err != nil {
@@ -52,7 +52,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 				}
 			}
 			if imgui.MenuItemV("Save As", "", false, widget.isProjectLoaded) {
-				data,err := widget.exporter.Export(widget.model.Vmf)
+				data, err := widget.exporter.Export(widget.model.Vmf)
 				if err == nil {
 					err = saveFile("", data)
 					if err != nil {
@@ -116,10 +116,10 @@ func (widget *Widget) loadVmf(filename string) {
 
 func NewWidget(dispatcher *event.Dispatcher, model *project.Model, importer *importers.VmfImporter, exporter *exporters.VmfExporter) *Widget {
 	return &Widget{
-		dispatcher: dispatcher,
-		importer:   importer,
-		model:      model,
-		exporter:   exporter,
+		dispatcher:        dispatcher,
+		importer:          importer,
+		model:             model,
+		exporter:          exporter,
 		dialogPreferences: dialog.NewPreferences(dispatcher),
 	}
 }

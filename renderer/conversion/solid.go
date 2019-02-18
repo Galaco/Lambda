@@ -2,17 +2,17 @@ package conversion
 
 import (
 	"fmt"
+	"github.com/galaco/Lambda-Core/core/material"
 	lambdaMesh "github.com/galaco/Lambda-Core/core/mesh"
 	lambdaModel "github.com/galaco/Lambda-Core/core/model"
 	"github.com/galaco/Lambda/valve/world"
 	"github.com/galaco/gosigl"
-	"math"
 )
 
-func SolidToModel(solid *world.Solid) *lambdaModel.Model{
+func SolidToModel(solid *world.Solid) *lambdaModel.Model {
 	meshes := make([]lambdaMesh.IMesh, 0)
 
-	for _,side := range solid.Sides {
+	for _, side := range solid.Sides {
 		meshes = append(meshes, SideToMesh(&side))
 	}
 
@@ -21,6 +21,11 @@ func SolidToModel(solid *world.Solid) *lambdaModel.Model{
 
 func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 	mesh := lambdaMesh.NewMesh()
+
+	// Material
+	mesh.SetMaterial(&material.Material{
+		FilePath: side.Material,
+	})
 
 	// Vertices
 	verts := make([]float32, 0)
@@ -38,32 +43,34 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 		vert4 := side.Plane[2].Sub(side.Plane[1].Sub(side.Plane[0]))
 		verts = append(verts, float32(vert4.X()), float32(vert4.Y()), 0)
 
-
-
-		// @TODO
-		// This is for debugging! It flattens the solid onto the X/Y plane
-		for idx, v := range verts {
-			if (idx + 1) % 3 == 0 {
-				verts[idx] = 0
-				continue
-			}
-			perc := math.Abs(float64((float32(v) / 16384.0))) - 0.5
-			verts[idx] = float32(perc)
-		}
-
 		mesh.AddVertex(verts...)
-		gosigl.FinishMesh()
 	}
 
-	// Material
+	// Normals
+	normals := make([]float32, 0)
+	{
+		normal := side.Plane[1].Sub(side.Plane[0]).Cross(side.Plane[2].Sub(side.Plane[0]))
+		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
+		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
+		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
+		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
+		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
+		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
 
+		mesh.AddNormal(normals...)
+	}
 
 	// Texture coordinates
 	{
-		for i := 0; i < len(verts); i+=3 {
+		for i := 0; i < len(verts); i += 3 {
 			mesh.AddUV(uvForVertex(verts[i:i+3], &side.UAxis, &side.VAxis, 32, 32)...)
 		}
 	}
+
+	// Tangents
+	mesh.GenerateTangents()
+
+	gosigl.FinishMesh()
 
 	return mesh
 }
@@ -72,12 +79,12 @@ func uvForVertex(vertex []float32, u *world.UVTransform, v *world.UVTransform, w
 	cu := (float32(u.Transform[0]) * vertex[0]) +
 		(float32(u.Transform[1]) * vertex[1]) +
 		(float32(u.Transform[2]) * vertex[2]) +
-		float32(u.Scale) / float32(width)
+		float32(u.Scale)/float32(width)
 
 	cv := (float32(v.Transform[0]) * vertex[0]) +
 		(float32(v.Transform[1]) * vertex[1]) +
 		(float32(v.Transform[2]) * vertex[2]) +
-		float32(v.Scale) / float32(height)
+		float32(v.Scale)/float32(height)
 
 	return []float32{cu, cv}
 }

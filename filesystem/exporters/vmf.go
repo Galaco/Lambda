@@ -7,24 +7,23 @@ import (
 )
 
 type VmfExporter struct {
-
 }
 
 func (exporter *VmfExporter) Export(model *valve.Vmf) (export string, err error) {
 	model.VersionInfo()
-	versionInfo,err := exporter.exportVersionInfo(model.VersionInfo())
+	versionInfo, err := exporter.exportVersionInfo(model.VersionInfo())
 	if err != nil {
 		return export, err
 	}
-	visGroups,err := exporter.exportVisGroups(model.Visgroups())
+	visGroups, err := exporter.exportVisGroups(model.Visgroups())
 	if err != nil {
 		return export, err
 	}
-	viewSettings,err := exporter.exportViewSettings(model.ViewSettings())
+	viewSettings, err := exporter.exportViewSettings(model.ViewSettings())
 	if err != nil {
 		return export, err
 	}
-	worldspawn,err := exporter.exportWorldspawn(model.Worldspawn())
+	worldspawn, err := exporter.exportWorldspawn(model.Worldspawn())
 	if err != nil {
 		return export, err
 	}
@@ -48,7 +47,7 @@ func (exporter *VmfExporter) exportVersionInfo(model *valve.VersionInfo) (export
 
 func (exporter *VmfExporter) exportVisGroups(model *valve.VisGroups) (export string, err error) {
 	export = templateVmfVisgroups
-	return export,err
+	return export, err
 }
 
 func (exporter *VmfExporter) exportViewSettings(model *valve.ViewSettings) (export string, err error) {
@@ -60,7 +59,7 @@ func (exporter *VmfExporter) exportViewSettings(model *valve.ViewSettings) (expo
 	export = strings.Replace(export, "{nGridSpacing}", intToString(model.GridSpacing), 1)
 	export = strings.Replace(export, "{bShow3DGrid}", boolToString(model.Show3DGrid), 1)
 
-	return export,err
+	return export, err
 }
 
 func (exporter *VmfExporter) exportWorldspawn(model *world.World) (export string, err error) {
@@ -79,8 +78,7 @@ func (exporter *VmfExporter) exportWorldspawn(model *world.World) (export string
 		kv = kv.Next
 	}
 
-
 	export += `}
 `
-	return export,err
+	return export, err
 }

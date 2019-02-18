@@ -12,7 +12,7 @@ type Sidebar struct {
 }
 
 func (nav *Sidebar) Render() {
-	for _,option := range nav.options {
+	for _, option := range nav.options {
 		selected := false
 		if strings.ToLower(option) == nav.currentPage {
 			selected = true

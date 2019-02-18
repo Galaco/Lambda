@@ -13,9 +13,9 @@ import (
 )
 
 type Widget struct {
-	dispatcher *event.Dispatcher
+	dispatcher      *event.Dispatcher
 	graphicsAdapter graphics.Adapter
-	fileSystem *lambdaFS.FileSystem
+	fileSystem      *lambdaFS.FileSystem
 
 	twoPanel         *columns.View
 	directoryList    *structure.Tree

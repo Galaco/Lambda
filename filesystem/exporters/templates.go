@@ -1,7 +1,6 @@
 package exporters
 
-const templateVmfVersionInfo =
-	`versioninfo
+const templateVmfVersionInfo = `versioninfo
 {
 	"editorversion" "{editorversion}"
 	"editorbuild" "{editorbuild}"
