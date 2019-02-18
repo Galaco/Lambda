@@ -2,6 +2,7 @@ package scene
 
 import (
 	"github.com/galaco/Lambda-Core/core/entity"
+	"github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
 	"github.com/galaco/Lambda/graphics"
@@ -17,6 +18,7 @@ type Widget struct {
 
 	dispatcher      *event.Dispatcher
 	keyboard 		*input.Keyboard
+	filesystem 		*filesystem.FileSystem
 	graphicsAdapter graphics.Adapter
 
 	window   *renderer.RenderWindow
@@ -44,15 +46,17 @@ func (widget *Widget) Initialize() {
 }
 
 func (widget *Widget) RenderScene(ctx *context.Context) {
+	dirtyComposition := widget.scene.frameCompositor.IsOutdated()
+	if dirtyComposition {
+		widget.scene.RecomposeScene(widget.filesystem)
+	}
+
 	widget.renderer.StartFrame()
 	widget.renderer.BindCamera(widget.scene.ActiveCamera())
 	widget.window.Bind()
-	widget.renderer.DrawComposition(widget.scene.frameComposed, widget.scene.ComposedMesh())
+	widget.renderer.DrawComposition(widget.scene.frameComposed, widget.scene.Composition(), widget.scene.CompositionMaterials())
 	widget.graphicsAdapter.Error()
 	widget.window.Unbind()
-
-	// @TODO remove me
-	widget.scene.ActiveCamera().Update(1000 / 60)
 }
 
 func (widget *Widget) Render(ctx *context.Context) {
@@ -118,6 +122,7 @@ func (widget *Widget) Update(dt float64) {
 		widget.scene.ActiveCamera().Rotate(-float32(dt)*0.1, 0, 0)
 	}
 
+	widget.scene.ActiveCamera().Update(1000 / 60)
 	//widget.scene.ActiveCamera().Rotate(float32(dt)*0.1, 0, 0)
 }
 
@@ -145,10 +150,11 @@ func (widget *Widget) Close() {
 	widget.window.Close()
 }
 
-func NewWidget(dispatcher *event.Dispatcher, keyboard *input.Keyboard, graphicsAdapter graphics.Adapter) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, filesystem *filesystem.FileSystem, keyboard *input.Keyboard, graphicsAdapter graphics.Adapter) *Widget {
 	return &Widget{
 		dispatcher:      dispatcher,
 		keyboard:        keyboard,
+		filesystem:      filesystem,
 		graphicsAdapter: graphicsAdapter,
 		width:           1024,
 		height:          768,

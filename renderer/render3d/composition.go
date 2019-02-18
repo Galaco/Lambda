@@ -1,6 +1,8 @@
 package render3d
 
-import "github.com/galaco/Lambda-Core/core/mesh"
+import (
+	"github.com/galaco/Lambda-Core/core/mesh"
+)
 
 type Composition struct {
 	mesh.Mesh
@@ -44,6 +46,10 @@ type compositionMesh struct {
 	length      int
 
 	indices []uint32
+}
+
+func (texMesh *compositionMesh) Material() string {
+	return texMesh.texturePath
 }
 
 // Indices returns all indices for vertices that use this material

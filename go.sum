@@ -9,6 +9,7 @@ github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf h1:FPsprx82rdrX2j
 github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf/go.mod h1:peYoMncQljjNS6tZwI9WVyQB3qZS6u79/N3mBOcnd3I=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/galaco/KeyValues v1.2.3 h1:WT7P+Djq+7903zLnnw/yyjSxVORwm8NBeI6gYHfzwxE=
 github.com/galaco/KeyValues v1.2.3/go.mod h1:EByNBjnai9BpKGMykvBD3G28R+L6OubVnRkvZrYxP2Y=
 github.com/galaco/KeyValues v1.3.0 h1:ahNJWGMWfZZwSKBFr8bPsz5qz3G1DzrtQzswM+dAB3w=
 github.com/galaco/KeyValues v1.3.0/go.mod h1:EByNBjnai9BpKGMykvBD3G28R+L6OubVnRkvZrYxP2Y=
@@ -20,6 +21,8 @@ github.com/galaco/Lambda-Core v0.2.0 h1:g2Ks2EzL1uiHb9kPL+4spNbOe6tCpPBWA3aIoRMy
 github.com/galaco/Lambda-Core v0.2.0/go.mod h1:/tLp69JLf3aNHtV76RQFwv8/oXtLk1m1+p0SahUVHqQ=
 github.com/galaco/Lambda-Core v0.2.1 h1:18FtYnlxbvnNUzLbSwLq/HgdgWnWK0v2Hy4yLxtfHGg=
 github.com/galaco/Lambda-Core v0.2.1/go.mod h1:/tLp69JLf3aNHtV76RQFwv8/oXtLk1m1+p0SahUVHqQ=
+github.com/galaco/Lambda-Core v0.3.0 h1:R25/wbft6P4Rwa35KWKJ5d1mwLlfh1kjX4phZNdmkUQ=
+github.com/galaco/Lambda-Core v0.3.0/go.mod h1:H+ir5q61am4L0as5Uh5YZrqQU1LkLhS0laJGbL2TbT8=
 github.com/galaco/StudioModel v0.0.0-20181028212841-5b8408bcc2af/go.mod h1:TyLwCRckWSsaQhePyfTOwfSXlEUJ411MwYaVkbPwOMo=
 github.com/galaco/StudioModel v0.0.0-20190212204017-d0486bcd90ed/go.mod h1:kMK3O6si6tHlxuxYvUAOuPsINUq00i+N5FqusJqaEvs=
 github.com/galaco/StudioModel v0.1.0/go.mod h1:kMK3O6si6tHlxuxYvUAOuPsINUq00i+N5FqusJqaEvs=
@@ -57,6 +60,7 @@ github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2 h1:78Hza2KHn2PX1jdydQnffa
 github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2/go.mod h1:482civXOzJJCPzJ4ZOX/pwvXBWSnzD4OKMdH4ClKGbk=
 github.com/go-gl/glfw v0.0.0-20181213070059-819e8ce5125f/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
 github.com/go-gl/glfw v0.0.0-20190217072633-93b30450e032/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
+github.com/go-gl/glfw v0.0.0-20190217223436-93b30450e032/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
 github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a h1:2n5w2v3knlspzjJWyQPC0j88Mwvq0SZV0Jdws34GJwc=
 github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a/go.mod h1:dvrdneKbyWbK2skTda0nM4B9zSlS2GZSnjX7itr/skQ=
 github.com/gotk3/gotk3 v0.0.0-20190213044432-19a4bd53683f h1:1KZtAagOhwAmKCkTJrPWpP1+5nIQq1b+RFk1AO5h+kw=

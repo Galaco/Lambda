@@ -42,13 +42,17 @@ func (renderer *Renderer) BindCamera(cam *entity.Camera) {
 	renderer.adapter.SendUniformMat4(renderer.uniforms["model"], &model[0])
 }
 
-func (renderer *Renderer) DrawComposition(composition *render3d.Composition, mesh *gosigl.VertexObject) {
+func (renderer *Renderer) DrawComposition(composition *render3d.Composition, mesh *gosigl.VertexObject, materials map[string]gosigl.TextureBindingId) {
 	if mesh == nil {
 		return
 	}
 	gosigl.BindMesh(mesh)
 	renderer.adapter.Error()
 	for _, matObj := range composition.MaterialMeshes() {
+		if _,ok := materials[matObj.Material()]; ok {
+			gosigl.BindTexture2D(gosigl.TextureSlot(0), materials[matObj.Material()])
+		}
+
 		renderer.adapter.DrawTriangleArray(matObj.Offset(), matObj.Length())
 		renderer.adapter.Error()
 	}

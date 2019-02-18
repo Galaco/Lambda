@@ -75,7 +75,7 @@ func (app *Application) InitializeViews() {
 	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.Model, app.VmfImporter, app.VmfExporter)
 	app.entityPropertiesView = properties.NewWidget(app.EventDispatcher, app.Model)
 	app.toolRibbonView = ribbon.NewWidget()
-	app.scenePreviewView = scene.NewWidget(app.EventDispatcher, app.Keyboard, app.GraphicsAdapter)
+	app.scenePreviewView = scene.NewWidget(app.EventDispatcher, app.FileSystem, app.Keyboard, app.GraphicsAdapter)
 
 	app.assetsView.Initialize()
 	app.hierarchyView.Initialize()
