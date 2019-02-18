@@ -6,6 +6,7 @@ import (
 	"github.com/galaco/Lambda/filesystem/exporters"
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/graphics"
+	"github.com/galaco/Lambda/input"
 	"github.com/galaco/Lambda/project"
 	"github.com/galaco/Lambda/ui"
 	"github.com/galaco/Lambda/ui/context"
@@ -30,6 +31,9 @@ type Application struct {
 
 	// Model
 	Model *project.Model
+
+	// Control
+	Keyboard *input.Keyboard
 
 	//Views
 	assetsView           *assets.Widget
@@ -71,7 +75,7 @@ func (app *Application) InitializeViews() {
 	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.Model, app.VmfImporter, app.VmfExporter)
 	app.entityPropertiesView = properties.NewWidget(app.EventDispatcher, app.Model)
 	app.toolRibbonView = ribbon.NewWidget()
-	app.scenePreviewView = scene.NewWidget(app.EventDispatcher, app.GraphicsAdapter)
+	app.scenePreviewView = scene.NewWidget(app.EventDispatcher, app.Keyboard, app.GraphicsAdapter)
 
 	app.assetsView.Initialize()
 	app.hierarchyView.Initialize()

@@ -68,7 +68,7 @@ func (scene *Scene) AddSolid(solid *world.Solid) {
 }
 
 func (scene *Scene) AddCamera(camera *valve.Camera) {
-	scene.cameras[camera] = entity.NewCamera(90, 1024/768)
+	scene.cameras[camera] = entity.NewCamera(70, 1024/768)
 	scene.cameras[camera].Transform().Position = mgl32.Vec3{float32(camera.Position.X()), float32(camera.Position.Y()), float32(camera.Position.Z())}
 	scene.cameras[camera].Transform().Rotation = mgl32.Vec3{
 		mgl32.DegToRad(float32(camera.Look.X())),
@@ -96,7 +96,7 @@ func NewScene() *Scene {
 		SolidMeshes: map[int]*lambdaModel.Model{},
 		//RenderableSolids: map[int][]*gosigl.VertexObject{},
 		cameras:         map[*valve.Camera]*entity.Camera{},
-		activeCamera:    entity.NewCamera(90, 1024/768),
+		activeCamera:    entity.NewCamera(70, 1024/768),
 		frameCompositor: &render3d.Compositor{},
 	}
 }

@@ -1,5 +1,7 @@
 package imgui_layouts
 
+import "github.com/inkyblackness/imgui-go"
+
 const imguiTitleBarHeight = 20
 const imguiMenuBarHeight = 20
 const imguiBorderSize = 2
@@ -42,4 +44,18 @@ func (panel *Panel) Resize(x, y int) {
 	if panel.Size[1] != y {
 		panel.Size[1] = y
 	}
+}
+
+func (panel *Panel) Start() bool {
+	return imgui.BeginV("Scene", nil, imgui.WindowFlagsNoResize|
+		imgui.WindowFlagsNoMove|
+		imgui.WindowFlagsNoBringToFrontOnFocus|
+		imgui.WindowFlagsNoScrollbar|
+		imgui.WindowFlagsNoScrollWithMouse|
+		imgui.WindowFlagsNoNav|
+		imgui.WindowFlagsNoInputs)
+}
+
+func (panel *Panel) End() {
+	imgui.End()
 }
