@@ -13,9 +13,9 @@ type Preferences struct {
 	dispatcher *event.Dispatcher
 
 	twoPanel *columns.View
-	sidebar *preferences.Sidebar
+	sidebar  *preferences.Sidebar
 
-	pages map[string]preferences.IPage
+	pages       map[string]preferences.IPage
 	currentPage preferences.IPage
 }
 
@@ -28,7 +28,6 @@ func (d *Preferences) Render(width, height int) {
 	imgui.OpenPopup(d.name)
 	if imgui.BeginPopupModal(d.name) {
 		d.twoPanel.Render(width, height)
-
 
 		imgui.EndPopup()
 	}
@@ -52,16 +51,16 @@ func (d *Preferences) renderTab() {
 	}
 }
 
-func NewPreferences(dispatch *event.Dispatcher) *Preferences{
+func NewPreferences(dispatch *event.Dispatcher) *Preferences {
 	dialog := &Preferences{
 		Dialog: Dialog{
 			name: "Preferences",
 		},
 		dispatcher: dispatch,
 
-		sidebar: preferences.NewNavbar(),
+		sidebar:  preferences.NewNavbar(),
 		twoPanel: columns.NewColumns(2),
-		pages: map[string]preferences.IPage{},
+		pages:    map[string]preferences.IPage{},
 	}
 
 	dialog.pages["general"] = &preferences.PageGeneral{}

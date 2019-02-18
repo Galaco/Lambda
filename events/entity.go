@@ -4,7 +4,6 @@ import "github.com/galaco/source-tools-common/entity"
 
 const TypeEntityCreated = "NewEntityCreated"
 
-
 type EntityCreated struct {
 	entity *entity.Entity
 }

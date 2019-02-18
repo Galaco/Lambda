@@ -9,10 +9,10 @@ import (
 	"github.com/galaco/gosigl"
 )
 
-func SolidToModel(solid *world.Solid) *lambdaModel.Model{
+func SolidToModel(solid *world.Solid) *lambdaModel.Model {
 	meshes := make([]lambdaMesh.IMesh, 0)
 
-	for _,side := range solid.Sides {
+	for _, side := range solid.Sides {
 		meshes = append(meshes, SideToMesh(&side))
 	}
 
@@ -46,7 +46,6 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 		mesh.AddVertex(verts...)
 	}
 
-
 	// Normals
 	normals := make([]float32, 0)
 	{
@@ -63,7 +62,7 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 
 	// Texture coordinates
 	{
-		for i := 0; i < len(verts); i+=3 {
+		for i := 0; i < len(verts); i += 3 {
 			mesh.AddUV(uvForVertex(verts[i:i+3], &side.UAxis, &side.VAxis, 32, 32)...)
 		}
 	}
@@ -80,12 +79,12 @@ func uvForVertex(vertex []float32, u *world.UVTransform, v *world.UVTransform, w
 	cu := (float32(u.Transform[0]) * vertex[0]) +
 		(float32(u.Transform[1]) * vertex[1]) +
 		(float32(u.Transform[2]) * vertex[2]) +
-		float32(u.Scale) / float32(width)
+		float32(u.Scale)/float32(width)
 
 	cv := (float32(v.Transform[0]) * vertex[0]) +
 		(float32(v.Transform[1]) * vertex[1]) +
 		(float32(v.Transform[2]) * vertex[2]) +
-		float32(v.Scale) / float32(height)
+		float32(v.Scale)/float32(height)
 
 	return []float32{cu, cv}
 }

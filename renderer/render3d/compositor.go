@@ -31,7 +31,7 @@ func (compositor *Compositor) ComposeScene() *Composition {
 	texMappings := map[string][]mesh.IMesh{}
 
 	// Step 1. Map meshes into contiguous groups by texture
-	for _,m := range compositor.meshes {
+	for _, m := range compositor.meshes {
 		if _, ok := texMappings[m.GetMaterial().GetFilePath()]; !ok {
 			texMappings[m.GetMaterial().GetFilePath()] = make([]mesh.IMesh, 0)
 		}
@@ -42,11 +42,11 @@ func (compositor *Compositor) ComposeScene() *Composition {
 	// Step 2. Construct a single vertex object Composition ordered by material
 	sceneComposition := NewComposition()
 	vertCount := 0
-	for key,texMesh := range texMappings {
+	for key, texMesh := range texMappings {
 		// @TODO verify if this is the vertex offset of the actual array offset (vertexOffset * 3)
 		matVertOffset := vertCount
 		matVertCount := 0
-		for _,sMesh := range texMesh {
+		for _, sMesh := range texMesh {
 			sceneComposition.AddVertex(sMesh.Vertices()...)
 			sceneComposition.AddNormal(sMesh.Normals()...)
 			sceneComposition.AddUV(sMesh.UVs()...)
@@ -54,10 +54,10 @@ func (compositor *Compositor) ComposeScene() *Composition {
 			matVertCount += len(sMesh.Vertices()) / 3
 		}
 
-		sceneComposition.GenerateTangents()
 		sceneComposition.AddMesh(NewCompositionMesh(key, matVertOffset, matVertCount))
 		vertCount += matVertCount
 	}
+	sceneComposition.GenerateTangents()
 
 	// Step 3. Generate indices from composed materials
 	sceneComposition.Compose()

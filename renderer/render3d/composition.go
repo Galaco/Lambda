@@ -2,18 +2,17 @@ package render3d
 
 import "github.com/galaco/Lambda-Core/core/mesh"
 
-
 type Composition struct {
 	mesh.Mesh
 	materialCompositions []*compositionMesh
 
-	indices []int32
+	indices []uint32
 }
 
 // Compose constructs the indices information for the current state of the Composition
 func (comp *Composition) Compose() {
-	comp.indices = make([]int32, 0)
-	for _,materialComposition := range comp.materialCompositions {
+	comp.indices = make([]uint32, 0)
+	for _, materialComposition := range comp.materialCompositions {
 		materialComposition.GenerateIndicesList()
 		comp.indices = append(comp.indices, materialComposition.indices...)
 	}
@@ -25,7 +24,7 @@ func (comp *Composition) MaterialMeshes() []*compositionMesh {
 }
 
 // Indices returns the indices of this compositions faces
-func (comp *Composition) Indices() []int32 {
+func (comp *Composition) Indices() []uint32 {
 	return comp.indices
 }
 
@@ -39,17 +38,16 @@ func NewComposition() *Composition {
 	return &Composition{}
 }
 
-
 type compositionMesh struct {
 	texturePath string
 	offset      int
 	length      int
 
-	indices []int32
+	indices []uint32
 }
 
 // Indices returns all indices for vertices that use this material
-func (texMesh *compositionMesh) Indices() []int32 {
+func (texMesh *compositionMesh) Indices() []uint32 {
 	return texMesh.indices
 }
 
@@ -65,9 +63,9 @@ func (texMesh *compositionMesh) Length() int32 {
 
 // GenerateIndicesList generates the indices list from offset and length of Composition vertex data.
 func (texMesh *compositionMesh) GenerateIndicesList() {
-	indices := make([]int32, 0)
-	for i := texMesh.offset; i < texMesh.offset + texMesh.length; i++ {
-		indices = append(indices, int32(i))
+	indices := make([]uint32, 0)
+	for i := texMesh.offset; i < texMesh.offset+texMesh.length; i++ {
+		indices = append(indices, uint32(i))
 	}
 
 	texMesh.indices = indices

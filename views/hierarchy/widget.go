@@ -71,7 +71,7 @@ func (widget *Widget) newEntityCreated(received event.IEvent) {
 	ent := received.(*events.EntityCreated).Target()
 	widget.list.addEntity(
 		ent.IntForKey("id"),
-		ent.ValueForKey("classname") + " " + ent.ValueForKey("targetname"),
+		ent.ValueForKey("classname")+" "+ent.ValueForKey("targetname"),
 		func(id int) {
 			widget.dispatcher.Dispatch(events.NewEntityNodeSelected(id))
 		})

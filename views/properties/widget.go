@@ -16,7 +16,7 @@ type Widget struct {
 	dispatcher *event.Dispatcher
 	model      *project.Model
 
-	keyValueView *keyvalues.View
+	keyValueView   *keyvalues.View
 	selectedEntity *entity.Entity
 	//keyValueViews  []keyValue
 }
@@ -71,8 +71,8 @@ func (widget *Widget) sceneClosed(received event.IEvent) {
 
 func NewWidget(dispatcher *event.Dispatcher, model *project.Model) *Widget {
 	return &Widget{
-		dispatcher: dispatcher,
-		model:      model,
+		dispatcher:   dispatcher,
+		model:        model,
 		keyValueView: keyvalues.NewKeyValues(),
 	}
 }

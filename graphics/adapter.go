@@ -30,10 +30,16 @@ type Adapter interface {
 	TexImage2D(target uint32, level int32, internalformat int32, width int32, height int32, border int32, format uint32, xtype uint32, pixels unsafe.Pointer)
 	TexParameteri(target uint32, pname uint32, param int32)
 
+	// Drawing
+	DrawTriangleArray(offset int32, count int32)
+
 	// Misc
 	EnableBlend()
 	EnableDepthTest()
 	EnableCullFaceBack()
+
+	// Uniforms
+	SendUniformMat4(uniform int32, matrix *float32)
 
 	Error() bool
 }

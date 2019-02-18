@@ -4,7 +4,7 @@ import "github.com/inkyblackness/imgui-go"
 
 type Dialog struct {
 	isOpen bool
-	name string
+	name   string
 }
 
 func (d *Dialog) IsOpen() bool {

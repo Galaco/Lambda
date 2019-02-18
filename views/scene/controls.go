@@ -6,12 +6,12 @@ type Controls struct {
 	isContextCurrent bool
 
 	Actions struct {
-		Forward bool
+		Forward   bool
 		Backwards bool
-		Left bool
-		Right bool
-		RotX int
-		RotY int
+		Left      bool
+		Right     bool
+		RotX      int
+		RotY      int
 	}
 }
 

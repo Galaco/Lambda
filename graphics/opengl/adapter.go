@@ -96,7 +96,6 @@ func (ogl *OpenGL) TexParameteri(target uint32, pname uint32, param int32) {
 	gl.TexParameteri(target, pname, param)
 }
 
-
 func (ogl *OpenGL) EnableBlend() {
 	gosigl.EnableBlend()
 }
@@ -105,6 +104,14 @@ func (ogl *OpenGL) EnableDepthTest() {
 }
 func (ogl *OpenGL) EnableCullFaceBack() {
 	gosigl.EnableCullFace(gosigl.Back, gosigl.WindingClockwise)
+}
+
+func (ogl *OpenGL) DrawTriangleArray(offset int32, count int32) {
+	gl.DrawArrays(gl.TRIANGLES, offset, count)
+}
+
+func (ogl *OpenGL) SendUniformMat4(uniform int32, matrix *float32) {
+	gl.UniformMatrix4fv(uniform, 1, false, matrix)
 }
 
 func (ogl *OpenGL) Error() bool {

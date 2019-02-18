@@ -12,16 +12,16 @@ import (
 )
 
 type Scene struct {
-	Solids map[int]*world.Solid
+	Solids      map[int]*world.Solid
 	SolidMeshes map[int]*lambdaModel.Model
 	//RenderableSolids map[int][]*gosigl.VertexObject
 
-	cameras map[*valve.Camera]*entity.Camera
+	cameras      map[*valve.Camera]*entity.Camera
 	activeCamera *entity.Camera
 
 	frameCompositor *render3d.Compositor
-	frameComposed *render3d.Composition
-	frameMesh *gosigl.VertexObject
+	frameComposed   *render3d.Composition
+	frameMesh       *gosigl.VertexObject
 }
 
 func (scene *Scene) ActiveCamera() *entity.Camera {
@@ -40,7 +40,7 @@ func (scene *Scene) ComposedMesh() *gosigl.VertexObject {
 	scene.frameComposed = scene.frameCompositor.ComposeScene()
 	sceneMesh := gosigl.NewMesh(scene.frameComposed.Vertices())
 	gosigl.CreateVertexAttributeArrayBuffer(sceneMesh, scene.frameComposed.UVs(), 2)
-	gosigl.CreateVertexAttributeElementArrayBuffer(sceneMesh, scene.frameComposed.Indices(), 1)
+	gosigl.CreateVertexAttributeElementArrayBuffer(sceneMesh, scene.frameComposed.Indices())
 	gosigl.FinishMesh()
 
 	scene.frameMesh = sceneMesh
@@ -70,7 +70,10 @@ func (scene *Scene) AddSolid(solid *world.Solid) {
 func (scene *Scene) AddCamera(camera *valve.Camera) {
 	scene.cameras[camera] = entity.NewCamera(90, 1024/768)
 	scene.cameras[camera].Transform().Position = mgl32.Vec3{float32(camera.Position.X()), float32(camera.Position.Y()), float32(camera.Position.Z())}
-	scene.cameras[camera].Transform().Rotation = mgl32.Vec3{float32(camera.Look.X()), float32(camera.Look.Y()), float32(camera.Look.Z())}
+	scene.cameras[camera].Transform().Rotation = mgl32.Vec3{
+		mgl32.DegToRad(float32(camera.Look.X())),
+		mgl32.DegToRad(float32(camera.Look.Y())),
+		mgl32.DegToRad(float32(camera.Look.Z()))}
 
 	if scene.activeCamera == nil {
 		scene.activeCamera = scene.cameras[camera]
@@ -89,12 +92,11 @@ func (scene *Scene) Close() {
 
 func NewScene() *Scene {
 	return &Scene{
-		Solids: map[int]*world.Solid{},
+		Solids:      map[int]*world.Solid{},
 		SolidMeshes: map[int]*lambdaModel.Model{},
 		//RenderableSolids: map[int][]*gosigl.VertexObject{},
-		cameras: map[*valve.Camera]*entity.Camera{},
-		activeCamera: entity.NewCamera(90, 1024/768),
+		cameras:         map[*valve.Camera]*entity.Camera{},
+		activeCamera:    entity.NewCamera(90, 1024/768),
 		frameCompositor: &render3d.Compositor{},
 	}
 }
-
