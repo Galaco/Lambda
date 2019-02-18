@@ -5,7 +5,7 @@ replace github.com/inkyblackness/imgui-go => E:\Users\Josh\go\src\github.com\gal
 require (
 	github.com/AllenDang/w32 v0.0.0-20180428130237-ad0a36d80adc // indirect
 	github.com/galaco/KeyValues v1.3.1 // indirect
-	github.com/galaco/Lambda-Core v0.2.1
+	github.com/galaco/Lambda-Core v0.3.0
 	github.com/galaco/gosigl v0.0.0-20190218114647-7d72bfe172dc
 	github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 // indirect
 	github.com/galaco/source-tools-common v0.1.0
