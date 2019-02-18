@@ -41,7 +41,7 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 
 		// Compute new vertex
 		vert4 := side.Plane[2].Sub(side.Plane[1].Sub(side.Plane[0]))
-		verts = append(verts, float32(vert4.X()), float32(vert4.Y()), 0)
+		verts = append(verts, float32(vert4.X()), float32(vert4.Y()), float32(vert4.Z()))
 
 		mesh.AddVertex(verts...)
 	}
@@ -63,7 +63,7 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 	// Texture coordinates
 	{
 		for i := 0; i < len(verts); i += 3 {
-			mesh.AddUV(uvForVertex(verts[i:i+3], &side.UAxis, &side.VAxis, 32, 32)...)
+			mesh.AddUV(uvForVertex(verts[i:i+3], &side.UAxis, &side.VAxis, 256, 256)...)
 		}
 	}
 

@@ -84,8 +84,8 @@ func (widget *Widget) Render(ctx *context.Context) {
 		imgui.ImageV(imgui.TextureID(widget.window.BufferId()), imgui.Vec2{
 			X: float32(widget.width),
 			Y: float32(widget.height)},
-			imgui.Vec2{},
-			imgui.Vec2{1, 1},
+			imgui.Vec2{X: 0, Y: 1},
+			imgui.Vec2{X: 1, Y: 0},
 			imgui.Vec4{X: 1, Y: 1, Z: 1, W: 1}, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 0})
 		widget.graphicsAdapter.Viewport(0, 0, int32(w), int32(h))
 		widget.End()
@@ -110,13 +110,13 @@ func (widget *Widget) Update(dt float64) {
 
 
 	if widget.keyboard.IsKeyDown(input.KeyUp) {
-		widget.scene.ActiveCamera().Rotate(0, 0, -float32(dt)*0.1)
+		widget.scene.ActiveCamera().Rotate(0, 0, float32(dt)*0.1)
 	}
 	if widget.keyboard.IsKeyDown(input.KeyLeft) {
 		widget.scene.ActiveCamera().Rotate(float32(dt)*0.1, 0, 0)
 	}
 	if widget.keyboard.IsKeyDown(input.KeyDown) {
-		widget.scene.ActiveCamera().Rotate(0, 0, float32(dt)*0.1)
+		widget.scene.ActiveCamera().Rotate(0, 0, -float32(dt)*0.1)
 	}
 	if widget.keyboard.IsKeyDown(input.KeyRight) {
 		widget.scene.ActiveCamera().Rotate(-float32(dt)*0.1, 0, 0)
