@@ -9,7 +9,7 @@ require (
 	github.com/galaco/gosigl v0.0.0-20190217220302-633335646da6
 	github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 // indirect
 	github.com/galaco/source-tools-common v0.1.0
-	github.com/galaco/vmf v0.0.0-20180309175744-7a9ccb6e8abb
+	github.com/galaco/vmf v1.0.0
 	github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2
 	github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a
 	github.com/inkyblackness/imgui-go v1.5.0
