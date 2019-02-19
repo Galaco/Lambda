@@ -58,11 +58,11 @@ func (scene *Scene) RecomposeScene(fs *filesystem.FileSystem) *gosigl.VertexObje
 	// @TODO This exists only to prove materials work, and that UVs are correct!
 	// Ensure materials are ready
 	material.LoadErrorMaterial()
-	for _,matComp := range scene.frameComposed.MaterialMeshes() {
-		if _,ok := scene.frameMaterials[matComp.Material()]; ok {
+	for _, matComp := range scene.frameComposed.MaterialMeshes() {
+		if _, ok := scene.frameMaterials[matComp.Material()]; ok {
 			continue
 		}
-		baseMat := material.LoadSingleMaterial(matComp.Material() + ".vmt", fs)
+		baseMat := material.LoadSingleMaterial(matComp.Material()+".vmt", fs)
 		if baseMat == nil {
 			baseMat = resource.Manager().GetMaterial(resource.Manager().ErrorTextureName())
 		}
@@ -113,19 +113,19 @@ func (scene *Scene) ChangeCamera(camera *valve.Camera) {
 func (scene *Scene) Close() {
 	gosigl.DeleteMesh(scene.frameMesh)
 
-	for _,m := range scene.frameMaterials {
+	for _, m := range scene.frameMaterials {
 		gosigl.DeleteTextures(m)
 	}
 }
 
 func NewScene() *Scene {
 	return &Scene{
-		Solids:      map[int]*world.Solid{},
-		SolidMeshes: map[int]*lambdaModel.Model{},
+		Solids:          map[int]*world.Solid{},
+		SolidMeshes:     map[int]*lambdaModel.Model{},
 		cameras:         map[*valve.Camera]*entity.Camera{},
 		activeCamera:    entity.NewCamera(70, 1024/768),
 		frameCompositor: &render3d.Compositor{},
-		frameMaterials: map[string]gosigl.TextureBindingId{},
+		frameMaterials:  map[string]gosigl.TextureBindingId{},
 	}
 }
 

@@ -9,9 +9,9 @@ A custom Source Engine level editor written in Go. End result is to be a drop in
 
 #### Current Features
 * Load vmf data
-* Top-down solid viewer
+* 3D Scene viewer with textures with camera controls (working, incomplete)
 * Entity and solid viewer with keyvalues
 * Vmf export (partially complete)
 
 
-![Editor](https://raw.githubusercontent.com/Galaco/Lambda/master/docs/repo/editor.png)
+![Editor](https://raw.githubusercontent.com/Galaco/Lambda/master/.github/docs/repo/editor.png)

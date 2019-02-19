@@ -1,53 +1,47 @@
 package imgui_layouts
 
-import "github.com/inkyblackness/imgui-go"
-
-const imguiTitleBarHeight = 20
-const imguiMenuBarHeight = 20
-const imguiBorderSize = 2
+import (
+	"github.com/galaco/Lambda/ui/imgui-layouts/master"
+	"github.com/go-gl/mathgl/mgl32"
+	"github.com/inkyblackness/imgui-go"
+)
 
 type Panel struct {
-	DisplayProperties struct {
-		HasTitleBar bool
-		HasMenuBar  bool
-	}
-	Size     [2]int
-	Position [2]int
+	panel *master.Panel
+
+	previousWidth, previousHeight int
+	sizeChangeCallbacks           []func(int, int)
+
+	offset, size mgl32.Vec2
 }
 
-func (panel *Panel) PanelSize() (x, y int) {
-	return panel.Size[0], panel.Size[1]
+func (panel *Panel) WithDisplayRule(rule master.Rulable) *Panel {
+	panel.panel.AddRule(rule)
+	return panel
 }
 
-func (panel *Panel) InternalSize() (x, y int) {
-	x = panel.Size[0] - (2 * imguiBorderSize)
-	y = panel.Size[1] - (2 * imguiBorderSize)
-	if panel.DisplayProperties.HasTitleBar == true {
-		y -= imguiTitleBarHeight
-	}
-	if panel.DisplayProperties.HasMenuBar == true {
-		y -= imguiMenuBarHeight
-	}
-
-	return x, y
+func (panel *Panel) Size() mgl32.Vec2 {
+	return panel.size
 }
 
-func (panel *Panel) SetPosition(x, y int) {
-
+func (panel *Panel) OnChangeSize(callback func(int, int)) {
+	panel.sizeChangeCallbacks = append(panel.sizeChangeCallbacks, callback)
 }
 
-func (panel *Panel) Resize(x, y int) {
-	if panel.Size[0] != x {
-		panel.Size[0] = x
+func (panel *Panel) Start(label string, width, height int) bool {
+	if panel.previousWidth != width || panel.previousHeight != height {
+		for _, cb := range panel.sizeChangeCallbacks {
+			cb(width, height)
+		}
+		panel.offset, panel.size = panel.panel.Resolve(width, height)
 	}
+	panel.previousWidth = width
+	panel.previousHeight = height
 
-	if panel.Size[1] != y {
-		panel.Size[1] = y
-	}
-}
+	imgui.SetNextWindowPos(imgui.Vec2{X: panel.offset[0], Y: panel.offset[1]})
+	imgui.SetNextWindowSize(imgui.Vec2{X: panel.size[0], Y: panel.size[1]})
 
-func (panel *Panel) Start() bool {
-	return imgui.BeginV("Scene", nil, imgui.WindowFlagsNoResize|
+	return imgui.BeginV(label, nil, imgui.WindowFlagsNoResize|
 		imgui.WindowFlagsNoMove|
 		imgui.WindowFlagsNoBringToFrontOnFocus|
 		imgui.WindowFlagsNoScrollbar|
@@ -58,4 +52,10 @@ func (panel *Panel) Start() bool {
 
 func (panel *Panel) End() {
 	imgui.End()
+}
+
+func NewPanel() *Panel {
+	return &Panel{
+		panel: master.NewPanel(),
+	}
 }

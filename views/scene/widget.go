@@ -10,15 +10,16 @@ import (
 	"github.com/galaco/Lambda/renderer"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/ui/imgui-layouts"
+	"github.com/galaco/Lambda/ui/imgui-layouts/master/rule"
 	"github.com/inkyblackness/imgui-go"
 )
 
 type Widget struct {
-	imgui_layouts.Panel
+	masterPanel *imgui_layouts.Panel
 
 	dispatcher      *event.Dispatcher
-	keyboard 		*input.Keyboard
-	filesystem 		*filesystem.FileSystem
+	keyboard        *input.Keyboard
+	filesystem      *filesystem.FileSystem
 	graphicsAdapter graphics.Adapter
 
 	window   *renderer.RenderWindow
@@ -28,8 +29,6 @@ type Widget struct {
 
 	scene  *Scene
 	camera *entity.Camera
-
-	isActive bool
 }
 
 func (widget *Widget) Initialize() {
@@ -39,10 +38,11 @@ func (widget *Widget) Initialize() {
 	widget.dispatcher.Subscribe(events.TypeCameraChanged, widget.cameraChanged)
 	widget.dispatcher.Subscribe(events.TypeSceneClosed, widget.sceneClosed)
 
-	widget.DisplayProperties.HasTitleBar = true
-	widget.DisplayProperties.HasMenuBar = false
-
 	widget.renderer.BindShader(renderer.LoadShader())
+
+	widget.masterPanel.OnChangeSize(func(width, height int) {
+		widget.window.SetSize(width, height)
+	})
 }
 
 func (widget *Widget) RenderScene(ctx *context.Context) {
@@ -61,37 +61,15 @@ func (widget *Widget) RenderScene(ctx *context.Context) {
 
 func (widget *Widget) Render(ctx *context.Context) {
 	w, h := ctx.Window().GetSize()
-	widgetWidth := int(w - (2 * 320))
-	widgetHeight := int(h - 48) // / 2
-
-	if widgetWidth != widget.width || widgetHeight != widget.height {
-		widget.width = widgetWidth
-		widget.height = widgetHeight
-		widget.window.SetSize(widget.width, widget.height)
-	}
-	imgui.SetNextWindowPos(imgui.Vec2{X: float32(320), Y: 48})
-	imgui.SetNextWindowSize(imgui.Vec2{X: float32(widgetWidth), Y: float32(widgetHeight)})
-
-	imgui.PushStyleColor(imgui.StyleColorChildBg, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 0})
-	imgui.PushStyleVarVec2(imgui.StyleVarWindowPadding, imgui.Vec2{X: 0, Y: 0})
-	if widget.Start() {
-
-		imgui.SetCursorPos(imgui.Vec2{
-			X: 0, //float32(widget.width / 2),
-			Y: 0, //float32(widget.height / 2),
-		})
-		widget.graphicsAdapter.Viewport(0, 0, int32(widget.width), int32(widget.height))
-		imgui.ImageV(imgui.TextureID(widget.window.BufferId()), imgui.Vec2{
-			X: float32(widget.width),
-			Y: float32(widget.height)},
+	if widget.masterPanel.Start("Scene", w, h) {
+		imgui.SetCursorPos(imgui.Vec2{X: 0, Y: 0})
+		imgui.ImageV(imgui.TextureID(widget.window.BufferId()),
+			imgui.Vec2{X: widget.masterPanel.Size()[0], Y: widget.masterPanel.Size()[1]},
 			imgui.Vec2{X: 0, Y: 1},
 			imgui.Vec2{X: 1, Y: 0},
 			imgui.Vec4{X: 1, Y: 1, Z: 1, W: 1}, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 0})
-		widget.graphicsAdapter.Viewport(0, 0, int32(w), int32(h))
-		widget.End()
+		widget.masterPanel.End()
 	}
-	imgui.PopStyleVar()
-	imgui.PopStyleColor()
 }
 
 func (widget *Widget) Update(dt float64) {
@@ -108,7 +86,6 @@ func (widget *Widget) Update(dt float64) {
 		widget.scene.ActiveCamera().Right(dt * 0.1)
 	}
 
-
 	if widget.keyboard.IsKeyDown(input.KeyUp) {
 		widget.scene.ActiveCamera().Rotate(0, 0, float32(dt)*0.1)
 	}
@@ -123,7 +100,6 @@ func (widget *Widget) Update(dt float64) {
 	}
 
 	widget.scene.ActiveCamera().Update(1000 / 60)
-	//widget.scene.ActiveCamera().Rotate(float32(dt)*0.1, 0, 0)
 }
 
 func (widget *Widget) newSolidCreated(received event.IEvent) {
@@ -160,5 +136,9 @@ func NewWidget(dispatcher *event.Dispatcher, filesystem *filesystem.FileSystem, 
 		height:          768,
 		scene:           NewScene(),
 		renderer:        renderer.NewRenderer(graphicsAdapter),
+		masterPanel: imgui_layouts.NewPanel().
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, 48)).
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampLeft, 320)).
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampRight, 320)),
 	}
 }

@@ -3,9 +3,11 @@ package properties
 import (
 	"github.com/galaco/Lambda/event"
 	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/model"
 	"github.com/galaco/Lambda/ui/context"
+	"github.com/galaco/Lambda/ui/imgui-layouts"
 	"github.com/galaco/Lambda/ui/imgui-layouts/keyvalues"
+	"github.com/galaco/Lambda/ui/imgui-layouts/master/rule"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/inkyblackness/imgui-go"
 	"log"
@@ -13,8 +15,10 @@ import (
 )
 
 type Widget struct {
+	masterPanel *imgui_layouts.Panel
+
 	dispatcher *event.Dispatcher
-	model      *project.Model
+	model      *model.Model
 
 	keyValueView   *keyvalues.View
 	selectedEntity *entity.Entity
@@ -29,24 +33,34 @@ func (widget *Widget) Initialize() {
 
 func (widget *Widget) Render(ctx *context.Context) {
 	w, h := ctx.Window().GetSize()
-	imgui.SetNextWindowPos(imgui.Vec2{X: float32(w - 320), Y: 48})
-	imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 48)})
-	if imgui.BeginV("Properties", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
+	if widget.masterPanel.Start("Properties", w, h) {
 		imgui.BeginChild("Scrolling")
 		widget.keyValueView.Render()
-		//for _, kv := range widget.keyValueViews {
-		//	kv.Render()
-		//}
 
 		imgui.EndChild()
-		imgui.End()
+		widget.masterPanel.End()
 	}
+	//
+	//
+	//w, h := ctx.Window().GetSize()
+	//imgui.SetNextWindowPos(imgui.Vec2{X: float32(w - 320), Y: 48})
+	//imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 48)})
+	//if imgui.BeginV("Properties", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus) {
+	//	imgui.BeginChild("Scrolling")
+	//	widget.keyValueView.Render()
+	//	//for _, kv := range widget.keyValueViews {
+	//	//	kv.Render()
+	//	//}
+	//
+	//	imgui.EndChild()
+	//	imgui.End()
+	//}
 }
 
 func (widget *Widget) selectedEntityChanged(received event.IEvent) {
 	widget.keyValueView = keyvalues.NewKeyValues()
 	evt := received.(*events.EntityNodeSelected)
-	widget.selectedEntity = widget.model.Vmf.Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
+	widget.selectedEntity = widget.model.Project.Vmf.Entities().FindByKeyValue("id", strconv.Itoa(evt.Id))
 
 	kv := widget.selectedEntity.EPairs
 	for kv != nil {
@@ -69,10 +83,14 @@ func (widget *Widget) sceneClosed(received event.IEvent) {
 	widget.keyValueView = keyvalues.NewKeyValues()
 }
 
-func NewWidget(dispatcher *event.Dispatcher, model *project.Model) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, model *model.Model) *Widget {
 	return &Widget{
 		dispatcher:   dispatcher,
 		model:        model,
 		keyValueView: keyvalues.NewKeyValues(),
+		masterPanel: imgui_layouts.NewPanel().
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, 48)).
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampRight, 0)).
+			WithDisplayRule(rule.NewRuleFixedWidth(320)),
 	}
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/graphics/opengl"
 	"github.com/galaco/Lambda/input"
-	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/model"
 	"github.com/galaco/Lambda/ui"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
@@ -21,7 +21,7 @@ func main() {
 	app.FileSystem = filesystem.Init()
 	app.EventDispatcher = event.NewDispatcher()
 	app.VmfImporter = importers.NewVmfImporter()
-	app.Model = project.NewModel()
+	app.Model = model.NewModel()
 	app.GraphicsAdapter = &opengl.OpenGL{}
 	app.Keyboard = input.NewKeyboard()
 

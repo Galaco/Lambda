@@ -63,7 +63,8 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 	// Texture coordinates
 	{
 		for i := 0; i < len(verts); i += 3 {
-			mesh.AddUV(uvForVertex(verts[i:i+3], &side.UAxis, &side.VAxis, 256, 256)...)
+			// @TODO width & height must be known
+			mesh.AddUV(uvForVertex(verts[i:i+3], &side.UAxis, &side.VAxis, 512, 512)...)
 		}
 	}
 

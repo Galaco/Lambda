@@ -7,7 +7,7 @@ import (
 	"github.com/galaco/Lambda/filesystem/importers"
 	"github.com/galaco/Lambda/graphics"
 	"github.com/galaco/Lambda/input"
-	"github.com/galaco/Lambda/project"
+	"github.com/galaco/Lambda/model"
 	"github.com/galaco/Lambda/ui"
 	"github.com/galaco/Lambda/ui/context"
 	"github.com/galaco/Lambda/views/assets"
@@ -30,7 +30,7 @@ type Application struct {
 	VmfExporter     *exporters.VmfExporter
 
 	// Model
-	Model *project.Model
+	Model *model.Model
 
 	// Control
 	Keyboard *input.Keyboard
