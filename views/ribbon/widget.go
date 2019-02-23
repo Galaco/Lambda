@@ -1,7 +1,7 @@
 package ribbon
 
 import (
-	"github.com/galaco/Lambda/ui/context"
+	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/inkyblackness/imgui-go"
 )
 

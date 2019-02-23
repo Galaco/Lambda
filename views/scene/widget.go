@@ -3,14 +3,14 @@ package scene
 import (
 	"github.com/galaco/Lambda-Core/core/entity"
 	"github.com/galaco/Lambda-Core/core/filesystem"
-	"github.com/galaco/Lambda/event"
-	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/graphics"
-	"github.com/galaco/Lambda/input"
-	"github.com/galaco/Lambda/renderer"
-	"github.com/galaco/Lambda/ui/context"
-	"github.com/galaco/Lambda/ui/imgui-layouts"
-	"github.com/galaco/Lambda/ui/imgui-layouts/master/rule"
+	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/graphics"
+	"github.com/galaco/Lambda/internal/input"
+	"github.com/galaco/Lambda/internal/renderer"
+	"github.com/galaco/Lambda/internal/ui/context"
+	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
+	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
 	"github.com/inkyblackness/imgui-go"
 )
 
@@ -38,7 +38,7 @@ func (widget *Widget) Initialize() {
 	widget.dispatcher.Subscribe(events.TypeCameraChanged, widget.cameraChanged)
 	widget.dispatcher.Subscribe(events.TypeSceneClosed, widget.sceneClosed)
 
-	widget.renderer.BindShader(renderer.LoadShader())
+	widget.renderer.BindShader(widget.graphicsAdapter.LambdaLoadSimpleShader("assets/shaders/UnlitGeneric"))
 
 	widget.masterPanel.OnChangeSize(func(width, height int) {
 		widget.window.SetSize(width, height)
