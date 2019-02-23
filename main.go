@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/galaco/Lambda/event"
-	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/filesystem"
-	"github.com/galaco/Lambda/filesystem/importers"
-	"github.com/galaco/Lambda/graphics/opengl"
-	"github.com/galaco/Lambda/input"
-	"github.com/galaco/Lambda/model"
-	"github.com/galaco/Lambda/ui"
+	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/filesystem"
+	"github.com/galaco/Lambda/internal/filesystem/importers"
+	"github.com/galaco/Lambda/internal/graphics/opengl"
+	"github.com/galaco/Lambda/internal/input"
+	"github.com/galaco/Lambda/internal/model"
+	"github.com/galaco/Lambda/internal/ui"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"time"
@@ -18,7 +18,7 @@ func main() {
 	app := Application{}
 	defer app.Close()
 
-	app.FileSystem = filesystem.Init()
+	app.FileSystem = filesystem.New()
 	app.EventDispatcher = event.NewDispatcher()
 	app.VmfImporter = importers.NewVmfImporter()
 	app.Model = model.NewModel()

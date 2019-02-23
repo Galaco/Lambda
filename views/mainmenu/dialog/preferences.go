@@ -1,9 +1,9 @@
 package dialog
 
 import (
-	"github.com/galaco/Lambda/event"
-	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/ui/imgui-layouts/columns"
+	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/ui/imgui-layouts/columns"
 	"github.com/galaco/Lambda/views/mainmenu/dialog/preferences"
 	"github.com/inkyblackness/imgui-go"
 )

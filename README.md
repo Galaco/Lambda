@@ -14,4 +14,4 @@ A custom Source Engine level editor written in Go. End result is to be a drop in
 * Vmf export (partially complete)
 
 
-![Editor](https://raw.githubusercontent.com/Galaco/Lambda/master/.github/docs/repo/editor.png)
+![Editor](https://raw.githubusercontent.com/Galaco/Lambda/master/docs/repo/editor.png)

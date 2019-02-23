@@ -1,13 +1,13 @@
 package properties
 
 import (
-	"github.com/galaco/Lambda/event"
-	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/model"
-	"github.com/galaco/Lambda/ui/context"
-	"github.com/galaco/Lambda/ui/imgui-layouts"
-	"github.com/galaco/Lambda/ui/imgui-layouts/keyvalues"
-	"github.com/galaco/Lambda/ui/imgui-layouts/master/rule"
+	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/model"
+	"github.com/galaco/Lambda/internal/ui/context"
+	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
+	"github.com/galaco/Lambda/internal/ui/imgui-layouts/keyvalues"
+	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/inkyblackness/imgui-go"
 	"log"

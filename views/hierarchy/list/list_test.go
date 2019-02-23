@@ -7,19 +7,17 @@ func TestList_AddRow(t *testing.T) {
 
 	id := 0
 	className := "foo"
-	targetName := "bar"
-	list.AddRow(id, className, targetName)
+	list.AddRow(id, className, nil)
 
-	if list.nodes[0].TargetName != targetName {
+	if list.nodes[0].label != "0 " + className {
 		t.Error("returned row does not matched added row")
 	}
 
 	id = 1
 	className = "foo2"
-	targetName = ""
-	list.AddRow(id, className, targetName)
+	list.AddRow(id, className, nil)
 
-	if list.nodes[1].Classname != className {
+	if list.nodes[1].label != "1 " + className {
 		t.Error("returned row does not matched added row")
 	}
 }
@@ -38,25 +36,15 @@ func TestList_Filter(t *testing.T) {
 		"six",
 		"seven",
 	}
-	targetNames := [8]string{
-		"Tzero",
-		"Tone",
-		"Ttwo",
-		"Tthree",
-		"Tfour",
-		"Tfive",
-		"Tsix",
-		"Tseven",
-	}
 
 	for i := 0; i < 8; i++ {
-		list.AddRow(ids[i], classNames[i], targetNames[i])
+		list.AddRow(ids[i], classNames[i], nil)
 	}
 
 	filtered := list.Filter(EntityFilterPropOnly)
 
-	if filtered.rows[0].TargetName != targetNames[2] ||
-		filtered.rows[1].TargetName != targetNames[5] {
+	if filtered.rows[0].label != "2 " + classNames[2] ||
+		filtered.rows[1].label != "5 " + classNames[5] {
 		t.Error("expected row did not pass filter")
 	}
 }

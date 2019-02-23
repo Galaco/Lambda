@@ -2,12 +2,12 @@ package mainmenu
 
 import (
 	"github.com/galaco/Lambda-Core/core/logger"
-	"github.com/galaco/Lambda/event"
-	"github.com/galaco/Lambda/events"
-	"github.com/galaco/Lambda/filesystem/exporters"
-	"github.com/galaco/Lambda/filesystem/importers"
-	"github.com/galaco/Lambda/model"
-	"github.com/galaco/Lambda/ui/context"
+	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/filesystem/exporters"
+	"github.com/galaco/Lambda/internal/filesystem/importers"
+	"github.com/galaco/Lambda/internal/model"
+	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/views/mainmenu/dialog"
 	"github.com/inkyblackness/imgui-go"
 )
