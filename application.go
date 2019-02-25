@@ -10,12 +10,12 @@ import (
 	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui"
 	"github.com/galaco/Lambda/internal/ui/context"
-	"github.com/galaco/Lambda/internal/views/assets"
-	"github.com/galaco/Lambda/internal/views/hierarchy"
-	"github.com/galaco/Lambda/internal/views/mainmenu"
-	"github.com/galaco/Lambda/internal/views/properties"
-	"github.com/galaco/Lambda/internal/views/ribbon"
-	"github.com/galaco/Lambda/internal/views/scene"
+	"github.com/galaco/Lambda/views/assets"
+	"github.com/galaco/Lambda/views/hierarchy"
+	"github.com/galaco/Lambda/views/mainmenu"
+	"github.com/galaco/Lambda/views/properties"
+	"github.com/galaco/Lambda/views/ribbon"
+	"github.com/galaco/Lambda/views/scene"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 

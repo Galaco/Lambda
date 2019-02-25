@@ -18,7 +18,7 @@ func main() {
 	app := Application{}
 	defer app.Close()
 
-	app.FileSystem = filesystem.Init()
+	app.FileSystem = filesystem.New()
 	app.EventDispatcher = event.NewDispatcher()
 	app.VmfImporter = importers.NewVmfImporter()
 	app.Model = model.NewModel()

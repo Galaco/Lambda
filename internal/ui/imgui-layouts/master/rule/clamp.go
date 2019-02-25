@@ -1,7 +1,7 @@
 package rule
 
 import (
-	"github.com/galaco/Lambda/ui/imgui-layouts/master"
+	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master"
 )
 
 const (

@@ -1,8 +1,10 @@
 package opengl
 
 import (
+	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/gosigl"
 	"github.com/go-gl/gl/v4.1-core/gl"
+	"io/ioutil"
 	"log"
 	"unsafe"
 )
@@ -58,6 +60,28 @@ func (ogl *OpenGL) LambdaBindFramebuffer(framebufferId uint32) {
 
 func (ogl *OpenGL) LambdaDrawBuffers() {
 	gl.DrawBuffer(gl.COLOR_ATTACHMENT0)
+}
+
+func (ogl *OpenGL) LambdaLoadSimpleShader(path string) *gosigl.Context {
+	vs,err := ioutil.ReadFile(path + ".vs.glsl")
+	if err != nil {
+		logger.Fatal(err)
+	}
+	fs,err := ioutil.ReadFile(path + ".fs.glsl")
+	if err != nil {
+		logger.Fatal(err)
+	}
+
+	shader := gosigl.NewShader()
+	if err = shader.AddShader(string(vs) + "\x00", gosigl.VertexShader); err != nil {
+		logger.Fatal(err)
+	}
+	if err = shader.AddShader(string(fs) + "\x00", gosigl.FragmentShader); err != nil {
+		logger.Fatal(err)
+	}
+	shader.Finalize()
+
+	return &shader
 }
 
 func (ogl *OpenGL) Viewport(x, y, width, height int32) {

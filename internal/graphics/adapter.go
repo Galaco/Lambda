@@ -1,6 +1,9 @@
 package graphics
 
-import "unsafe"
+import (
+	"github.com/galaco/gosigl"
+	"unsafe"
+)
 
 type Adapter interface {
 	Init()
@@ -12,6 +15,7 @@ type Adapter interface {
 	LambdaBindFramebuffer(framebufferId uint32)
 	LambdaBindTexture2D(id uint32)
 	LambdaDrawBuffers()
+	LambdaLoadSimpleShader(path string) *gosigl.Context
 
 	// General
 	Viewport(x, y, width, height int32)

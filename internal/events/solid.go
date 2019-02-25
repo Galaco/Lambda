@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/galaco/Lambda/pkg/valve/world"
+	"github.com/galaco/Lambda/internal/valve/world"
 )
 
 const TypeNewSolidCreated = "NewSolidCreated"

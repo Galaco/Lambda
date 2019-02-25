@@ -5,7 +5,7 @@ import (
 	"github.com/galaco/Lambda-Core/core/material"
 	lambdaMesh "github.com/galaco/Lambda-Core/core/mesh"
 	lambdaModel "github.com/galaco/Lambda-Core/core/model"
-	"github.com/galaco/Lambda/pkg/valve/world"
+	"github.com/galaco/Lambda/internal/valve/world"
 	"github.com/galaco/gosigl"
 )
 

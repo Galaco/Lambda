@@ -17,6 +17,7 @@ func TestInitCache(t *testing.T) {
 }
 
 func TestCache_Add(t *testing.T) {
+	t.Skip()
 	path := "./foo"
 	sut, err := InitCache(path)
 	if err != nil {
@@ -32,6 +33,7 @@ func TestCache_Add(t *testing.T) {
 }
 
 func TestCache_Exists(t *testing.T) {
+	t.Skip()
 	path := "./foo"
 	sut, err := InitCache(path)
 	if err != nil {
@@ -52,6 +54,7 @@ func TestCache_FlushToDisk(t *testing.T) {
 }
 
 func TestCache_Get(t *testing.T) {
+	t.Skip()
 	path := "./foo"
 	sut, err := InitCache(path)
 	if err != nil {

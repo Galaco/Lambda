@@ -50,7 +50,6 @@ func (scene *Scene) RecomposeScene(fs *filesystem.FileSystem) *gosigl.VertexObje
 	gosigl.CreateVertexAttributeArrayBuffer(sceneMesh, scene.frameComposed.Normals(), 3)
 	gosigl.CreateVertexAttributeArrayBuffer(sceneMesh, scene.frameComposed.UVs(), 2)
 	gosigl.CreateVertexAttributeArrayBuffer(sceneMesh, scene.frameComposed.Tangents(), 3)
-	gosigl.CreateVertexAttributeElementArrayBuffer(sceneMesh, scene.frameComposed.Indices())
 	gosigl.FinishMesh()
 
 	scene.frameMesh = sceneMesh

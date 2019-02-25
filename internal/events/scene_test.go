@@ -64,10 +64,3 @@ func TestOpenSceneFailed_Type(t *testing.T) {
 		t.Error("unexpected event type for event")
 	}
 }
-
-func TestSceneNodeSelected_Type(t *testing.T) {
-	sut := NewEntityNodeSelected(0)
-	if sut.Type() != TypeSceneNodeSelected {
-		t.Error("unexpected event type for event")
-	}
-}

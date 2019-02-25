@@ -1,6 +1,6 @@
 package model
 
-import "github.com/galaco/Lambda/pkg/valve"
+import "github.com/galaco/Lambda/internal/valve"
 
 type Project struct {
 	Filename string

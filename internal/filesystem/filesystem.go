@@ -17,7 +17,7 @@ func New() *lambdaFS.FileSystem {
 	if err != nil {
 		logger.Fatal(err)
 	}
-	_, err = gameinfo.LoadConfig(cfg.GameDirectory)
+	gameInfo, err := gameinfo.LoadConfig(cfg.GameDirectory)
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -25,7 +25,7 @@ func New() *lambdaFS.FileSystem {
 	// Register GameInfo.txt referenced resource paths
 	// Filesystem module needs to know about all the possible resource
 	// locations it can search.
-	fs := lambdaFS.CreateFilesystemFromGameInfoDefinitions(config.Singleton().GameDirectory, gameinfo.Get())
+	fs := lambdaFS.CreateFilesystemFromGameInfoDefinitions(cfg.GameDirectory, gameInfo)
 
 	// Explicity define fallbacks for missing resources
 	// Defaults are defined, but if HL2 assets are not readable, then

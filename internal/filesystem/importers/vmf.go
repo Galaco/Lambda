@@ -2,8 +2,8 @@ package importers
 
 import (
 	"errors"
-	"github.com/galaco/Lambda/pkg/valve"
-	"github.com/galaco/Lambda/pkg/valve/world"
+	"github.com/galaco/Lambda/internal/valve"
+	"github.com/galaco/Lambda/internal/valve/world"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/galaco/vmf"
 	"os"

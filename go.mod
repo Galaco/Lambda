@@ -1,10 +1,8 @@
 module github.com/galaco/Lambda
 
-replace github.com/inkyblackness/imgui-go => E:\Users\Josh\go\src\github.com\galaco\imgui-go
+replace github.com/inkyblackness/imgui-go => C:\Users\Josh\go\src\github.com\galaco\imgui-go
 
 replace github.com/galaco/gosigl => E:\Users\Josh\go\src\github.com\galaco\gosigl
-
-replace github.com/galaco/Lambda-Core => E:\Users\Josh\go\src\github.com\galaco\Lambda-Core
 
 require (
 	github.com/AllenDang/w32 v0.0.0-20180428130237-ad0a36d80adc // indirect

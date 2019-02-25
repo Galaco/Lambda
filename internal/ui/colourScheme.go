@@ -4,7 +4,7 @@ import "github.com/inkyblackness/imgui-go"
 
 func ApplyImguiStyles(themeId int) {
 	fontAtlas := imgui.CurrentIO().Fonts()
-	fontAtlas.AddFontFromFileTTF("./FiraCode-Regular.ttf", 16)
+	fontAtlas.AddFontFromFileTTF("./assets/fonts/FiraCode-Regular.ttf", 16)
 	//style := imgui.CurrentStyle()
 	//
 	//commonLayout()

@@ -11,26 +11,19 @@ type Config struct {
 	GameDirectory string
 }
 
-// @TODO Implement something nicer than this scoped variable
-var config Config
-
-// Get returns (kind-of) static config object
-func Singleton() *Config {
-	return &config
-}
-
 // Load attempts to open and unmarshall
 // json configuration
 func Load(path string) (*Config, error) {
 	data, err := ioutil.ReadFile(path)
+	config := new(Config)
 	if err != nil {
-		return &config, err
+		return config, err
 	}
 
-	err = json.Unmarshal(data, &config)
+	err = json.Unmarshal(data, config)
 	if err != nil {
-		return &config, err
+		return config, err
 	}
 
-	return &config, nil
+	return config, nil
 }
