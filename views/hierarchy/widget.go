@@ -34,15 +34,6 @@ func (widget *Widget) Render(ctx *context.Context) {
 
 		widget.masterPanel.End()
 	}
-	//_, h := ctx.Window().GetSize()
-	//imgui.SetNextWindowPos(imgui.Vec2{X: 0, Y: 48})
-	//imgui.SetNextWindowSize(imgui.Vec2{X: 320, Y: float32(h - 368)})
-	//if imgui.BeginV("Hierarchy", nil, imgui.WindowFlagsNoResize|imgui.WindowFlagsNoMove|imgui.WindowFlagsNoBringToFrontOnFocus|imgui.WindowFlagsMenuBar) {
-	//	widget.renderMenuBar()
-	//	widget.list.getFiltered().Render()
-	//	widget.solidList.getFiltered().Render()
-	//	imgui.End()
-	//}
 }
 
 func (widget *Widget) renderMenuBar() {

@@ -8,13 +8,19 @@ import (
 // list. It represents a subset of all rows in another list.
 type FilteredList struct {
 	rows []*row
+	selected int
 }
 
 // Render renders all the rows in this list
 func (filteredList *FilteredList) Render() {
 	imgui.BeginChild("HierarchyMainScrolling")
 	for _, row := range filteredList.rows {
-		row.render()
+		if row.Id != filteredList.selected {
+			row.selected = false
+		}
+		if row.render() {
+			filteredList.selected = row.Id
+		}
 	}
 	imgui.EndChild()
 }

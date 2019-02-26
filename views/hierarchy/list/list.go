@@ -8,6 +8,7 @@ import (
 // using imgui
 type List struct {
 	nodes []row
+	selected int
 }
 
 // Filter applies a filtermode on the stored rows and returns
@@ -33,5 +34,8 @@ func (mod *List) Filter(filterMode int) *FilteredList {
 
 // AddRow adds a new row to the end of the list.
 func (mod *List) AddRow(id int, label string, onClick func(id int)) {
-	mod.nodes = append(mod.nodes, newRow(id, label, onClick))
+	mod.nodes = append(mod.nodes, newRow(id, label, func(id int) {
+		mod.selected = id
+		onClick(id)
+	}))
 }
