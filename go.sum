@@ -23,7 +23,10 @@ github.com/galaco/Lambda-Core v0.2.1 h1:18FtYnlxbvnNUzLbSwLq/HgdgWnWK0v2Hy4yLxtf
 github.com/galaco/Lambda-Core v0.2.1/go.mod h1:/tLp69JLf3aNHtV76RQFwv8/oXtLk1m1+p0SahUVHqQ=
 github.com/galaco/Lambda-Core v0.3.0 h1:R25/wbft6P4Rwa35KWKJ5d1mwLlfh1kjX4phZNdmkUQ=
 github.com/galaco/Lambda-Core v0.3.0/go.mod h1:H+ir5q61am4L0as5Uh5YZrqQU1LkLhS0laJGbL2TbT8=
+github.com/galaco/Lambda-Core v0.3.1 h1:IZTgVGGRZE67uLG71V/YbVq338s/W1ynrJCIRBMtFlQ=
 github.com/galaco/Lambda-Core v0.3.1/go.mod h1:H+ir5q61am4L0as5Uh5YZrqQU1LkLhS0laJGbL2TbT8=
+github.com/galaco/Lambda-Core v0.3.2 h1:muxzo8xjalaFRLWTYkMHQ5tjn0VtXNRyiBfBPWbQzD0=
+github.com/galaco/Lambda-Core v0.3.2/go.mod h1:WyCCBsbgPEhnaRhnDqs99tMQnFh5eANzpiPjEMU7egM=
 github.com/galaco/StudioModel v0.0.0-20181028212841-5b8408bcc2af/go.mod h1:TyLwCRckWSsaQhePyfTOwfSXlEUJ411MwYaVkbPwOMo=
 github.com/galaco/StudioModel v0.0.0-20190212204017-d0486bcd90ed/go.mod h1:kMK3O6si6tHlxuxYvUAOuPsINUq00i+N5FqusJqaEvs=
 github.com/galaco/StudioModel v0.1.0/go.mod h1:kMK3O6si6tHlxuxYvUAOuPsINUq00i+N5FqusJqaEvs=
