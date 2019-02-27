@@ -38,6 +38,7 @@ github.com/galaco/imgui-layouts v0.0.0-20190129194952-d0ce9f8a5a5c/go.mod h1:xsC
 github.com/galaco/packrect v0.0.0-20190106134957-d6cd1e9d06f9/go.mod h1:1QOQWDBGRc6sT0tglK344YodNuAGsj6WPqZXzzpv6f4=
 github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 h1:9lAWZWuLo8dMG907qrgciO+hgR826eA6foqvHboEpUw=
 github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37/go.mod h1:1QOQWDBGRc6sT0tglK344YodNuAGsj6WPqZXzzpv6f4=
+github.com/galaco/packrect v0.0.0-20190227183335-d10c60f871c0/go.mod h1:1QOQWDBGRc6sT0tglK344YodNuAGsj6WPqZXzzpv6f4=
 github.com/galaco/source-tools-common v0.0.0-20181114203108-b70b8e75c546 h1:zWNJVV0bFq+/O7nMK+AJfCXCD4V5vhwukgt/F9TeBa0=
 github.com/galaco/source-tools-common v0.0.0-20181114203108-b70b8e75c546/go.mod h1:vcKoSJ6VLGuLDPp2ptTTb1J7D51w5+t02EqlNtwMDLI=
 github.com/galaco/source-tools-common v0.0.0-20190112113846-b5034dc3fa3a h1:/OaK/0cDccyC/zxZGUTSIS1NZFvpcy+uZFz9S9/vNBw=

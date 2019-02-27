@@ -5,7 +5,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/galaco/Lambda-Core v0.3.0
 	github.com/galaco/gosigl v0.0.0-20190218114618-7d72bfe172dc
-	github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 // indirect
+	github.com/galaco/packrect v0.0.0-20190227183335-d10c60f871c0 // indirect
 	github.com/galaco/source-tools-common v0.1.0
 	github.com/galaco/vmf v1.0.0
 	github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2
