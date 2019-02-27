@@ -7,7 +7,7 @@ import (
 // List contains a slice of rows that can be rendered
 // using imgui
 type List struct {
-	nodes []row
+	nodes    []row
 	selected int
 }
 

@@ -13,9 +13,15 @@ type Adapter interface {
 	LambdaCreateTextureStorage2D(id *uint32, width, height int32)
 	LambdaBindTexture2DToFramebuffer(framebufferId uint32)
 	LambdaBindFramebuffer(framebufferId uint32)
+	LambdaBindColourBufferToFramebuffer(framebufferId uint32)
+	LambdaBindDepthBufferToFramebuffer(framebufferId uint32)
 	LambdaBindTexture2D(id uint32)
 	LambdaDrawBuffers()
 	LambdaLoadSimpleShader(path string) *gosigl.Context
+	LambdaCreateRenderbufferStorageMultiSampledColour(width, height int32) uint32
+	LambdaCreateRenderbufferStorageMultiSampledDepth(width, height int32) uint32
+	LambdaCreateRenderbufferStorageColour(width, height int32) uint32
+	LambdaCreateRenderbufferStorageDepth(width, height int32) uint32
 
 	// General
 	Viewport(x, y, width, height int32)
@@ -28,6 +34,7 @@ type Adapter interface {
 	BindFramebuffer(target uint32, framebuffer uint32)
 	DeleteFramebuffers(n int32, framebuffers *uint32)
 	FramebufferTexture2D(target uint32, attachment uint32, textarget uint32, texture uint32, level int32)
+	DeleteRenderBuffer(n int32, target *uint32)
 
 	// Texture
 	DeleteTextures(n int32, textures *uint32)

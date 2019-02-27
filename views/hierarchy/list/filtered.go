@@ -7,7 +7,7 @@ import (
 // FilteredList contains references to rows in the master
 // list. It represents a subset of all rows in another list.
 type FilteredList struct {
-	rows []*row
+	rows     []*row
 	selected int
 }
 

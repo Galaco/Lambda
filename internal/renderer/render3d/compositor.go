@@ -31,12 +31,12 @@ func (compositor *Compositor) ComposeScene() *Composition {
 	texMappings := map[string][]mesh.IMesh{}
 
 	// Step 1. Map meshes into contiguous groups by texture
-	for _, m := range compositor.meshes {
+	for idx, m := range compositor.meshes {
 		if _, ok := texMappings[m.GetMaterial().GetFilePath()]; !ok {
 			texMappings[m.GetMaterial().GetFilePath()] = make([]mesh.IMesh, 0)
 		}
 
-		texMappings[m.GetMaterial().GetFilePath()] = append(texMappings[m.GetMaterial().GetFilePath()], m)
+		texMappings[m.GetMaterial().GetFilePath()] = append(texMappings[m.GetMaterial().GetFilePath()], compositor.meshes[idx])
 	}
 
 	// Step 2. Construct a single vertex object Composition ordered by material

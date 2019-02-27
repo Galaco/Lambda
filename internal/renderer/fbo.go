@@ -5,11 +5,12 @@ import (
 )
 
 type fbo struct {
-	adapter            graphics.Adapter
-	framebuffer        uint32
-	framebufferTexture uint32
-	width              int
-	height             int
+	adapter       graphics.Adapter
+	framebuffer   uint32
+	colourTexture uint32
+	depthTexture  uint32
+	width         int
+	height        int
 }
 
 func (win *fbo) Resize(width int, height int) {
@@ -18,13 +19,17 @@ func (win *fbo) Resize(width int, height int) {
 
 	win.Bind()
 
-	if win.framebufferTexture != 0 {
-		win.adapter.DeleteTextures(1, &win.framebufferTexture)
+	if win.colourTexture != 0 {
+		win.adapter.DeleteTextures(1, &win.colourTexture)
+		win.adapter.DeleteRenderBuffer(1, &win.depthTexture)
 	}
 
-	win.adapter.LambdaCreateTextureStorage2D(&win.framebufferTexture, int32(win.width), int32(win.height))
-	win.adapter.LambdaBindTexture2D(win.framebufferTexture)
-	win.adapter.LambdaBindTexture2DToFramebuffer(win.framebufferTexture)
+	win.depthTexture = win.adapter.LambdaCreateRenderbufferStorageDepth(int32(win.width), int32(win.height))
+
+	win.adapter.LambdaCreateTextureStorage2D(&win.colourTexture, int32(win.width), int32(win.height))
+	win.adapter.LambdaBindTexture2D(win.colourTexture)
+	win.adapter.LambdaBindTexture2DToFramebuffer(win.colourTexture)
+	win.adapter.LambdaBindDepthBufferToFramebuffer(win.depthTexture)
 	win.adapter.LambdaDrawBuffers()
 	win.adapter.ClearColor(0, 0, 0, 0)
 	win.adapter.ClearAll()

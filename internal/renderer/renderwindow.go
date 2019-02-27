@@ -12,7 +12,7 @@ type RenderWindow struct {
 }
 
 func (win *RenderWindow) BufferId() uint32 {
-	return win.frameBuffer.framebufferTexture
+	return win.frameBuffer.colourTexture
 }
 
 func (win *RenderWindow) Bind() {

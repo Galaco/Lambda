@@ -74,16 +74,16 @@ func (widget *Widget) Render(ctx *context.Context) {
 
 func (widget *Widget) Update(dt float64) {
 	if widget.keyboard.IsKeyDown(input.KeyW) {
-		widget.scene.ActiveCamera().Forwards(dt * 0.1)
+		widget.scene.ActiveCamera().Forwards(dt * 0.05)
 	}
 	if widget.keyboard.IsKeyDown(input.KeyA) {
-		widget.scene.ActiveCamera().Left(dt * 0.1)
+		widget.scene.ActiveCamera().Left(dt * 0.05)
 	}
 	if widget.keyboard.IsKeyDown(input.KeyS) {
-		widget.scene.ActiveCamera().Backwards(dt * 0.1)
+		widget.scene.ActiveCamera().Backwards(dt * 0.05)
 	}
 	if widget.keyboard.IsKeyDown(input.KeyD) {
-		widget.scene.ActiveCamera().Right(dt * 0.1)
+		widget.scene.ActiveCamera().Right(dt * 0.05)
 	}
 
 	if widget.keyboard.IsKeyDown(input.KeyUp) {

@@ -50,6 +50,14 @@ func (ogl *OpenGL) LambdaBindTexture2DToFramebuffer(texId uint32) {
 	ogl.FramebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texId, 0)
 }
 
+func (ogl *OpenGL) LambdaBindDepthBufferToFramebuffer(texId uint32) {
+	gl.FramebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, texId)
+}
+
+func (ogl *OpenGL) LambdaBindColourBufferToFramebuffer(texId uint32) {
+	gl.FramebufferRenderbuffer(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.RENDERBUFFER, texId)
+}
+
 func (ogl *OpenGL) LambdaBindTexture2D(id uint32) {
 	ogl.BindTexture(gl.TEXTURE_2D, id)
 }
@@ -62,21 +70,63 @@ func (ogl *OpenGL) LambdaDrawBuffers() {
 	gl.DrawBuffer(gl.COLOR_ATTACHMENT0)
 }
 
+func (ogl *OpenGL) LambdaCreateRenderbufferStorageMultiSampledColour(width, height int32) uint32 {
+	var buf uint32
+	msaa := int32(4)
+
+	gl.GenRenderbuffers(1, &buf)
+	gl.BindRenderbuffer(gl.RENDERBUFFER, buf)
+	gl.RenderbufferStorageMultisample(gl.RENDERBUFFER, msaa, gl.RGB8, width, height)
+
+	return buf
+}
+
+func (ogl *OpenGL) LambdaCreateRenderbufferStorageMultiSampledDepth(width, height int32) uint32 {
+	var buf uint32
+	msaa := int32(4)
+
+	gl.GenRenderbuffers(1, &buf)
+	gl.BindRenderbuffer(gl.RENDERBUFFER, buf)
+	gl.RenderbufferStorageMultisample(gl.RENDERBUFFER, msaa, gl.DEPTH_COMPONENT, width, height)
+
+	return buf
+}
+
+func (ogl *OpenGL) LambdaCreateRenderbufferStorageColour(width, height int32) uint32 {
+	var buf uint32
+
+	gl.GenRenderbuffers(1, &buf)
+	gl.BindRenderbuffer(gl.RENDERBUFFER, buf)
+	gl.RenderbufferStorage(gl.RENDERBUFFER, gl.RGB8, width, height)
+
+	return buf
+}
+
+func (ogl *OpenGL) LambdaCreateRenderbufferStorageDepth(width, height int32) uint32 {
+	var buf uint32
+
+	gl.GenRenderbuffers(1, &buf)
+	gl.BindRenderbuffer(gl.RENDERBUFFER, buf)
+	gl.RenderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT, width, height)
+
+	return buf
+}
+
 func (ogl *OpenGL) LambdaLoadSimpleShader(path string) *gosigl.Context {
-	vs,err := ioutil.ReadFile(path + ".vs.glsl")
+	vs, err := ioutil.ReadFile(path + ".vs.glsl")
 	if err != nil {
 		logger.Fatal(err)
 	}
-	fs,err := ioutil.ReadFile(path + ".fs.glsl")
+	fs, err := ioutil.ReadFile(path + ".fs.glsl")
 	if err != nil {
 		logger.Fatal(err)
 	}
 
 	shader := gosigl.NewShader()
-	if err = shader.AddShader(string(vs) + "\x00", gosigl.VertexShader); err != nil {
+	if err = shader.AddShader(string(vs)+"\x00", gosigl.VertexShader); err != nil {
 		logger.Fatal(err)
 	}
-	if err = shader.AddShader(string(fs) + "\x00", gosigl.FragmentShader); err != nil {
+	if err = shader.AddShader(string(fs)+"\x00", gosigl.FragmentShader); err != nil {
 		logger.Fatal(err)
 	}
 	shader.Finalize()
@@ -114,6 +164,10 @@ func (ogl *OpenGL) FramebufferTexture(target uint32, attachment uint32, texture 
 }
 func (ogl *OpenGL) FramebufferTexture2D(target uint32, attachment uint32, textarget uint32, texture uint32, level int32) {
 	gl.FramebufferTexture2D(target, attachment, textarget, texture, level)
+}
+
+func (ogl *OpenGL) DeleteRenderBuffer(n int32, target *uint32) {
+	gl.DeleteRenderbuffers(n, target)
 }
 
 // Textures

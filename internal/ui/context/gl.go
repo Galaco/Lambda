@@ -18,7 +18,7 @@ func initGlfw() *glfw.Window {
 	glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
 	glfw.WindowHint(glfw.OpenGLForwardCompatible, 1)
 
-	window, err := glfw.CreateWindow(1280, 720, "Lambda", nil, nil)
+	window, err := glfw.CreateWindow(1920, 1080, "Lambda", nil, nil)
 	if err != nil {
 		panic(err)
 	}

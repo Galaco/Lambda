@@ -12,8 +12,8 @@ import (
 func SolidToModel(solid *world.Solid) *lambdaModel.Model {
 	meshes := make([]lambdaMesh.IMesh, 0)
 
-	for _, side := range solid.Sides {
-		meshes = append(meshes, SideToMesh(&side))
+	for idx := range solid.Sides {
+		meshes = append(meshes, SideToMesh(&solid.Sides[idx]))
 	}
 
 	return lambdaModel.NewModel(fmt.Sprintf("solid_%d", solid.Id), meshes...)
@@ -49,7 +49,7 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 	// Normals
 	normals := make([]float32, 0)
 	{
-		normal := side.Plane[1].Sub(side.Plane[0]).Cross(side.Plane[2].Sub(side.Plane[0]))
+		normal := (side.Plane[1].Sub(side.Plane[0])).Cross(side.Plane[2].Sub(side.Plane[0]))
 		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
 		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))
 		normals = append(normals, float32(normal.X()), float32(normal.Y()), float32(normal.Z()))

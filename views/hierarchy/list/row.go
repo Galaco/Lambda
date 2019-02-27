@@ -11,7 +11,7 @@ type row struct {
 	Id    int
 	label string
 
-	onClick func(id int)
+	onClick  func(id int)
 	selected bool
 }
 
