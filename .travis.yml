@@ -32,7 +32,7 @@ before_install:
   - "export Glib_VERSION=$(pkg-config --modversion glib-2.0)"
   - "export Cairo_VERSION=$(pkg-config --modversion cairo)"
   - "export Pango_VERSION=$(pkg-config --modversion pango)"
-- echo "GTK version ${GTK_VERSION} (Glib ${Glib_VERSION}, Cairo ${Cairo_VERSION}, Pango ${Pango_VERSION})"  
+  - echo "GTK version ${GTK_VERSION} (Glib ${Glib_VERSION}, Cairo ${Cairo_VERSION}, Pango ${Pango_VERSION})"  
 
 before_script:
   - go get -v github.com/golangci/golangci-lint/cmd/golangci-lint
