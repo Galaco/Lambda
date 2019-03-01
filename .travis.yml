@@ -1,10 +1,10 @@
 sudo: false
+dist: trusty
 
 addons:
   apt_packages:
     - libgl1-mesa-dev
     - xorg-dev
-    - libgtk-3-dev
 
 language: go
 
