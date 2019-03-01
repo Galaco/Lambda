@@ -20,18 +20,23 @@ func main() {
 	app := Application{}
 	defer app.Close()
 
+	app.Model = model.NewModel()
+
 	logger.EnablePretty()
-	preferences, err := config.Load("./lambda.json")
+	logger.SetOutputPipeFunc(func(msg string) {
+		app.Model.Logs.AddLog(model.LogTypeApplication, msg)
+	})
+
+
+	configuration, err := config.Load("./lambda.json")
 	if err != nil {
 		logger.Fatal(err)
 	}
-
-	app.FileSystem = filesystem.New(preferences.General.GameDirectory)
+	app.Model.Preferences = &configuration.Preferences
+	app.FileSystem = filesystem.New(configuration.Preferences.General.GameDirectory)
 	app.GraphicsAdapter = &opengl.OpenGL{}
 	app.EventDispatcher = event.NewDispatcher()
 	app.Keyboard = input.NewKeyboard()
-	app.Model = model.NewModel()
-	app.Model.Preferences = preferences
 	app.VmfImporter = importers.NewVmfImporter()
 
 	uiContext := app.InitializeUIContext()

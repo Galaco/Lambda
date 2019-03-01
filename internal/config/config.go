@@ -6,11 +6,15 @@ import (
 	"io/ioutil"
 )
 
+type Config struct {
+	Preferences model.Preferences `json:"preferences"`
+}
+
 // Load attempts to open and unmarshall
 // json configuration
-func Load(path string) (*model.Preferences, error) {
+func Load(path string) (*Config, error) {
 	data, err := ioutil.ReadFile(path)
-	config := new(model.Preferences)
+	config := new(Config)
 	if err != nil {
 		return config, err
 	}

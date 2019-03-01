@@ -11,10 +11,10 @@ import (
 	"github.com/galaco/Lambda/internal/ui"
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/views/assets"
+	"github.com/galaco/Lambda/views/console"
 	"github.com/galaco/Lambda/views/hierarchy"
 	"github.com/galaco/Lambda/views/mainmenu"
 	"github.com/galaco/Lambda/views/properties"
-	"github.com/galaco/Lambda/views/ribbon"
 	"github.com/galaco/Lambda/views/scene"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
@@ -40,8 +40,8 @@ type Application struct {
 	hierarchyView        *hierarchy.Widget
 	mainMenuView         *mainmenu.Widget
 	entityPropertiesView *properties.Widget
-	toolRibbonView       *ribbon.Widget
 	scenePreviewView     *scene.Widget
+	consoleView 		 *console.Widget
 }
 
 func (app *Application) InitializeUIContext() *context.Context {
@@ -59,8 +59,8 @@ func (app *Application) Render() {
 	app.hierarchyView.Render(app.uiContext)
 	app.mainMenuView.Render(app.uiContext)
 	app.entityPropertiesView.Render(app.uiContext)
-	app.toolRibbonView.Render(app.uiContext)
 	app.scenePreviewView.Render(app.uiContext)
+	app.consoleView.Render(app.uiContext)
 }
 
 func (app *Application) Update() {
@@ -74,15 +74,15 @@ func (app *Application) InitializeViews() {
 	app.hierarchyView = hierarchy.NewWidget(app.EventDispatcher)
 	app.mainMenuView = mainmenu.NewWidget(app.EventDispatcher, app.Model, app.VmfImporter, app.VmfExporter)
 	app.entityPropertiesView = properties.NewWidget(app.EventDispatcher, app.Model)
-	app.toolRibbonView = ribbon.NewWidget()
 	app.scenePreviewView = scene.NewWidget(app.EventDispatcher, app.FileSystem, app.Keyboard, app.GraphicsAdapter)
+	app.consoleView = console.NewWidget(app.EventDispatcher, app.FileSystem, app.Model)
 
 	app.assetsView.Initialize()
 	app.hierarchyView.Initialize()
 	app.mainMenuView.Initialize()
 	app.entityPropertiesView.Initialize()
-	app.toolRibbonView.Initialize()
 	app.scenePreviewView.Initialize()
+	app.consoleView.Initialize()
 }
 
 func (app *Application) InitializeGUITheme() {

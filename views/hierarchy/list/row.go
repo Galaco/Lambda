@@ -2,8 +2,8 @@ package list
 
 import (
 	"fmt"
+	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/inkyblackness/imgui-go"
-	"log"
 )
 
 // row is a single row in a list
@@ -21,7 +21,7 @@ func (item *row) render() bool {
 	if imgui.SelectableV(item.label, item.selected, 0, imgui.Vec2{}) {
 		item.selected = true
 		item.onClick(item.Id)
-		log.Println(fmt.Sprintf("%d selected", item.Id))
+		logger.Notice(fmt.Sprintf("%d selected", item.Id))
 
 		return true
 	}
@@ -30,11 +30,11 @@ func (item *row) render() bool {
 
 // newRow returns a new row
 func newRow(id int, label string, onClick func(id int)) row {
-	format := "%d %s"
+	format := "%s##%d"
 
 	return row{
 		Id:      id,
-		label:   fmt.Sprintf(format, id, label),
+		label:   fmt.Sprintf(format, label, id),
 		onClick: onClick,
 	}
 }

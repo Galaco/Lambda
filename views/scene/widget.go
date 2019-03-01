@@ -139,8 +139,9 @@ func NewWidget(dispatcher *event.Dispatcher, filesystem *filesystem.FileSystem, 
 		scene:           NewScene(),
 		renderer:        renderer.NewRenderer(graphicsAdapter),
 		masterPanel: imgui_layouts.NewPanel().
-			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, 48)).
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, 24)).
 			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampLeft, 320)).
-			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampRight, 320)),
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampRight, 320)).
+			WithDisplayRule(rule.NewRuleFixedHeight(100, true, 344)),
 	}
 }

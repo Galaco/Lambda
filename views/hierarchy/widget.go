@@ -99,8 +99,9 @@ func NewWidget(dispatcher *event.Dispatcher) *Widget {
 	return &Widget{
 		dispatcher: dispatcher,
 		masterPanel: imgui_layouts.NewPanel().
-			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, 48)).
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, 24)).
 			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampLeft, 0)).
-			WithDisplayRule(rule.NewRuleFixedWidth(320)),
+			WithDisplayRule(rule.NewRuleFixedWidth(320)).
+			WithDisplayRule(rule.NewRuleFixedHeight(50, true, 24)),
 	}
 }
