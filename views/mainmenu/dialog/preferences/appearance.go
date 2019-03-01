@@ -22,9 +22,9 @@ func (d *PageAppearance) Render() {
 	}
 }
 
-func NewPageAppearance() *PageAppearance {
+func NewPageAppearance(currentOption int) *PageAppearance {
 	page := &PageAppearance{
-		CurrentOption: 0,
+		CurrentOption: currentOption,
 	}
 
 	page.themeLabels = []string{

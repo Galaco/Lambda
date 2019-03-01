@@ -61,6 +61,7 @@ func (widget *Widget) RenderScene(ctx *context.Context) {
 
 func (widget *Widget) Render(ctx *context.Context) {
 	w, h := ctx.Window().GetSize()
+	imgui.PushStyleColor(imgui.StyleColorChildBg, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 1})
 	if widget.masterPanel.Start("Scene", w, h) {
 		imgui.SetCursorPos(imgui.Vec2{X: 0, Y: 0})
 		imgui.ImageV(imgui.TextureID(widget.window.BufferId()),
@@ -70,6 +71,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 			imgui.Vec4{X: 1, Y: 1, Z: 1, W: 1}, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 0})
 		widget.masterPanel.End()
 	}
+	imgui.PopStyleColor()
 }
 
 func (widget *Widget) Update(dt float64) {

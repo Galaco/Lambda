@@ -2,20 +2,15 @@ package config
 
 import (
 	"encoding/json"
+	"github.com/galaco/Lambda/internal/model"
 	"io/ioutil"
 )
 
-// Project configuration properties
-// Engine needs to know where to locate its game data
-type Config struct {
-	GameDirectory string
-}
-
 // Load attempts to open and unmarshall
 // json configuration
-func Load(path string) (*Config, error) {
+func Load(path string) (*model.Preferences, error) {
 	data, err := ioutil.ReadFile(path)
-	config := new(Config)
+	config := new(model.Preferences)
 	if err != nil {
 		return config, err
 	}

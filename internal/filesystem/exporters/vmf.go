@@ -1,8 +1,8 @@
 package exporters
 
 import (
-	"github.com/galaco/Lambda/internal/valve"
-	"github.com/galaco/Lambda/internal/valve/world"
+	"github.com/galaco/Lambda/internal/model/valve"
+	"github.com/galaco/Lambda/internal/model/valve/world"
 	"strings"
 )
 

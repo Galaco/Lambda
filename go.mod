@@ -5,7 +5,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/galaco/Lambda-Core v0.3.2
 	github.com/galaco/gosigl v0.0.0-20190218114618-7d72bfe172dc
-	github.com/galaco/packrect v0.0.0-20190112190119-9e2d67f8fa37 // indirect
+	github.com/galaco/packrect v0.0.0-20190221101750-d10c60f871c0 // indirect
 	github.com/galaco/source-tools-common v0.1.0
 	github.com/galaco/vmf v1.0.0
 	github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2
@@ -17,4 +17,5 @@ require (
 	github.com/sqweek/dialog v0.0.0-20190209060818-302ed2f52949
 	github.com/stretchr/objx v0.1.1 // indirect
 	github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5
+	golang.org/x/image v0.0.0-20190227222117-0694c2d4d067 // indirect
 )

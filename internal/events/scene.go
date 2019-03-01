@@ -1,6 +1,6 @@
 package events
 
-import "github.com/galaco/Lambda/internal/valve"
+import "github.com/galaco/Lambda/internal/model/valve"
 
 const TypeNewScene = "NewScene"
 const TypeOpenScene = "OpenScene"

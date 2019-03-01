@@ -5,19 +5,10 @@ import (
 	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/Lambda-Core/core/resource"
 	"github.com/galaco/Lambda-Core/lib/gameinfo"
-	"github.com/galaco/Lambda/internal/config"
 )
 
-func New() *lambdaFS.FileSystem {
-	logger.EnablePretty()
-	// Load GameInfo.txt
-	// GameInfo.txt includes fundamental properties about the game
-	// and its resources locations
-	cfg, err := config.Load("./lambda.json")
-	if err != nil {
-		logger.Fatal(err)
-	}
-	gameInfo, err := gameinfo.LoadConfig(cfg.GameDirectory)
+func New(gameDir string) *lambdaFS.FileSystem {
+	gameInfo, err := gameinfo.LoadConfig(gameDir)
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -25,7 +16,7 @@ func New() *lambdaFS.FileSystem {
 	// Register GameInfo.txt referenced resource paths
 	// Filesystem module needs to know about all the possible resource
 	// locations it can search.
-	fs := lambdaFS.CreateFilesystemFromGameInfoDefinitions(cfg.GameDirectory, gameInfo)
+	fs := lambdaFS.CreateFilesystemFromGameInfoDefinitions(gameDir, gameInfo)
 
 	// Explicity define fallbacks for missing resources
 	// Defaults are defined, but if HL2 assets are not readable, then

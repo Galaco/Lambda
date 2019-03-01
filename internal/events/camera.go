@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/galaco/Lambda/internal/valve"
+	"github.com/galaco/Lambda/internal/model/valve"
 )
 
 const TypeNewCameraCreated = "NewCameraCreated"

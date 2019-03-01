@@ -86,7 +86,7 @@ func (app *Application) InitializeViews() {
 }
 
 func (app *Application) InitializeGUITheme() {
-	ui.ApplyImguiStyles(1)
+	ui.ApplyImguiStyles(app.Model.Preferences.Appearance.Theme)
 }
 
 func (app *Application) Close() {
