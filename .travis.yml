@@ -5,8 +5,6 @@ addons:
     - libgl1-mesa-dev
     - xorg-dev
     - libgtk-3-dev
-    - pango
-    - pangocairo
 
 language: go
 
