@@ -19,8 +19,8 @@ func NewRuleFixedWidth(width int) *RuleFixedWidth {
 }
 
 type RuleFixedHeight struct {
-	Height int
-	asPercent bool
+	Height      int
+	asPercent   bool
 	fixedOffset int
 }
 
@@ -28,15 +28,15 @@ func (rule *RuleFixedHeight) Resolve(panel *master.Panel) {
 	if !rule.asPercent {
 		panel.Size[1] = float32(rule.Height)
 	} else {
-		panel.Size[1] = (float32(rule.Height)/100) * panel.WindowSize[1]
+		panel.Size[1] = (float32(rule.Height) / 100) * panel.WindowSize[1]
 	}
 	panel.Size[1] = panel.Size[1] - float32(rule.fixedOffset)
 }
 
 func NewRuleFixedHeight(height int, asPercent bool, fixedOffset int) *RuleFixedHeight {
 	return &RuleFixedHeight{
-		Height: height,
-		asPercent: asPercent,
+		Height:      height,
+		asPercent:   asPercent,
 		fixedOffset: fixedOffset,
 	}
 }

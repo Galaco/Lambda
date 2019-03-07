@@ -7,6 +7,9 @@ import (
 	"github.com/galaco/Lambda-Core/lib/gameinfo"
 )
 
+// New builds a new filesystem from a game directory root.
+// It loads a gameinfo.txt and attempts to find listed resourced
+// in it.
 func New(gameDir string) *lambdaFS.FileSystem {
 	gameInfo, err := gameinfo.LoadConfig(gameDir)
 	if err != nil {

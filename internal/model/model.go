@@ -3,7 +3,7 @@ package model
 type Model struct {
 	Project     *Project
 	Preferences *Preferences
-	Logs 		*Log
+	Logs        *Log
 }
 
 func NewModel() *Model {

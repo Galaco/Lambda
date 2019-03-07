@@ -4,8 +4,12 @@ import (
 	"github.com/galaco/Lambda/internal/model/valve"
 )
 
-const TypeNewCameraCreated = "NewCameraCreated"
-const TypeCameraChanged = "CameraChanged"
+const (
+	// TypeNewCameraCreated event type
+	TypeNewCameraCreated = "NewCameraCreated"
+	// TypeCameraChanged event type
+	TypeCameraChanged = "CameraChanged"
+)
 
 type NewCameraCreated struct {
 	camera *valve.Camera

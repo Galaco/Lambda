@@ -46,7 +46,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 	}
 }
 
-func (widget *Widget) selectedEntityChanged(received event.IEvent) {
+func (widget *Widget) selectedEntityChanged(received event.Dispatchable) {
 }
 
 func NewWidget(dispatcher *event.Dispatcher, fileSystem *lambdaFS.FileSystem) *Widget {

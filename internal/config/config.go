@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 )
 
+// Config contains application configuration.
 type Config struct {
 	Preferences model.Preferences `json:"preferences"`
 }

@@ -3,6 +3,7 @@ package hierarchy
 import (
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/ui"
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
@@ -70,7 +71,7 @@ func (widget *Widget) renderMenuBar() {
 	}
 }
 
-func (widget *Widget) newEntityCreated(received event.IEvent) {
+func (widget *Widget) newEntityCreated(received event.Dispatchable) {
 	ent := received.(*events.EntityCreated).Target()
 	widget.list.addEntity(
 		ent.IntForKey("id"),
@@ -80,7 +81,7 @@ func (widget *Widget) newEntityCreated(received event.IEvent) {
 		})
 }
 
-func (widget *Widget) newSolidCreated(received event.IEvent) {
+func (widget *Widget) newSolidCreated(received event.Dispatchable) {
 	ent := received.(*events.NewSolidCreated).Target()
 	widget.solidList.addEntity(
 		ent.Id,
@@ -90,7 +91,7 @@ func (widget *Widget) newSolidCreated(received event.IEvent) {
 		})
 }
 
-func (widget *Widget) sceneClosed(received event.IEvent) {
+func (widget *Widget) sceneClosed(received event.Dispatchable) {
 	widget.list = entityList{}
 	widget.solidList = entityList{}
 }
@@ -99,9 +100,9 @@ func NewWidget(dispatcher *event.Dispatcher) *Widget {
 	return &Widget{
 		dispatcher: dispatcher,
 		masterPanel: imgui_layouts.NewPanel().
-			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, 24)).
+			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampTop, int(24.0*ui.DPIScale()))).
 			WithDisplayRule(rule.NewRuleClampToEdge(rule.ClampLeft, 0)).
-			WithDisplayRule(rule.NewRuleFixedWidth(320)).
-			WithDisplayRule(rule.NewRuleFixedHeight(50, true, 24)),
+			WithDisplayRule(rule.NewRuleFixedWidth(int(320.0 * ui.DPIScale()))).
+			WithDisplayRule(rule.NewRuleFixedHeight(50, true, int(24.0*ui.DPIScale()))),
 	}
 }

@@ -19,6 +19,7 @@ import (
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 
+// Application is the main Lambda application
 type Application struct {
 	uiContext       *context.Context
 	GraphicsAdapter graphics.Adapter
@@ -41,9 +42,10 @@ type Application struct {
 	mainMenuView         *mainmenu.Widget
 	entityPropertiesView *properties.Widget
 	scenePreviewView     *scene.Widget
-	consoleView 		 *console.Widget
+	consoleView          *console.Widget
 }
 
+// InitializeUIContext prepares the graphics and visual context.
 func (app *Application) InitializeUIContext() *context.Context {
 	// Window & OpenGL
 	app.uiContext = context.NewContext(app.GraphicsAdapter)
@@ -51,6 +53,7 @@ func (app *Application) InitializeUIContext() *context.Context {
 	return app.uiContext
 }
 
+// Render renders the loaded widgets
 func (app *Application) Render() {
 	app.scenePreviewView.RenderScene(app.uiContext)
 
@@ -63,12 +66,14 @@ func (app *Application) Render() {
 	app.consoleView.Render(app.uiContext)
 }
 
+// Update processes dispatched events.
 func (app *Application) Update() {
 	app.EventDispatcher.Process()
 
 	app.scenePreviewView.Update(1000.0 / 60)
 }
 
+// InitializeViews loads and prepares application views/widgets
 func (app *Application) InitializeViews() {
 	app.assetsView = assets.NewWidget(app.EventDispatcher, app.FileSystem)
 	app.hierarchyView = hierarchy.NewWidget(app.EventDispatcher)
@@ -85,10 +90,12 @@ func (app *Application) InitializeViews() {
 	app.consoleView.Initialize()
 }
 
+// InitializeGUITheme set the initial imgui layout and colour scheme
 func (app *Application) InitializeGUITheme() {
 	ui.ApplyImguiStyles(app.Model.Preferences.Appearance.Theme)
 }
 
+// Close shuts doen the application
 func (app *Application) Close() {
 	defer glfw.Terminate()
 	defer app.uiContext.Close()

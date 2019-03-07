@@ -2,12 +2,12 @@ package model
 
 const (
 	LogTypeApplication = 0
-	LogTypeProject = 1
+	LogTypeProject     = 1
 )
 
 type Log struct {
 	application []string
-	project []string
+	project     []string
 }
 
 func (log *Log) GetLogs(logType int) []string {

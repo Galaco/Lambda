@@ -2,12 +2,11 @@ package ui
 
 import "github.com/inkyblackness/imgui-go"
 
+// ApplyImguiStyles sets the Imgui layout and theme.
 func ApplyImguiStyles(themeId int) {
-	fontAtlas := imgui.CurrentIO().Fonts()
-	fontAtlas.AddFontFromFileTTF("./assets/fonts/FiraCode-Regular.ttf", 16)
 	style := imgui.CurrentStyle()
 
-	//commonLayout()
+	commonLayout(&style)
 
 	switch themeId {
 	case 1:
@@ -17,18 +16,14 @@ func ApplyImguiStyles(themeId int) {
 	}
 }
 
-func commonLayout() {
-	//imgui.PushStyleVarVec2(imgui.StyleVarWindowPadding, imgui.Vec2{15, 15})
-	//imgui.PushStyleVarFloat(imgui.StyleVarWindowRounding, 0)
-	//imgui.PushStyleVarVec2(imgui.StyleVarFramePadding, imgui.Vec2{5, 5})
-	//imgui.PushStyleVarFloat(imgui.StyleVarFrameRounding, 0)
-	//imgui.PushStyleVarVec2(imgui.StyleVarItemSpacing, imgui.Vec2{12, 8})
-	//imgui.PushStyleVarVec2(imgui.StyleVarItemInnerSpacing, imgui.Vec2{8, 6})
-	//imgui.PushStyleVarFloat(imgui.StyleVarIndentSpacing, 25)
-	//imgui.PushStyleVarFloat(imgui.StyleVarScrollbarSize, 16)
-	//imgui.PushStyleVarFloat(imgui.StyleVarScrollbarRounding, 0)
-	//imgui.PushStyleVarFloat(imgui.StyleVarGrabMinSize, 5)
-	//imgui.PushStyleVarFloat(imgui.StyleVarGrabRounding, 0)
+func commonLayout(style *imgui.Style) {
+	style.ScaleAllSizes(DPIScale())
+	fontAtlas := imgui.CurrentIO().Fonts()
+	fontConfig := imgui.NewFontConfig()
+	fontConfig.SetSize(DPIScale() * float32(DefaultFontSize))
+	fontAtlas.AddFontFromFileTTF("./assets/fonts/FiraCode-Regular.ttf", DPIScale() * DefaultFontSize)
+	fontAtlas.AddFontDefaultV(fontConfig)
+	//fontAtlas.AddFontDefault()
 }
 
 func lightTheme(style *imgui.Style) {
@@ -59,15 +54,7 @@ func lightTheme(style *imgui.Style) {
 	style.SetColor(imgui.StyleColorResizeGrip, imgui.Vec4{0.60, 0.60, 0.80, 0.30})
 	style.SetColor(imgui.StyleColorResizeGripHovered, imgui.Vec4{1.00, 1.00, 1.00, 0.60})
 	style.SetColor(imgui.StyleColorResizeGripActive, imgui.Vec4{1.00, 1.00, 1.00, 0.90})
-	//style.SetColor(imgui.StyleColorCloseButton, imgui.Vec4{0.41, 0.75, 0.98, 0.50}})
-	//style.SetColor(imgui.StyleColorCloseButtonHovered, imgui.Vec4{1.00, 0.47, 0.41, 0.60}})
-	//style.SetColor(imgui.StyleColorCloseButtonActive, imgui.Vec4{1.00, 0.16, 0.00, 1.00}})
 	style.SetColor(imgui.StyleColorTextSelectedBg, imgui.Vec4{1.00, 0.99, 0.54, 0.43})
-	//style.SetColor(imgui.StyleColorTooltipBg, imgui.Vec4{0.82, 0.92, 1.00, 0.90}})
-	//style.Alpha = 1.0
-	//style.WindowFillAlphaDefault = 1.0
-	//style.FrameRounding = 4
-	//style.IndentSpacing = 12.0
 }
 
 func darkTheme(style *imgui.Style) {
@@ -123,56 +110,12 @@ func darkTheme(style *imgui.Style) {
 	//style.SetColor(imgui.StyleColorModalWindowDimBg, imgui.Vec4{0.000, 0.000, 0.000, 0.586})
 	imgui.PushStyleVarFloat(imgui.StyleVarChildRounding, 4)
 	imgui.PushStyleVarFloat(imgui.StyleVarFrameBorderSize, 1.0)
-	imgui.PushStyleVarFloat(imgui.StyleVarFrameRounding, 2.0 )
-	imgui.PushStyleVarFloat(imgui.StyleVarGrabMinSize, 7.0 )
+	imgui.PushStyleVarFloat(imgui.StyleVarFrameRounding, 2.0)
+	imgui.PushStyleVarFloat(imgui.StyleVarGrabMinSize, 7.0)
 	imgui.PushStyleVarFloat(imgui.StyleVarPopupRounding, 2.0)
 	imgui.PushStyleVarFloat(imgui.StyleVarScrollbarRounding, 12.0)
-	imgui.PushStyleVarFloat(imgui.StyleVarScrollbarSize, 13.0 )
+	imgui.PushStyleVarFloat(imgui.StyleVarScrollbarSize, 13.0)
 	//imgui.PushStyleVarFloat(imgui.StyleVarTabBorderSize, 1.0 )
 	//imgui.PushStyleVarFloat(imgui.StyleVarTabRounding, 0.0 )
 	imgui.PushStyleVarFloat(imgui.StyleVarWindowRounding, 4.0)
-	//
-	//
-	//style.SetColor(imgui.StyleColorText, imgui.Vec4{0.80, 0.80, 0.83, 1.00})
-	//style.SetColor(imgui.StyleColorTextDisabled, imgui.Vec4{0.24, 0.23, 0.29, 1.00})
-	//style.SetColor(imgui.StyleColorWindowBg, imgui.Vec4{0.06, 0.05, 0.07, 1.00})
-	//style.SetColor(imgui.StyleColorPopupBg, imgui.Vec4{0.07, 0.07, 0.09, 1.00})
-	//style.SetColor(imgui.StyleColorBorder, imgui.Vec4{0.80, 0.80, 0.83, 0.88})
-	//style.SetColor(imgui.StyleColorBorderShadow, imgui.Vec4{0.92, 0.91, 0.88, 0.00})
-	//style.SetColor(imgui.StyleColorFrameBg, imgui.Vec4{0.10, 0.09, 0.12, 1.00})
-	//style.SetColor(imgui.StyleColorFrameBgHovered, imgui.Vec4{0.24, 0.23, 0.29, 1.00})
-	//style.SetColor(imgui.StyleColorFrameBgActive, imgui.Vec4{0.56, 0.56, 0.58, 1.00})
-	//style.SetColor(imgui.StyleColorTitleBg, imgui.Vec4{0.10, 0.09, 0.12, 1.00})
-	//style.SetColor(imgui.StyleColorTitleBgCollapsed, imgui.Vec4{1.00, 0.98, 0.95, 0.75})
-	//style.SetColor(imgui.StyleColorTitleBgActive, imgui.Vec4{0.07, 0.07, 0.09, 1.00})
-	//style.SetColor(imgui.StyleColorMenuBarBg, imgui.Vec4{0.10, 0.09, 0.12, 1.00})
-	//style.SetColor(imgui.StyleColorScrollbarBg, imgui.Vec4{0.10, 0.09, 0.12, 1.00})
-	//style.SetColor(imgui.StyleColorScrollbarGrab, imgui.Vec4{0.80, 0.80, 0.83, 0.31})
-	//style.SetColor(imgui.StyleColorScrollbarGrabHovered, imgui.Vec4{0.56, 0.56, 0.58, 1.00})
-	//style.SetColor(imgui.StyleColorScrollbarGrabActive, imgui.Vec4{0.06, 0.05, 0.07, 1.00})
-	////style.SetColor(imgui.StyleColorComboBg, imgui.Vec4{0.19, 0.18, 0.21, 1.00})
-	//style.SetColor(imgui.StyleColorCheckMark, imgui.Vec4{0.80, 0.80, 0.83, 0.31})
-	//style.SetColor(imgui.StyleColorSliderGrab, imgui.Vec4{0.80, 0.80, 0.83, 0.31})
-	//style.SetColor(imgui.StyleColorSliderGrabActive, imgui.Vec4{0.06, 0.05, 0.07, 1.00})
-	//style.SetColor(imgui.StyleColorButton, imgui.Vec4{0.10, 0.09, 0.12, 1.00})
-	//style.SetColor(imgui.StyleColorButtonHovered, imgui.Vec4{0.24, 0.23, 0.29, 1.00})
-	//style.SetColor(imgui.StyleColorButtonActive, imgui.Vec4{0.56, 0.56, 0.58, 1.00})
-	//style.SetColor(imgui.StyleColorHeader, imgui.Vec4{0.10, 0.09, 0.12, 1.00})
-	//style.SetColor(imgui.StyleColorHeaderHovered, imgui.Vec4{0.56, 0.56, 0.58, 1.00})
-	//style.SetColor(imgui.StyleColorHeaderActive, imgui.Vec4{0.06, 0.05, 0.07, 1.00})
-	////style.SetColor(imgui.StyleColorColumn, imgui.Vec4{0.56, 0.56, 0.58, 1.00})
-	////style.SetColor(imgui.StyleColorColumnHovered, imgui.Vec4{0.24, 0.23, 0.29, 1.00})
-	////style.SetColor(imgui.StyleColorColumnActive, imgui.Vec4{0.56, 0.56, 0.58, 1.00})
-	//style.SetColor(imgui.StyleColorResizeGrip, imgui.Vec4{0.00, 0.00, 0.00, 0.00})
-	//style.SetColor(imgui.StyleColorResizeGripHovered, imgui.Vec4{0.56, 0.56, 0.58, 1.00})
-	//style.SetColor(imgui.StyleColorResizeGripActive, imgui.Vec4{0.06, 0.05, 0.07, 1.00})
-	////style.SetColor(imgui.StyleColorCloseButton, imgui.Vec4{0.40, 0.39, 0.38, 0.16})
-	////style.SetColor(imgui.StyleColorCloseButtonHovered, imgui.Vec4{0.40, 0.39, 0.38, 0.39})
-	////style.SetColor(imgui.StyleColorCloseButtonActive, imgui.Vec4{0.40, 0.39, 0.38, 1.00})
-	//style.SetColor(imgui.StyleColorPlotLines, imgui.Vec4{0.40, 0.39, 0.38, 0.63})
-	//style.SetColor(imgui.StyleColorPlotLinesHovered, imgui.Vec4{0.25, 1.00, 0.00, 1.00})
-	//style.SetColor(imgui.StyleColorPlotHistogram, imgui.Vec4{0.40, 0.39, 0.38, 0.63})
-	//style.SetColor(imgui.StyleColorPlotHistogramHovered, imgui.Vec4{0.25, 1.00, 0.00, 1.00})
-	//style.SetColor(imgui.StyleColorTextSelectedBg, imgui.Vec4{0.25, 1.00, 0.00, 0.43})
-	//style.SetColor(imgui.StyleColorModalWindowDarkening, imgui.Vec4{1.00, 0.98, 0.95, 0.73})
 }

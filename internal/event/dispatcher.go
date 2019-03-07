@@ -16,7 +16,7 @@ type Dispatcher struct {
 	running   bool
 	receivers map[string][]Receivable
 
-	messages []IEvent
+	messages []Dispatchable
 }
 
 // Initialize starts the singleton running.
@@ -35,7 +35,7 @@ func (dispatch *Dispatcher) Close() {
 
 // Dispatch notified the Dispatcher that the specified event has occurred,
 // and appends it to the end of the current dispatch queue for processing.
-func (dispatch *Dispatcher) Dispatch(action IEvent) {
+func (dispatch *Dispatcher) Dispatch(action Dispatchable) {
 	dispatch.messages = append(dispatch.messages, action)
 	//dispatch.processMessages()
 }

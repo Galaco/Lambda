@@ -27,7 +27,6 @@ func main() {
 		app.Model.Logs.AddLog(model.LogTypeApplication, msg)
 	})
 
-
 	configuration, err := config.Load("./lambda.json")
 	if err != nil {
 		logger.Fatal(err)
@@ -46,10 +45,10 @@ func main() {
 
 	// Subscribe to window closing event
 	windowShouldClose := false
-	app.EventDispatcher.Subscribe(events.TypeWindowClosed, func(action event.IEvent) {
+	app.EventDispatcher.Subscribe(events.TypeWindowClosed, func(action event.Dispatchable) {
 		windowShouldClose = true
 	})
-	app.EventDispatcher.Subscribe(events.TypePreferencesUpdated, func(action event.IEvent) {
+	app.EventDispatcher.Subscribe(events.TypePreferencesUpdated, func(action event.Dispatchable) {
 		ui.ApplyImguiStyles(action.(*events.PreferencesUpdated).Appearance.Theme)
 	})
 

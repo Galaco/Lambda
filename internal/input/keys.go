@@ -2,6 +2,7 @@ package input
 
 import "github.com/vulkan-go/glfw/v3.3/glfw"
 
+// Key maps to an integer value of a keyboard key (glfw values)
 type Key int
 
 const (
