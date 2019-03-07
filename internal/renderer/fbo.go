@@ -13,6 +13,7 @@ type fbo struct {
 	height        int
 }
 
+// Resize resizes this framebuffer object
 func (win *fbo) Resize(width int, height int) {
 	win.width = width
 	win.height = height
@@ -38,18 +39,22 @@ func (win *fbo) Resize(width int, height int) {
 	win.Unbind()
 }
 
+// Bind this framebuffer
 func (win *fbo) Bind() {
 	win.adapter.LambdaBindFramebuffer(win.framebuffer)
 }
 
+// Unbind unbind this framebuffer
 func (win *fbo) Unbind() {
 	win.adapter.LambdaBindFramebuffer(0)
 }
 
+// Destroy deletes and cleans up this framebuffer
 func (win *fbo) Destroy() {
 	win.adapter.DeleteFramebuffers(1, &win.framebuffer)
 }
 
+// NewFbo returns a new framebuffer
 func NewFbo(adapter graphics.Adapter, width int, height int) *fbo {
 	f := &fbo{
 		adapter: adapter,

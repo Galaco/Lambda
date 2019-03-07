@@ -1,6 +1,9 @@
 package events
 
-const TypePreferencesUpdated = "TypePreferencesUpdated"
+const (
+	// TypePreferencesUpdated event type
+	TypePreferencesUpdated = "TypePreferencesUpdated"
+)
 
 type PreferencesUpdated struct {
 	General    struct{}

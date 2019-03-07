@@ -2,13 +2,13 @@ package config
 
 import (
 	"encoding/json"
+	"github.com/galaco/Lambda/internal/model"
 	"io/ioutil"
 )
 
-// Project configuration properties
-// Engine needs to know where to locate its game data
+// Config contains application configuration.
 type Config struct {
-	GameDirectory string
+	Preferences model.Preferences `json:"preferences"`
 }
 
 // Load attempts to open and unmarshall

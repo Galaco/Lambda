@@ -3,6 +3,7 @@ package dialog
 import (
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/columns"
 	"github.com/galaco/Lambda/views/mainmenu/dialog/preferences"
 	"github.com/inkyblackness/imgui-go"
@@ -51,7 +52,7 @@ func (d *Preferences) renderTab() {
 	}
 }
 
-func NewPreferences(dispatch *event.Dispatcher) *Preferences {
+func NewPreferences(dispatch *event.Dispatcher, model *model.Preferences) *Preferences {
 	dialog := &Preferences{
 		Dialog: Dialog{
 			name: "Preferences",
@@ -64,7 +65,7 @@ func NewPreferences(dispatch *event.Dispatcher) *Preferences {
 	}
 
 	dialog.pages["general"] = &preferences.PageGeneral{}
-	dialog.pages["appearance"] = preferences.NewPageAppearance()
+	dialog.pages["appearance"] = preferences.NewPageAppearance(model.Appearance.Theme)
 
 	dialog.currentPage = dialog.pages[dialog.sidebar.CurrentTab()]
 

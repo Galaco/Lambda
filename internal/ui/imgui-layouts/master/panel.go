@@ -20,6 +20,8 @@ type Panel struct {
 
 	// Rules is the ruleset to compute layout information from
 	Rules []Rulable
+
+	WindowSize mgl32.Vec2
 }
 
 // AddRules adds a new rule to the resolver
@@ -31,6 +33,7 @@ func (pane *Panel) AddRule(rule Rulable) {
 // ruleset.
 // Incompatible rules wont error, but unexpected results may be generated.
 func (pane *Panel) Resolve(width int, height int) (offset, size mgl32.Vec2) {
+	pane.WindowSize = mgl32.Vec2{float32(width), float32(height)}
 	for _, rule := range pane.Rules {
 		rule.Resolve(pane)
 	}

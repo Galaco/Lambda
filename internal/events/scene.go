@@ -1,13 +1,21 @@
 package events
 
-import "github.com/galaco/Lambda/internal/valve"
+import "github.com/galaco/Lambda/internal/model/valve"
 
-const TypeNewScene = "NewScene"
-const TypeOpenScene = "OpenScene"
-const TypeOpenSceneFailed = "OpenSceneFailed"
-const TypeEntityNodeSelected = "EntityNodeSelected"
-const TypeSolidNodeSelected = "SolidNodeSelected"
-const TypeSceneClosed = "SceneClosed"
+const (
+	// TypeNewScene event type
+	TypeNewScene = "NewScene"
+	// TypeOpenScene event type
+	TypeOpenScene = "OpenScene"
+	// TypeOpenSceneFailed event type
+	TypeOpenSceneFailed = "OpenSceneFailed"
+	// TypeEntityNodeSelected event type
+	TypeEntityNodeSelected = "EntityNodeSelected"
+	// TypeSolidNodeSelected event type
+	TypeSolidNodeSelected = "SolidNodeSelected"
+	// TypeSceneClosed event type
+	TypeSceneClosed = "SceneClosed"
+)
 
 // NewScene action includes a payload of the new scene
 // Note that NewScene is also a loaded scene, as there is

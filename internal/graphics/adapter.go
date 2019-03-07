@@ -5,6 +5,7 @@ import (
 	"unsafe"
 )
 
+// Adapter is an interface for graphics api agnostic gpu function calls
 type Adapter interface {
 	Init()
 

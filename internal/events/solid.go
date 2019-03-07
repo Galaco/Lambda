@@ -1,10 +1,13 @@
 package events
 
 import (
-	"github.com/galaco/Lambda/internal/valve/world"
+	"github.com/galaco/Lambda/internal/model/valve/world"
 )
 
-const TypeNewSolidCreated = "NewSolidCreated"
+const (
+	// TypeNewSolidCreated event type
+	TypeNewSolidCreated = "NewSolidCreated"
+)
 
 type NewSolidCreated struct {
 	solid *world.Solid

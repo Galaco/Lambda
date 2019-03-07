@@ -1,6 +1,9 @@
 package events
 
-const TypeWindowClosed = "WindowClosed"
+const (
+	// TypeWindowClosed event type
+	TypeWindowClosed = "WindowClosed"
+)
 
 type windowClosed struct {
 	x, y int

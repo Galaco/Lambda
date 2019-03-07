@@ -2,7 +2,10 @@ package events
 
 import "github.com/galaco/source-tools-common/entity"
 
-const TypeEntityCreated = "NewEntityCreated"
+const (
+	// TypeEntityCreated event type
+	TypeEntityCreated = "NewEntityCreated"
+)
 
 type EntityCreated struct {
 	entity *entity.Entity

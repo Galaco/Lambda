@@ -1,3 +1,14 @@
 {
-  "gameDirectory": "."
+  "preferences": {
+    "general": {
+      "gameDirectory": "."
+    },
+    "appearance": {
+      "theme": 1,
+      "windowScaling": 1
+    },
+    "viewport": {
+      "fov": 90
+    }
+  }
 }
