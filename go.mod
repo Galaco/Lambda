@@ -8,7 +8,7 @@ require (
 	github.com/galaco/packrect v0.0.0-20190221101750-d10c60f871c0 // indirect
 	github.com/galaco/source-tools-common v0.1.0
 	github.com/galaco/vmf v1.0.0
-	github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2
+	github.com/go-gl/gl v0.0.0-20190320195457-bf2b1f2f34d7
 	github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a
 	github.com/gotk3/gotk3 v0.0.0-20190306224825-558ae9ac7697 // indirect
 	github.com/inkyblackness/imgui-go v1.7.0
