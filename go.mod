@@ -16,6 +16,6 @@ require (
 	github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791 // indirect
 	github.com/sqweek/dialog v0.0.0-20190209060818-302ed2f52949
 	github.com/stretchr/objx v0.1.1 // indirect
-	github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5
+	github.com/vulkan-go/glfw v0.0.0-20190522174953-32f33e359ff2
 	golang.org/x/image v0.0.0-20190227222117-0694c2d4d067 // indirect
 )
