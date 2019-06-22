@@ -15,6 +15,7 @@ import (
 	"github.com/inkyblackness/imgui-go"
 )
 
+// Widget
 type Widget struct {
 	masterPanel *imgui_layouts.Panel
 
@@ -32,6 +33,7 @@ type Widget struct {
 	camera *entity.Camera
 }
 
+// Initialize
 func (widget *Widget) Initialize() {
 	widget.window = renderer.NewRenderWindow(widget.graphicsAdapter, widget.width, widget.height)
 	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
@@ -46,6 +48,7 @@ func (widget *Widget) Initialize() {
 	})
 }
 
+// RenderScene
 func (widget *Widget) RenderScene(ctx *context.Context) {
 	dirtyComposition := widget.scene.frameCompositor.IsOutdated()
 	if dirtyComposition {
@@ -60,6 +63,7 @@ func (widget *Widget) RenderScene(ctx *context.Context) {
 	widget.window.Unbind()
 }
 
+// Render
 func (widget *Widget) Render(ctx *context.Context) {
 	w, h := ctx.Window().GetSize()
 	imgui.PushStyleColor(imgui.StyleColorChildBg, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 1})
@@ -75,6 +79,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 	imgui.PopStyleColor()
 }
 
+// Update
 func (widget *Widget) Update(dt float64) {
 	if widget.keyboard.IsKeyDown(input.KeyW) {
 		widget.scene.ActiveCamera().Forwards(dt * 0.05)

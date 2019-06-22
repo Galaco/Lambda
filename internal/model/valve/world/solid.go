@@ -58,19 +58,23 @@ func NewSide(id int, plane Plane, material string, uAxis UVTransform, vAxis UVTr
 	}
 }
 
+// NewEditor
 func NewEditor(color mgl64.Vec3, visgroupShown bool, visgroupAutoShown bool) *Editor {
 	return &Editor{
 		color:             color,
 		visgroupShown:     visgroupShown,
 		visGroupAutoShown: visgroupAutoShown,
+		logicalPos: mgl64.Vec2{},
 	}
 }
 
+// NewPlane
 func NewPlane(a mgl64.Vec3, b mgl64.Vec3, c mgl64.Vec3) *Plane {
 	p := Plane([3]mgl64.Vec3{a, b, c})
 	return &p
 }
 
+// NewPlaneFromString
 func NewPlaneFromString(marshalled string) *Plane {
 	var v1, v2, v3 = float64(0), float64(0), float64(0)
 	var v4, v5, v6 = float64(0), float64(0), float64(0)
@@ -83,6 +87,7 @@ func NewPlaneFromString(marshalled string) *Plane {
 		mgl64.Vec3{v7, v8, v9})
 }
 
+// NewUVTransform
 func NewUVTransform(transform mgl64.Vec4, scale float64) *UVTransform {
 	return &UVTransform{
 		Transform: transform,
@@ -90,6 +95,7 @@ func NewUVTransform(transform mgl64.Vec4, scale float64) *UVTransform {
 	}
 }
 
+// NewUVTransformFromString
 func NewUVTransformFromString(marshalled string) *UVTransform {
 	var v1, v2, v3, v4 = float64(0), float64(0), float64(0), float64(0)
 	var scale = float64(0)

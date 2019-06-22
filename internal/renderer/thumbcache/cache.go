@@ -3,7 +3,6 @@ package thumbcache
 import (
 	"bytes"
 	"encoding/binary"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -142,7 +141,7 @@ func (cache *Cache) loadFromFile() error {
 	// Read filepaths
 	paths := strings.Split(string(raw[head.FilePathBlockOffset:head.FilePathBlockOffset+head.FilePathBlockLength]), "\x00")
 	if len(paths) != int(head.NumEntries) {
-		return errors.New(fmt.Sprintf("cache entry data corrupted for cache %s", cache.fsPath))
+		return fmt.Errorf("cache entry data corrupted for cache %s", cache.fsPath)
 	}
 
 	// Read entries
@@ -175,7 +174,7 @@ func InitCache(cachePath string) (*Cache, error) {
 		// no cache exists to load
 		cache.cacheFile = cacheFile{}
 	} else {
-		return nil, errors.New(fmt.Sprintf("failed to initialize cache for path: %s", cachePath))
+		return nil, fmt.Errorf("failed to initialize cache for path: %s", cachePath)
 	}
 
 	return cache, nil

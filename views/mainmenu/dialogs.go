@@ -8,13 +8,8 @@ import (
 const dialogWidth = 480
 const dialogHeight = 640
 
-func openFile() string {
-	filename, err := dialog.FileOpen()
-	if err != nil {
-		filename = "./ze_bioshock_v6_4.vmf"
-		return ""
-	}
-	return filename
+func openFile() (string,error) {
+	return dialog.FileOpen()
 }
 
 func saveFile(filename string, data string) (err error) {
@@ -26,5 +21,5 @@ func saveFile(filename string, data string) (err error) {
 		}
 	}
 
-	return ioutil.WriteFile(filename, []byte(data), 755)
+	return ioutil.WriteFile(filename, []byte(data), 0755)
 }

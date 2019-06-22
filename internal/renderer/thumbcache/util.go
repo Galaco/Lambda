@@ -7,6 +7,6 @@ import (
 
 func hashDirectory(directory string) string {
 	hasher := md5.New()
-	hasher.Write([]byte(directory))
+	_,_ = hasher.Write([]byte(directory))
 	return hex.EncodeToString(hasher.Sum(nil))
 }

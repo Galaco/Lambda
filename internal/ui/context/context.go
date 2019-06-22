@@ -10,6 +10,7 @@ type Context struct {
 	window       *glfw.Window
 	imguiContext *imgui.Context
 	imguiBind    *imguiGlfw3
+	drawContext graphics.Context
 }
 
 func (ctx *Context) Window() *glfw.Window {
@@ -18,6 +19,10 @@ func (ctx *Context) Window() *glfw.Window {
 
 func (ctx *Context) Imgui() *imguiGlfw3 {
 	return ctx.imguiBind
+}
+
+func (ctx *Context) DrawContext() *graphics.Context {
+	return &ctx.drawContext
 }
 
 func (ctx *Context) Close() {

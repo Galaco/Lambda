@@ -1,6 +1,6 @@
 package ui
 
-var windowDPI = 192
+var windowDPI = 141.2
 
 // DPIScale returns the scale factor for interface elements based
 // on screen DPI.

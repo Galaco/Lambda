@@ -18,8 +18,6 @@ type Widget struct {
 	graphicsAdapter graphics.Adapter
 	fileSystem      *lambdaFS.FileSystem
 	model           *model.Model
-
-	messages []string
 }
 
 func (widget *Widget) Initialize() {

@@ -36,7 +36,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 				/* Do stuff */
 			}
 			if imgui.MenuItemV("Open..", "Ctrl+O", false, true) {
-				if filename := openFile(); filename != "" {
+				if filename, err := openFile(); err == nil {
 					widget.loadVmf(filename)
 				}
 			}

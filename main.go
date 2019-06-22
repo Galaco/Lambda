@@ -62,6 +62,8 @@ func main() {
 		imgui.Render()
 		uiContext.Imgui().Render(imgui.RenderedDrawData())
 
+		uiContext.DrawContext().Stack.Execute()
+
 		uiContext.Window().SwapBuffers()
 		app.GraphicsAdapter.ClearColor(0, 0, 0, 0)
 		app.GraphicsAdapter.ClearAll()

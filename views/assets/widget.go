@@ -3,7 +3,6 @@ package assets
 import (
 	lambdaFS "github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/internal/event"
-	"github.com/galaco/Lambda/internal/graphics"
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/columns"
 	"github.com/galaco/Lambda/views/assets/structure"
@@ -14,7 +13,6 @@ import (
 
 type Widget struct {
 	dispatcher      *event.Dispatcher
-	graphicsAdapter graphics.Adapter
 	fileSystem      *lambdaFS.FileSystem
 
 	twoPanel         *columns.View

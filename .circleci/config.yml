@@ -20,7 +20,9 @@ jobs:
             echo "GTK version ${GTK_VERSION} (Glib ${Glib_VERSION}, Cairo ${Cairo_VERSION}, Pango ${Pango_VERSION})"
       - run:
           name: Install Go Dependencies
-          command: go get -v github.com/golangci/golangci-lint/cmd/golangci-lint
+          command: |
+            go get -u
+            go get -v github.com/golangci/golangci-lint/cmd/golangci-lint
       - run:
           name: Lint
           command: golangci-lint run --deadline=2m
