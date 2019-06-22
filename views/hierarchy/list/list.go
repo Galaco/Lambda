@@ -18,7 +18,7 @@ func (mod *List) Filter(filterMode int) *FilteredList {
 	switch filterMode {
 	case EntityFilterPropOnly:
 		for idx, n := range mod.nodes {
-			if strings.Contains(n.label, " prop_") == true {
+			if strings.Contains(n.label, "prop_") == true {
 				filtered = append(filtered, &mod.nodes[idx])
 			}
 		}

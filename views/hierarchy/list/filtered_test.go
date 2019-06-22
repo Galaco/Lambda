@@ -29,8 +29,8 @@ func TestNewFilteredList(t *testing.T) {
 
 	filtered := list.Filter(EntityFilterPropOnly)
 
-	if filtered.rows[0].label != "2 "+classNames[2] ||
-		filtered.rows[1].label != "5 "+classNames[5] {
+	if filtered.rows[0].label != classNames[2]+"##2" ||
+		filtered.rows[1].label != classNames[5]+"##5" {
 		t.Error("expected row did not pass filter")
 	}
 

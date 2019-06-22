@@ -21,7 +21,7 @@ func commonLayout(style *imgui.Style) {
 	fontAtlas := imgui.CurrentIO().Fonts()
 	fontConfig := imgui.NewFontConfig()
 	fontConfig.SetSize(DPIScale() * float32(DefaultFontSize))
-	fontAtlas.AddFontFromFileTTF("./assets/fonts/FiraCode-Regular.ttf", DPIScale() * DefaultFontSize)
+	fontAtlas.AddFontFromFileTTF("./assets/fonts/FiraCode-Regular.ttf", DPIScale()*DefaultFontSize)
 	fontAtlas.AddFontDefaultV(fontConfig)
 	//fontAtlas.AddFontDefault()
 }
