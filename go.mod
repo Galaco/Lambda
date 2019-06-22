@@ -10,7 +10,7 @@ require (
 	github.com/galaco/vmf v1.0.0
 	github.com/go-gl/gl v0.0.0-20181026044259-55b76b7df9d2
 	github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a
-	github.com/gotk3/gotk3 v0.0.0-20190306224825-558ae9ac7697 // indirect
+	github.com/gotk3/gotk3 v0.0.0-20190621020446-6dcdf9e5c51e // indirect
 	github.com/inkyblackness/imgui-go v1.7.0
 	github.com/mattn/go-gtk v0.0.0-20181205025739-e9a6766929f6 // indirect
 	github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791 // indirect
