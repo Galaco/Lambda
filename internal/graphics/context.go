@@ -22,7 +22,7 @@ func (ctx *callStack) Unwind(frames int) error {
 	if frames > len(ctx.stack) {
 		return ErrorCallstackOutOfBounds
 	}
-	ctx.stack = ctx.stack[:len(ctx.stack) - frames]
+	ctx.stack = ctx.stack[:len(ctx.stack)-frames]
 
 	return nil
 }
@@ -34,7 +34,7 @@ func (ctx *callStack) Execute() {
 			ctx.Reset()
 		}
 	}()
-	for _,f := range ctx.stack {
+	for _, f := range ctx.stack {
 		f()
 	}
 

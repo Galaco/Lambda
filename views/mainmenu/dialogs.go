@@ -8,7 +8,7 @@ import (
 const dialogWidth = 480
 const dialogHeight = 640
 
-func openFile() (string,error) {
+func openFile() (string, error) {
 	return dialog.FileOpen()
 }
 

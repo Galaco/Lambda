@@ -1,17 +1,17 @@
 package scene
 
 import (
-	"github.com/galaco/Lambda-Core/core/entity"
-	"github.com/galaco/Lambda-Core/core/filesystem"
-	"github.com/galaco/Lambda-Core/core/loader/material"
-	material2 "github.com/galaco/Lambda-Core/core/material"
-	lambdaModel "github.com/galaco/Lambda-Core/core/model"
-	"github.com/galaco/Lambda-Core/core/resource"
 	"github.com/galaco/Lambda/internal/model/valve"
 	"github.com/galaco/Lambda/internal/model/valve/world"
 	"github.com/galaco/Lambda/internal/renderer/conversion"
 	"github.com/galaco/Lambda/internal/renderer/render3d"
 	"github.com/galaco/gosigl"
+	"github.com/galaco/lambda-core/entity"
+	"github.com/galaco/lambda-core/filesystem"
+	"github.com/galaco/lambda-core/loader/material"
+	material2 "github.com/galaco/lambda-core/material"
+	lambdaModel "github.com/galaco/lambda-core/model"
+	"github.com/galaco/lambda-core/resource"
 	"github.com/go-gl/mathgl/mgl32"
 )
 
@@ -63,7 +63,7 @@ func (scene *Scene) RecomposeScene(fs *filesystem.FileSystem) *gosigl.VertexObje
 		}
 		baseMat := material.LoadSingleMaterial(matComp.Material()+".vmt", fs)
 		if baseMat == nil {
-			baseMat = resource.Manager().GetMaterial(resource.Manager().ErrorTextureName())
+			baseMat = resource.Manager().Material(resource.Manager().ErrorTextureName())
 		}
 		mat := baseMat.(*material2.Material)
 
@@ -85,8 +85,8 @@ func (scene *Scene) AddSolid(solid *world.Solid) {
 	model := conversion.SolidToModel(solid)
 	scene.SolidMeshes[solid.Id] = model
 
-	for idx := range model.GetMeshes() {
-		scene.frameCompositor.AddMesh(model.GetMeshes()[idx])
+	for idx := range model.Meshes() {
+		scene.frameCompositor.AddMesh(model.Meshes()[idx])
 	}
 }
 

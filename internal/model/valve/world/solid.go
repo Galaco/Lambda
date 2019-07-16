@@ -64,7 +64,7 @@ func NewEditor(color mgl64.Vec3, visgroupShown bool, visgroupAutoShown bool) *Ed
 		color:             color,
 		visgroupShown:     visgroupShown,
 		visGroupAutoShown: visgroupAutoShown,
-		logicalPos: mgl64.Vec2{},
+		logicalPos:        mgl64.Vec2{},
 	}
 }
 

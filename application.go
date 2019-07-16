@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/filesystem/exporters"
 	"github.com/galaco/Lambda/internal/filesystem/importers"
@@ -16,6 +15,7 @@ import (
 	"github.com/galaco/Lambda/views/mainmenu"
 	"github.com/galaco/Lambda/views/properties"
 	"github.com/galaco/Lambda/views/scene"
+	"github.com/galaco/lambda-core/filesystem"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 

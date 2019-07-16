@@ -1,7 +1,6 @@
 package console
 
 import (
-	lambdaFS "github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/graphics"
 	"github.com/galaco/Lambda/internal/model"
@@ -9,6 +8,7 @@ import (
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
+	lambdaFS "github.com/galaco/lambda-core/filesystem"
 	"github.com/inkyblackness/imgui-go"
 )
 

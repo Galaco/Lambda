@@ -1,8 +1,6 @@
 package scene
 
 import (
-	"github.com/galaco/Lambda-Core/core/entity"
-	"github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/events"
 	"github.com/galaco/Lambda/internal/graphics"
@@ -12,6 +10,8 @@ import (
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
+	"github.com/galaco/lambda-core/entity"
+	"github.com/galaco/lambda-core/filesystem"
 	"github.com/inkyblackness/imgui-go"
 )
 

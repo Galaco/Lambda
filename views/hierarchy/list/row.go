@@ -2,7 +2,7 @@ package list
 
 import (
 	"fmt"
-	"github.com/galaco/Lambda-Core/core/logger"
+	"github.com/galaco/lambda-core/lib/util"
 	"github.com/inkyblackness/imgui-go"
 )
 
@@ -21,7 +21,7 @@ func (item *row) render() bool {
 	if imgui.SelectableV(item.label, item.selected, 0, imgui.Vec2{}) {
 		item.selected = true
 		item.onClick(item.Id)
-		logger.Notice(fmt.Sprintf("%d selected", item.Id))
+		util.Logger().Notice(fmt.Sprintf("%d selected", item.Id))
 
 		return true
 	}

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/Lambda/internal/config"
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/events"
@@ -9,8 +8,11 @@ import (
 	"github.com/galaco/Lambda/internal/filesystem/importers"
 	"github.com/galaco/Lambda/internal/graphics/opengl"
 	"github.com/galaco/Lambda/internal/input"
+	"github.com/galaco/Lambda/internal/log"
 	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui"
+	filesystem2 "github.com/galaco/lambda-core/filesystem"
+	"github.com/galaco/lambda-core/lib/util"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"time"
@@ -22,17 +24,17 @@ func main() {
 
 	app.Model = model.NewModel()
 
-	logger.EnablePretty()
-	logger.SetOutputPipeFunc(func(msg string) {
+	util.Logger().SetWriter(log.NewLog(func(msg string) {
 		app.Model.Logs.AddLog(model.LogTypeApplication, msg)
-	})
+	}))
+	util.Logger().EnablePretty()
 
 	configuration, err := config.Load("./lambda.json")
 	if err != nil {
-		logger.Fatal(err)
+		util.Logger().Panic(err)
 	}
 	app.Model.Preferences = &configuration.Preferences
-	app.FileSystem = filesystem.New(configuration.Preferences.General.GameDirectory)
+	app.FileSystem = filesystem.New(configuration.Preferences.General.GameDirectory).(*filesystem2.FileSystem)
 	app.GraphicsAdapter = &opengl.OpenGL{}
 	app.EventDispatcher = event.NewDispatcher()
 	app.Keyboard = input.NewKeyboard()

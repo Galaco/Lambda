@@ -10,7 +10,7 @@ type Context struct {
 	window       *glfw.Window
 	imguiContext *imgui.Context
 	imguiBind    *imguiGlfw3
-	drawContext graphics.Context
+	drawContext  graphics.Context
 }
 
 func (ctx *Context) Window() *glfw.Window {

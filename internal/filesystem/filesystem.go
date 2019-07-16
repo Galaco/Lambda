@@ -1,19 +1,19 @@
 package filesystem
 
 import (
-	lambdaFS "github.com/galaco/Lambda-Core/core/filesystem"
-	"github.com/galaco/Lambda-Core/core/logger"
-	"github.com/galaco/Lambda-Core/core/resource"
-	"github.com/galaco/Lambda-Core/lib/gameinfo"
+	lambdaFS "github.com/galaco/lambda-core/filesystem"
+	"github.com/galaco/lambda-core/lib/gameinfo"
+	"github.com/galaco/lambda-core/lib/util"
+	"github.com/galaco/lambda-core/resource"
 )
 
 // New builds a new filesystem from a game directory root.
 // It loads a gameinfo.txt and attempts to find listed resourced
 // in it.
-func New(gameDir string) *lambdaFS.FileSystem {
+func New(gameDir string) lambdaFS.IFileSystem {
 	gameInfo, err := gameinfo.LoadConfig(gameDir)
 	if err != nil {
-		logger.Fatal(err)
+		util.Logger().Panic(err)
 	}
 
 	// Register GameInfo.txt referenced resource paths

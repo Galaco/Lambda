@@ -1,8 +1,8 @@
 package opengl
 
 import (
-	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/gosigl"
+	"github.com/galaco/lambda-core/lib/util"
 	"github.com/go-gl/gl/v4.1-core/gl"
 	"io/ioutil"
 	"log"
@@ -115,19 +115,19 @@ func (ogl *OpenGL) LambdaCreateRenderbufferStorageDepth(width, height int32) uin
 func (ogl *OpenGL) LambdaLoadSimpleShader(path string) *gosigl.Context {
 	vs, err := ioutil.ReadFile(path + ".vs.glsl")
 	if err != nil {
-		logger.Fatal(err)
+		util.Logger().Panic(err)
 	}
 	fs, err := ioutil.ReadFile(path + ".fs.glsl")
 	if err != nil {
-		logger.Fatal(err)
+		util.Logger().Panic(err)
 	}
 
 	shader := gosigl.NewShader()
 	if err = shader.AddShader(string(vs)+"\x00", gosigl.VertexShader); err != nil {
-		logger.Fatal(err)
+		util.Logger().Panic(err)
 	}
 	if err = shader.AddShader(string(fs)+"\x00", gosigl.FragmentShader); err != nil {
-		logger.Fatal(err)
+		util.Logger().Panic(err)
 	}
 	shader.Finalize()
 

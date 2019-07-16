@@ -2,11 +2,11 @@ package conversion
 
 import (
 	"fmt"
-	"github.com/galaco/Lambda-Core/core/material"
-	lambdaMesh "github.com/galaco/Lambda-Core/core/mesh"
-	lambdaModel "github.com/galaco/Lambda-Core/core/model"
 	"github.com/galaco/Lambda/internal/model/valve/world"
 	"github.com/galaco/gosigl"
+	"github.com/galaco/lambda-core/material"
+	lambdaMesh "github.com/galaco/lambda-core/mesh"
+	lambdaModel "github.com/galaco/lambda-core/model"
 )
 
 func SolidToModel(solid *world.Solid) *lambdaModel.Model {
@@ -23,9 +23,7 @@ func SideToMesh(side *world.Side) lambdaMesh.IMesh {
 	mesh := lambdaMesh.NewMesh()
 
 	// Material
-	mesh.SetMaterial(&material.Material{
-		FilePath: side.Material,
-	})
+	mesh.SetMaterial(material.NewMaterial(side.Material))
 
 	// Vertices
 	verts := make([]float32, 0)

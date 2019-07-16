@@ -1,10 +1,10 @@
 package renderer
 
 import (
-	"github.com/galaco/Lambda-Core/core/entity"
 	"github.com/galaco/Lambda/internal/graphics"
 	"github.com/galaco/Lambda/internal/renderer/render3d"
 	"github.com/galaco/gosigl"
+	"github.com/galaco/lambda-core/entity"
 )
 
 type Renderer struct {
