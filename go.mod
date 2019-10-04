@@ -13,7 +13,7 @@ require (
 	github.com/gotk3/gotk3 v0.0.0-20190621020446-6dcdf9e5c51e // indirect
 	github.com/inkyblackness/imgui-go v1.7.0
 	github.com/mattn/go-gtk v0.0.0-20181205025739-e9a6766929f6 // indirect
-	github.com/mattn/go-pointer v0.0.0-20180825124634-49522c3f3791 // indirect
+	github.com/mattn/go-pointer a0a44394634f // indirect
 	github.com/sqweek/dialog v0.0.0-20190209060818-302ed2f52949
 	github.com/stretchr/objx v0.1.1 // indirect
 	github.com/vulkan-go/glfw v0.0.0-20180930191036-cac57eedc4a5
