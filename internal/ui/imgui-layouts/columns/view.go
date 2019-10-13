@@ -18,7 +18,7 @@ func (view *View) Render(width int, height int) {
 	imgui.Columns(view.numColumns, "Columns")
 
 	for idx, renderFunc := range view.columnContents {
-		if view.columnWidths[idx].AsPercentage == false {
+		if !view.columnWidths[idx].AsPercentage {
 			imgui.SetColumnWidth(idx, float32(view.columnWidths[idx].Width))
 			renderFunc()
 		} else {

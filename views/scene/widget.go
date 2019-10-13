@@ -1,10 +1,9 @@
 package scene
 
 import (
-	"github.com/galaco/Lambda-Core/core/entity"
-	"github.com/galaco/Lambda-Core/core/filesystem"
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/filesystem"
 	"github.com/galaco/Lambda/internal/graphics"
 	"github.com/galaco/Lambda/internal/input"
 	"github.com/galaco/Lambda/internal/renderer"
@@ -12,15 +11,17 @@ import (
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
+	"github.com/galaco/lambda-core/entity"
 	"github.com/inkyblackness/imgui-go"
 )
 
+// Widget
 type Widget struct {
 	masterPanel *imgui_layouts.Panel
 
 	dispatcher      *event.Dispatcher
 	keyboard        *input.Keyboard
-	filesystem      *filesystem.FileSystem
+	filesystem      filesystem.FileSystem
 	graphicsAdapter graphics.Adapter
 
 	window   *renderer.RenderWindow
@@ -32,6 +33,7 @@ type Widget struct {
 	camera *entity.Camera
 }
 
+// Initialize
 func (widget *Widget) Initialize() {
 	widget.window = renderer.NewRenderWindow(widget.graphicsAdapter, widget.width, widget.height)
 	widget.dispatcher.Subscribe(events.TypeNewSolidCreated, widget.newSolidCreated)
@@ -46,6 +48,7 @@ func (widget *Widget) Initialize() {
 	})
 }
 
+// RenderScene
 func (widget *Widget) RenderScene(ctx *context.Context) {
 	dirtyComposition := widget.scene.frameCompositor.IsOutdated()
 	if dirtyComposition {
@@ -60,6 +63,7 @@ func (widget *Widget) RenderScene(ctx *context.Context) {
 	widget.window.Unbind()
 }
 
+// Render
 func (widget *Widget) Render(ctx *context.Context) {
 	w, h := ctx.Window().GetSize()
 	imgui.PushStyleColor(imgui.StyleColorChildBg, imgui.Vec4{X: 0, Y: 0, Z: 0, W: 1})
@@ -75,6 +79,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 	imgui.PopStyleColor()
 }
 
+// Update
 func (widget *Widget) Update(dt float64) {
 	if widget.keyboard.IsKeyDown(input.KeyW) {
 		widget.scene.ActiveCamera().Forwards(dt * 0.05)
@@ -129,7 +134,7 @@ func (widget *Widget) Close() {
 	widget.window.Close()
 }
 
-func NewWidget(dispatcher *event.Dispatcher, filesystem *filesystem.FileSystem, keyboard *input.Keyboard, graphicsAdapter graphics.Adapter) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, filesystem filesystem.FileSystem, keyboard *input.Keyboard, graphicsAdapter graphics.Adapter) *Widget {
 	return &Widget{
 		dispatcher:      dispatcher,
 		keyboard:        keyboard,

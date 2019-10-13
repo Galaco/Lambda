@@ -1,7 +1,6 @@
 package mainmenu
 
 import (
-	"github.com/galaco/Lambda-Core/core/logger"
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/events"
 	"github.com/galaco/Lambda/internal/filesystem/exporters"
@@ -9,6 +8,7 @@ import (
 	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/views/mainmenu/dialog"
+	"github.com/galaco/lambda-core/lib/util"
 	"github.com/inkyblackness/imgui-go"
 )
 
@@ -36,7 +36,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 				/* Do stuff */
 			}
 			if imgui.MenuItemV("Open..", "Ctrl+O", false, true) {
-				if filename := openFile(); filename != "" {
+				if filename, err := openFile(); err == nil {
 					widget.loadVmf(filename)
 				}
 			}
@@ -45,10 +45,10 @@ func (widget *Widget) Render(ctx *context.Context) {
 				if err == nil {
 					err = saveFile(widget.model.Project.Filename, data)
 					if err != nil {
-						logger.Error(err)
+						util.Logger().Error(err)
 					}
 				} else {
-					logger.Error(err)
+					util.Logger().Error(err)
 				}
 			}
 			if imgui.MenuItemV("Save As", "", false, widget.isProjectLoaded) {
@@ -56,10 +56,10 @@ func (widget *Widget) Render(ctx *context.Context) {
 				if err == nil {
 					err = saveFile("", data)
 					if err != nil {
-						logger.Error(err)
+						util.Logger().Error(err)
 					}
 				} else {
-					logger.Error(err)
+					util.Logger().Error(err)
 				}
 			}
 			if imgui.MenuItemV("Close", "Ctrl+W", false, widget.isProjectLoaded) {

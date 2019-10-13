@@ -1,5 +1,7 @@
 [![GoDoc](https://godoc.org/github.com/Galaco/Lambda?status.svg)](https://godoc.org/github.com/Galaco/Lambda)
 [![Go report card](https://goreportcard.com/badge/github.com/galaco/Lambda)](https://goreportcard.com/badge/github.com/galaco/Lambda)
+[![GolangCI](https://golangci.com/badges/github.com/galaco/Lambda.svg)](https://golangci.com)
+[![CircleCI](https://circleci.com/gh/Galaco/Lambda.svg?style=svg)](https://circleci.com/gh/Galaco/Lambda)
 
 # Lambda
 A custom Source Engine level editor written in Go. End result is to be a drop in replacement for Hammer, with support for non-Windows OS.

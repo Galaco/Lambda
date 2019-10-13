@@ -1,7 +1,7 @@
 package render3d
 
 import (
-	"github.com/galaco/Lambda-Core/core/mesh"
+	"github.com/galaco/lambda-core/mesh"
 )
 
 // Compositor is a struct that provides a mechanism to compose 1 or more models into a single renderable set of data,
@@ -32,11 +32,11 @@ func (compositor *Compositor) ComposeScene() *Composition {
 
 	// Step 1. Map meshes into contiguous groups by texture
 	for idx, m := range compositor.meshes {
-		if _, ok := texMappings[m.GetMaterial().GetFilePath()]; !ok {
-			texMappings[m.GetMaterial().GetFilePath()] = make([]mesh.IMesh, 0)
+		if _, ok := texMappings[m.Material().FilePath()]; !ok {
+			texMappings[m.Material().FilePath()] = make([]mesh.IMesh, 0)
 		}
 
-		texMappings[m.GetMaterial().GetFilePath()] = append(texMappings[m.GetMaterial().GetFilePath()], compositor.meshes[idx])
+		texMappings[m.Material().FilePath()] = append(texMappings[m.Material().FilePath()], compositor.meshes[idx])
 	}
 
 	// Step 2. Construct a single vertex object Composition ordered by material

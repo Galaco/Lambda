@@ -1,7 +1,7 @@
 package render3d
 
 import (
-	"github.com/galaco/Lambda-Core/core/mesh"
+	"github.com/galaco/lambda-core/mesh"
 )
 
 type Composition struct {

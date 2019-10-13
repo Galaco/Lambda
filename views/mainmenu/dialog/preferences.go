@@ -69,8 +69,8 @@ func NewPreferences(dispatch *event.Dispatcher, model *model.Preferences) *Prefe
 
 	dialog.currentPage = dialog.pages[dialog.sidebar.CurrentTab()]
 
-	dialog.twoPanel.SetColumnContents(0, dialog.sidebar.Render, columns.NewColumnWidth(120, false))
-	dialog.twoPanel.SetColumnContents(1, dialog.renderTab, nil)
+	_ = dialog.twoPanel.SetColumnContents(0, dialog.sidebar.Render, columns.NewColumnWidth(120, false))
+	_ = dialog.twoPanel.SetColumnContents(1, dialog.renderTab, nil)
 
 	return dialog
 }
