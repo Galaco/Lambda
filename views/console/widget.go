@@ -2,13 +2,13 @@ package console
 
 import (
 	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/filesystem"
 	"github.com/galaco/Lambda/internal/graphics"
 	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui"
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
-	lambdaFS "github.com/galaco/lambda-core/filesystem"
 	"github.com/inkyblackness/imgui-go"
 )
 
@@ -16,7 +16,7 @@ type Widget struct {
 	masterPanel     *imgui_layouts.Panel
 	dispatcher      *event.Dispatcher
 	graphicsAdapter graphics.Adapter
-	fileSystem      *lambdaFS.FileSystem
+	fileSystem      filesystem.FileSystem
 	model           *model.Model
 }
 
@@ -39,7 +39,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 func (widget *Widget) selectedEntityChanged(received event.Dispatchable) {
 }
 
-func NewWidget(dispatcher *event.Dispatcher, fileSystem *lambdaFS.FileSystem, model *model.Model) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, fileSystem filesystem.FileSystem, model *model.Model) *Widget {
 	return &Widget{
 		dispatcher: dispatcher,
 		fileSystem: fileSystem,

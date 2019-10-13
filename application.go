@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/filesystem"
 	"github.com/galaco/Lambda/internal/filesystem/exporters"
 	"github.com/galaco/Lambda/internal/filesystem/importers"
 	"github.com/galaco/Lambda/internal/graphics"
@@ -15,7 +16,6 @@ import (
 	"github.com/galaco/Lambda/views/mainmenu"
 	"github.com/galaco/Lambda/views/properties"
 	"github.com/galaco/Lambda/views/scene"
-	"github.com/galaco/lambda-core/filesystem"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 )
 
@@ -25,7 +25,7 @@ type Application struct {
 	GraphicsAdapter graphics.Adapter
 
 	// Tools
-	FileSystem      *filesystem.FileSystem
+	FileSystem      filesystem.FileSystem
 	EventDispatcher *event.Dispatcher
 	VmfImporter     *importers.VmfImporter
 	VmfExporter     *exporters.VmfExporter

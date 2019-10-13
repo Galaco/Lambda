@@ -1,18 +1,19 @@
 package scene
 
 import (
+	"github.com/galaco/Lambda/internal/filesystem"
 	"github.com/galaco/Lambda/internal/model/valve"
 	"github.com/galaco/Lambda/internal/model/valve/world"
 	"github.com/galaco/Lambda/internal/renderer/conversion"
 	"github.com/galaco/Lambda/internal/renderer/render3d"
 	"github.com/galaco/gosigl"
 	"github.com/galaco/lambda-core/entity"
-	"github.com/galaco/lambda-core/filesystem"
 	"github.com/galaco/lambda-core/loader/material"
 	material2 "github.com/galaco/lambda-core/material"
 	lambdaModel "github.com/galaco/lambda-core/model"
 	"github.com/galaco/lambda-core/resource"
 	"github.com/go-gl/mathgl/mgl32"
+	filesystemLib "github.com/golang-source-engine/filesystem"
 )
 
 type Scene struct {
@@ -40,7 +41,7 @@ func (scene *Scene) CompositionMaterials() map[string]gosigl.TextureBindingId {
 	return scene.frameMaterials
 }
 
-func (scene *Scene) RecomposeScene(fs *filesystem.FileSystem) *gosigl.VertexObject {
+func (scene *Scene) RecomposeScene(fs filesystem.FileSystem) *gosigl.VertexObject {
 	if scene.frameMesh != nil {
 		gosigl.DeleteMesh(scene.frameMesh)
 	}
@@ -61,8 +62,8 @@ func (scene *Scene) RecomposeScene(fs *filesystem.FileSystem) *gosigl.VertexObje
 		if _, ok := scene.frameMaterials[matComp.Material()]; ok {
 			continue
 		}
-		baseMat := material.LoadSingleMaterial(matComp.Material()+".vmt", fs)
-		if baseMat == nil {
+		baseMat, err := material.LoadMaterialFromFilesystem(fs.(*filesystemLib.FileSystem), matComp.Material()+".vmt")
+		if err != nil || baseMat == nil {
 			baseMat = resource.Manager().Material(resource.Manager().ErrorTextureName())
 		}
 		mat := baseMat.(*material2.Material)
@@ -72,7 +73,7 @@ func (scene *Scene) RecomposeScene(fs *filesystem.FileSystem) *gosigl.VertexObje
 			mat.Textures.Albedo.Width(),
 			mat.Textures.Albedo.Height(),
 			mat.Textures.Albedo.PixelDataForFrame(0),
-			gosigl.PixelFormat(glTextureFormatFromVtfFormat(mat.Textures.Albedo.Format())),
+			glTextureFormatFromVtfFormat(mat.Textures.Albedo.Format()),
 			false)
 	}
 

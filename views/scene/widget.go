@@ -3,6 +3,7 @@ package scene
 import (
 	"github.com/galaco/Lambda/internal/event"
 	"github.com/galaco/Lambda/internal/events"
+	"github.com/galaco/Lambda/internal/filesystem"
 	"github.com/galaco/Lambda/internal/graphics"
 	"github.com/galaco/Lambda/internal/input"
 	"github.com/galaco/Lambda/internal/renderer"
@@ -11,7 +12,6 @@ import (
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
 	"github.com/galaco/lambda-core/entity"
-	"github.com/galaco/lambda-core/filesystem"
 	"github.com/inkyblackness/imgui-go"
 )
 
@@ -21,7 +21,7 @@ type Widget struct {
 
 	dispatcher      *event.Dispatcher
 	keyboard        *input.Keyboard
-	filesystem      *filesystem.FileSystem
+	filesystem      filesystem.FileSystem
 	graphicsAdapter graphics.Adapter
 
 	window   *renderer.RenderWindow
@@ -134,7 +134,7 @@ func (widget *Widget) Close() {
 	widget.window.Close()
 }
 
-func NewWidget(dispatcher *event.Dispatcher, filesystem *filesystem.FileSystem, keyboard *input.Keyboard, graphicsAdapter graphics.Adapter) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, filesystem filesystem.FileSystem, keyboard *input.Keyboard, graphicsAdapter graphics.Adapter) *Widget {
 	return &Widget{
 		dispatcher:      dispatcher,
 		keyboard:        keyboard,

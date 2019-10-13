@@ -11,7 +11,6 @@ import (
 	"github.com/galaco/Lambda/internal/log"
 	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui"
-	filesystem2 "github.com/galaco/lambda-core/filesystem"
 	"github.com/galaco/lambda-core/lib/util"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
@@ -34,7 +33,7 @@ func main() {
 		util.Logger().Panic(err)
 	}
 	app.Model.Preferences = &configuration.Preferences
-	app.FileSystem = filesystem.New(configuration.Preferences.General.GameDirectory).(*filesystem2.FileSystem)
+	app.FileSystem = filesystem.New(configuration.Preferences.General.GameDirectory)
 	app.GraphicsAdapter = &opengl.OpenGL{}
 	app.EventDispatcher = event.NewDispatcher()
 	app.Keyboard = input.NewKeyboard()

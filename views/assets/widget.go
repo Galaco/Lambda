@@ -2,18 +2,18 @@ package assets
 
 import (
 	"github.com/galaco/Lambda/internal/event"
+	"github.com/galaco/Lambda/internal/filesystem"
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/columns"
 	"github.com/galaco/Lambda/views/assets/structure"
 	"github.com/galaco/Lambda/views/assets/structure/directory"
-	lambdaFS "github.com/galaco/lambda-core/filesystem"
 	"github.com/inkyblackness/imgui-go"
 	"log"
 )
 
 type Widget struct {
 	dispatcher *event.Dispatcher
-	fileSystem *lambdaFS.FileSystem
+	fileSystem filesystem.FileSystem
 
 	twoPanel         *columns.View
 	directoryList    *structure.Tree
@@ -47,7 +47,7 @@ func (widget *Widget) Render(ctx *context.Context) {
 func (widget *Widget) selectedEntityChanged(received event.Dispatchable) {
 }
 
-func NewWidget(dispatcher *event.Dispatcher, fileSystem *lambdaFS.FileSystem) *Widget {
+func NewWidget(dispatcher *event.Dispatcher, fileSystem filesystem.FileSystem) *Widget {
 	return &Widget{
 		dispatcher:       dispatcher,
 		fileSystem:       fileSystem,
