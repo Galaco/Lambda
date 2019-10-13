@@ -2,30 +2,17 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.12
+      - image: galaco/go-gtk-ci:1.13b1
     steps:
       - checkout
-      - run:
-          name: Install OS Dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y gtk+3.0 libgtk-3-dev
-            sudo apt-get install -y xvfb
-            export DISPLAY=:99.0
-            sudo /usr/bin/Xvfb $DISPLAY 2>1 > /dev/null &
-            export GTK_VERSION=$(pkg-config --modversion gtk+-3.0 | tr . _| cut -d '_' -f 1-2)
-            export Glib_VERSION=$(pkg-config --modversion glib-2.0)
-            export Cairo_VERSION=$(pkg-config --modversion cairo)
-            export Pango_VERSION=$(pkg-config --modversion pango)
-            echo "GTK version ${GTK_VERSION} (Glib ${Glib_VERSION}, Cairo ${Cairo_VERSION}, Pango ${Pango_VERSION})"
       - run:
           name: Install Go Dependencies
           command: |
             go get -u
-            go get -v github.com/golangci/golangci-lint/cmd/golangci-lint
-      - run:
-          name: Lint
-          command: golangci-lint run --deadline=2m
+#            go get -v github.com/golangci/golangci-lint/cmd/golangci-lint
+#      - run:
+#          name: Lint
+#          command: golangci-lint run --deadline=2m
       - run:
           name: Test
           command: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
