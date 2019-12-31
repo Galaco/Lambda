@@ -11,7 +11,7 @@ require (
 	github.com/go-gl/mathgl v0.0.0-20190713194549-592312d8590a
 	github.com/golang-source-engine/filesystem v0.1.2
 	github.com/gotk3/gotk3 v0.0.0-20191010201156-711c17fcaec0 // indirect
-	github.com/inkyblackness/imgui-go v1.10.0
+	github.com/inkyblackness/imgui-go v1.12.0
 	github.com/logrusorgru/aurora v0.0.0-20190803045625-94edacc10f9b // indirect
 	github.com/sqweek/dialog v0.0.0-20190728103509-6254ed5b0d3c
 	github.com/vulkan-go/glfw v0.0.0-20190520160600-32f33e359ff2
