@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/galaco/Lambda/internal/model/valve/world"
 	"github.com/galaco/gosigl"
-	"github.com/galaco/lambda-core/material"
-	lambdaMesh "github.com/galaco/lambda-core/mesh"
-	lambdaModel "github.com/galaco/lambda-core/model"
+	"github.com/galaco/Lambda/pkg/lambda-core/material"
+	lambdaMesh "github.com/galaco/Lambda/pkg/lambda-core/mesh"
+	lambdaModel "github.com/galaco/Lambda/pkg/lambda-core/model"
 )
 
 func SolidToModel(solid *world.Solid) *lambdaModel.Model {

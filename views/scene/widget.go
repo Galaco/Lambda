@@ -11,7 +11,7 @@ import (
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
-	"github.com/galaco/lambda-core/entity"
+	"github.com/galaco/Lambda/pkg/lambda-core/entity"
 	"github.com/inkyblackness/imgui-go"
 )
 

@@ -1,7 +1,7 @@
 package render3d
 
 import (
-	"github.com/galaco/lambda-core/mesh"
+	"github.com/galaco/Lambda/pkg/lambda-core/mesh"
 )
 
 // Compositor is a struct that provides a mechanism to compose 1 or more models into a single renderable set of data,

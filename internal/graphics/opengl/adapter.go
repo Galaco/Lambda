@@ -2,7 +2,7 @@ package opengl
 
 import (
 	"github.com/galaco/gosigl"
-	"github.com/galaco/lambda-core/lib/util"
+	"github.com/galaco/Lambda/pkg/lambda-core/lib/util"
 	"github.com/go-gl/gl/v4.1-core/gl"
 	"io/ioutil"
 	"log"

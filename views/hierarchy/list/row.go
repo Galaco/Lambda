@@ -2,7 +2,7 @@ package list
 
 import (
 	"fmt"
-	"github.com/galaco/lambda-core/lib/util"
+	"github.com/galaco/Lambda/pkg/lambda-core/lib/util"
 	"github.com/inkyblackness/imgui-go"
 )
 

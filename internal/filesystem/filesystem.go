@@ -1,9 +1,9 @@
 package filesystem
 
 import (
-	"github.com/galaco/lambda-core/lib/gameinfo"
-	"github.com/galaco/lambda-core/lib/util"
-	"github.com/galaco/lambda-core/resource"
+	"github.com/galaco/Lambda/pkg/lambda-core/lib/gameinfo"
+	"github.com/galaco/Lambda/pkg/lambda-core/lib/util"
+	"github.com/galaco/Lambda/pkg/lambda-core/resource"
 	"github.com/golang-source-engine/filesystem"
 	"io"
 )

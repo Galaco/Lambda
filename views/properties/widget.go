@@ -9,7 +9,7 @@ import (
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/keyvalues"
 	"github.com/galaco/Lambda/internal/ui/imgui-layouts/master/rule"
-	"github.com/galaco/lambda-core/lib/util"
+	"github.com/galaco/Lambda/pkg/lambda-core/lib/util"
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/inkyblackness/imgui-go"
 	"strconv"

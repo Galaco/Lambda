@@ -11,7 +11,7 @@ import (
 	"github.com/galaco/Lambda/internal/log"
 	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui"
-	"github.com/galaco/lambda-core/lib/util"
+	"github.com/galaco/Lambda/pkg/lambda-core/lib/util"
 	"github.com/inkyblackness/imgui-go"
 	"github.com/vulkan-go/glfw/v3.3/glfw"
 	"time"

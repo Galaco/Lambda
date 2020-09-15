@@ -8,7 +8,7 @@ import (
 	"github.com/galaco/Lambda/internal/model"
 	"github.com/galaco/Lambda/internal/ui/context"
 	"github.com/galaco/Lambda/views/mainmenu/dialog"
-	"github.com/galaco/lambda-core/lib/util"
+	"github.com/galaco/Lambda/pkg/lambda-core/lib/util"
 	"github.com/inkyblackness/imgui-go"
 )
 
