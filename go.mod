@@ -8,7 +8,7 @@ require (
 	github.com/galaco/source-tools-common v0.1.0
 	github.com/galaco/vmf v1.0.0
 	github.com/go-gl/gl ae072cafe09d
-	github.com/go-gl/mathgl v0.0.0-20190713194549-592312d8590a
+	github.com/go-gl/mathgl v1.0.0
 	github.com/golang-source-engine/filesystem v0.1.3
 	github.com/gotk3/gotk3 v0.0.0-20191010201156-711c17fcaec0 // indirect
 	github.com/inkyblackness/imgui-go v1.12.0
