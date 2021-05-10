@@ -19,7 +19,7 @@ import (
 	"github.com/galaco/bsp/primitives/plane"
 	"github.com/galaco/bsp/primitives/texinfo"
 	"github.com/go-gl/mathgl/mgl32"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 	"math"
 	"strings"
 	"unsafe"

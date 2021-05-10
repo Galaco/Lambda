@@ -6,7 +6,7 @@ import (
 	"github.com/galaco/source-tools-common/entity"
 	"github.com/galaco/vmf"
 	"github.com/go-gl/mathgl/mgl32"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 	"strings"
 )
 

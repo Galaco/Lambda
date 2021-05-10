@@ -13,7 +13,7 @@ import (
 	"github.com/galaco/studiomodel/phy"
 	"github.com/galaco/studiomodel/vtx"
 	"github.com/galaco/studiomodel/vvd"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 	"strings"
 )
 

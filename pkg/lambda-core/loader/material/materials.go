@@ -7,8 +7,8 @@ import (
 	"github.com/galaco/Lambda/pkg/lambda-core/texture"
 	"github.com/galaco/bsp/lumps"
 	"github.com/galaco/bsp/primitives/texinfo"
-	"github.com/golang-source-engine/filesystem"
-	stringtableLib "github.com/golang-source-engine/stringtable"
+	"github.com/galaco/filesystem"
+	stringtableLib "github.com/galaco/stringtable"
 )
 
 // LoadMaterials is the base bsp material loader function.

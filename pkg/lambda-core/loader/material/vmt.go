@@ -1,7 +1,7 @@
 package material
 
 import (
-	"github.com/golang-source-engine/vmt"
+	"github.com/galaco/vmt"
 )
 
 func LoadVmtFromFilesystem(fs VirtualFilesystem, filePath string) (*vmt.Properties, error) {

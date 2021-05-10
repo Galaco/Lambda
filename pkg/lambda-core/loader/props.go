@@ -6,7 +6,7 @@ import (
 	"github.com/galaco/Lambda/pkg/lambda-core/loader/prop"
 	"github.com/galaco/Lambda/pkg/lambda-core/model"
 	"github.com/galaco/Lambda/pkg/lambda-core/resource"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 	"strings"
 )
 

@@ -26,8 +26,8 @@ github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7/go.mod h1:482civXOzJJCPzJ
 github.com/go-gl/mathgl v0.0.0-20180804195959-cdf14b6b8f8a/go.mod h1:dvrdneKbyWbK2skTda0nM4B9zSlS2GZSnjX7itr/skQ=
 github.com/go-gl/mathgl v0.0.0-20190713194549-592312d8590a h1:yoAEv7yeWqfL/l9A/J5QOndXIJCldv+uuQB1DSNQbS0=
 github.com/go-gl/mathgl v0.0.0-20190713194549-592312d8590a/go.mod h1:yhpkQzEiH9yPyxDUGzkmgScbaBVlhC06qodikEM0ZwQ=
-github.com/golang-source-engine/filesystem v0.1.2 h1:6e+E71FSrohJlcbTNmOh1cVnPDP04/V4Gkfno/5VdGI=
-github.com/golang-source-engine/filesystem v0.1.2/go.mod h1:HKc/2NsiY0wj9uRSM6s5AQIt/8J9T7qx2nITY8JBKEU=
+github.com/galaco/filesystem v0.1.2 h1:6e+E71FSrohJlcbTNmOh1cVnPDP04/V4Gkfno/5VdGI=
+github.com/galaco/filesystem v0.1.2/go.mod h1:HKc/2NsiY0wj9uRSM6s5AQIt/8J9T7qx2nITY8JBKEU=
 github.com/gotk3/gotk3 v0.0.0-20191010201156-711c17fcaec0/go.mod h1:Eew3QBwAOBTrfFFDmsDE5wZWbcagBL1NUslj1GhRveo=
 github.com/inkyblackness/imgui-go v1.12.0 h1:uaxSM5SbbqCTGEx5ig7B2J78hM3g3az4f5NC6b4J7lY=
 github.com/inkyblackness/imgui-go v1.12.0/go.mod h1:S9wTWrw/HfxYPbOnqsbck9A6mxHRauv+Sy+bz5+BQwc=

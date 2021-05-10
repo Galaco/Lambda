@@ -5,7 +5,7 @@ import (
 	"github.com/galaco/Lambda/pkg/lambda-core/resource"
 	"github.com/galaco/Lambda/pkg/lambda-core/texture"
 	"github.com/galaco/vtf"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 	"strings"
 )
 

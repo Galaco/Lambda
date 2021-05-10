@@ -12,7 +12,7 @@ require (
 	github.com/galaco/vtf v1.2.0
 	github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7
 	github.com/go-gl/mathgl v0.0.0-20190713194549-592312d8590a
-	github.com/golang-source-engine/filesystem v0.1.2
+	github.com/galaco/filesystem v0.1.3
 	github.com/gotk3/gotk3 v0.0.0-20191010201156-711c17fcaec0 // indirect
 	github.com/inkyblackness/imgui-go v1.12.0
 	github.com/logrusorgru/aurora v0.0.0-20190803045625-94edacc10f9b // indirect

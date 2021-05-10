@@ -6,7 +6,7 @@ import (
 	"github.com/galaco/Lambda/pkg/lambda-core/mesh/primitive"
 	"github.com/galaco/Lambda/pkg/lambda-core/model"
 	"github.com/galaco/Lambda/pkg/lambda-core/texture"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 )
 
 const skyboxRootDir = "skybox/"

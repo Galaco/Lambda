@@ -5,7 +5,7 @@ import (
 	entity2 "github.com/galaco/Lambda/pkg/lambda-core/game/entity"
 	"github.com/galaco/Lambda/pkg/lambda-core/loader/prop"
 	"github.com/galaco/Lambda/pkg/lambda-core/resource"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 	"strings"
 )
 

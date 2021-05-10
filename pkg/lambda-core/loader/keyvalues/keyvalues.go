@@ -2,7 +2,7 @@ package keyvalues
 
 import (
 	"github.com/galaco/KeyValues"
-	"github.com/golang-source-engine/filesystem"
+	"github.com/galaco/filesystem"
 )
 
 // ReadKeyValues loads a keyvalues file.

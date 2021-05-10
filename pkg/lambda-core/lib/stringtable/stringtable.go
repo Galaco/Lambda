@@ -3,7 +3,7 @@ package stringtable
 import (
 	"github.com/galaco/bsp/lumps"
 	"github.com/galaco/bsp/primitives/texinfo"
-	"github.com/golang-source-engine/stringtable"
+	"github.com/galaco/stringtable"
 )
 
 // NewTable returns a new StringTable

@@ -13,7 +13,7 @@ import (
 	lambdaModel "github.com/galaco/Lambda/pkg/lambda-core/model"
 	"github.com/galaco/Lambda/pkg/lambda-core/resource"
 	"github.com/go-gl/mathgl/mgl32"
-	filesystemLib "github.com/golang-source-engine/filesystem"
+	filesystemLib "github.com/galaco/filesystem"
 )
 
 type Scene struct {
