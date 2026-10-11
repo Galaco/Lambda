@@ -3,7 +3,7 @@ module github.com/galaco/Lambda
 go 1.19
 
 require (
-	github.com/galaco/gosigl v0.2.1
+	github.com/galaco/gosigl v0.3.0
 	github.com/galaco/lambda-core v1.1.3
 	github.com/galaco/source-tools-common v0.1.0
 	github.com/galaco/vmf v1.0.0
